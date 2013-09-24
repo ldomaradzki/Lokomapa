@@ -15,13 +15,16 @@
 		179A96CD17F23DD6003FDC64 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 179A96CC17F23DD6003FDC64 /* AppDelegate.m */; };
 		179A96D017F23DD6003FDC64 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 179A96CE17F23DD6003FDC64 /* Main_iPhone.storyboard */; };
 		179A96D317F23DD6003FDC64 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 179A96D117F23DD6003FDC64 /* Main_iPad.storyboard */; };
-		179A96D617F23DD6003FDC64 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 179A96D517F23DD6003FDC64 /* ViewController.m */; };
 		179A96D817F23DD6003FDC64 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 179A96D717F23DD6003FDC64 /* Images.xcassets */; };
 		179A96DF17F23DD7003FDC64 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96DE17F23DD7003FDC64 /* XCTest.framework */; };
 		179A96E017F23DD7003FDC64 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96BC17F23DD6003FDC64 /* Foundation.framework */; };
 		179A96E117F23DD7003FDC64 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96C017F23DD6003FDC64 /* UIKit.framework */; };
 		179A96E917F23DD7003FDC64 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 179A96E717F23DD7003FDC64 /* InfoPlist.strings */; };
 		179A96EB17F23DD7003FDC64 /* LokomapaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 179A96EA17F23DD7003FDC64 /* LokomapaTests.m */; };
+		179A96FA17F23E8A003FDC64 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 179A96F817F23E8A003FDC64 /* MapViewController.m */; };
+		179A96FB17F23E8A003FDC64 /* MapViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179A96F917F23E8A003FDC64 /* MapViewController~ipad.xib */; };
+		179A96FD17F23F3F003FDC64 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 179A96FC17F23F3F003FDC64 /* MapViewController.xib */; };
+		179A96FF17F24042003FDC64 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96FE17F24042003FDC64 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,14 +50,17 @@
 		179A96CC17F23DD6003FDC64 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		179A96CF17F23DD6003FDC64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		179A96D217F23DD6003FDC64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		179A96D417F23DD6003FDC64 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		179A96D517F23DD6003FDC64 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		179A96D717F23DD6003FDC64 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		179A96DD17F23DD7003FDC64 /* LokomapaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LokomapaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		179A96DE17F23DD7003FDC64 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		179A96E617F23DD7003FDC64 /* LokomapaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LokomapaTests-Info.plist"; sourceTree = "<group>"; };
 		179A96E817F23DD7003FDC64 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		179A96EA17F23DD7003FDC64 /* LokomapaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LokomapaTests.m; sourceTree = "<group>"; };
+		179A96F717F23E8A003FDC64 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		179A96F817F23E8A003FDC64 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		179A96F917F23E8A003FDC64 /* MapViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MapViewController~ipad.xib"; sourceTree = "<group>"; };
+		179A96FC17F23F3F003FDC64 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		179A96FE17F24042003FDC64 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				179A96FF17F24042003FDC64 /* MapKit.framework in Frameworks */,
 				179A96BF17F23DD6003FDC64 /* CoreGraphics.framework in Frameworks */,
 				179A96C117F23DD6003FDC64 /* UIKit.framework in Frameworks */,
 				179A96BD17F23DD6003FDC64 /* Foundation.framework in Frameworks */,
@@ -103,6 +110,7 @@
 		179A96BB17F23DD6003FDC64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				179A96FE17F24042003FDC64 /* MapKit.framework */,
 				179A96BC17F23DD6003FDC64 /* Foundation.framework */,
 				179A96BE17F23DD6003FDC64 /* CoreGraphics.framework */,
 				179A96C017F23DD6003FDC64 /* UIKit.framework */,
@@ -114,12 +122,9 @@
 		179A96C217F23DD6003FDC64 /* Lokomapa */ = {
 			isa = PBXGroup;
 			children = (
-				179A96CB17F23DD6003FDC64 /* AppDelegate.h */,
-				179A96CC17F23DD6003FDC64 /* AppDelegate.m */,
+				179A96F417F23E09003FDC64 /* Controllers */,
 				179A96CE17F23DD6003FDC64 /* Main_iPhone.storyboard */,
 				179A96D117F23DD6003FDC64 /* Main_iPad.storyboard */,
-				179A96D417F23DD6003FDC64 /* ViewController.h */,
-				179A96D517F23DD6003FDC64 /* ViewController.m */,
 				179A96D717F23DD6003FDC64 /* Images.xcassets */,
 				179A96C317F23DD6003FDC64 /* Supporting Files */,
 			);
@@ -153,6 +158,35 @@
 				179A96E717F23DD7003FDC64 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		179A96F417F23E09003FDC64 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				179A96F517F23E1A003FDC64 /* AppDelegate */,
+				179A96F617F23E67003FDC64 /* Map */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		179A96F517F23E1A003FDC64 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				179A96CB17F23DD6003FDC64 /* AppDelegate.h */,
+				179A96CC17F23DD6003FDC64 /* AppDelegate.m */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		179A96F617F23E67003FDC64 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				179A96F717F23E8A003FDC64 /* MapViewController.h */,
+				179A96F817F23E8A003FDC64 /* MapViewController.m */,
+				179A96FC17F23F3F003FDC64 /* MapViewController.xib */,
+				179A96F917F23E8A003FDC64 /* MapViewController~ipad.xib */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,8 +266,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				179A96D317F23DD6003FDC64 /* Main_iPad.storyboard in Resources */,
+				179A96FD17F23F3F003FDC64 /* MapViewController.xib in Resources */,
 				179A96D817F23DD6003FDC64 /* Images.xcassets in Resources */,
 				179A96D017F23DD6003FDC64 /* Main_iPhone.storyboard in Resources */,
+				179A96FB17F23E8A003FDC64 /* MapViewController~ipad.xib in Resources */,
 				179A96C717F23DD6003FDC64 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -253,9 +289,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				179A96D617F23DD6003FDC64 /* ViewController.m in Sources */,
 				179A96CD17F23DD6003FDC64 /* AppDelegate.m in Sources */,
 				179A96C917F23DD6003FDC64 /* main.m in Sources */,
+				179A96FA17F23E8A003FDC64 /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
