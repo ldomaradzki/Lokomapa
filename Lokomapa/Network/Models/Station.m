@@ -9,6 +9,38 @@
 #import "Station.h"
 #import "SitkolAPIClient.h"
 
+@interface SitkolCoords : NSObject
+@property (nonatomic, copy) NSString *xCoord, *yCoord;
+- (id)initWithXCoord:(NSString*)xCoord andYCoord:(NSString*)yCoord;
+@end
+
+@implementation SitkolCoords
+
+- (id)initWithXCoord:(NSString*)xCoord andYCoord:(NSString*)yCoord
+{
+    self = [super init];
+    if (self) {
+        self.xCoord = xCoord;
+        self.yCoord = yCoord;
+    }
+    return self;
+}
+
+@end
+
+@implementation CLLocation (CLLocation2Sitkol)
+
+// lat - y
+// lon - x
+
+-(SitkolCoords *)convertToSitkolCoords {
+    NSString *yCoord = [[NSString stringWithFormat:@"%.06f", self.coordinate.latitude] stringByReplacingOccurrencesOfString:@"." withString:@""];
+    NSString *xCoord = [[NSString stringWithFormat:@"%.06f", self.coordinate.longitude] stringByReplacingOccurrencesOfString:@"." withString:@""];
+    return [[SitkolCoords alloc] initWithXCoord:xCoord andYCoord:yCoord];
+}
+
+@end
+
 @implementation Station
 
 -(instancetype)initWithAttributes:(NSDictionary *)attributes {
@@ -24,9 +56,10 @@
     self.puic = @([attributes[@"puic"] integerValue]);
     self.stopWeight = @([attributes[@"stopweight"] integerValue]);
     self.urlName = attributes[@"urlname"];
-    self.xCoord = @([attributes[@"x"] integerValue]);
-    self.yCoord = @([attributes[@"y"] integerValue]);
-    
+    self.coords = [[CLLocation alloc]
+                   initWithLatitude:([attributes[@"x"] floatValue] / 1000000.0f)
+                   longitude:([attributes[@"y"] floatValue] / 1000000.0f)];
+    NSLog(@"%@", [self.coords convertToSitkolCoords]);
     return self;
 }
 
@@ -36,7 +69,9 @@
 
 #pragma mark - GET methods
 
-+(NSURLSessionDataTask *)stationsWithBlock:(void (^)(NSArray *, NSError *))block {
++(NSURLSessionDataTask *)stationsInRegion:(MKCoordinateRegion)region withBlock:(void (^)(NSArray *, NSError *))block {
+    SitkolCoords *bottomRight = [Station getBottomRightCornerFromRegion:region];
+    SitkolCoords *upperLeft = [Station getUpperLeftCornerFromRegion:region];
     
     NSDictionary *parameters =
   @{
@@ -47,10 +82,10 @@
     @"look_maxno": @"150",
     @"performLocating": @"2",
     
-    @"look_minx": @"18508902",
-    @"look_miny": @"54432830",
-    @"look_maxx": @"18611899",
-    @"look_maxy": @"54482724",
+    @"look_maxx": bottomRight.xCoord,
+    @"look_maxy": upperLeft.yCoord,
+    @"look_minx": upperLeft.xCoord,
+    @"look_miny": bottomRight.yCoord
     };
 
     return [[SitkolAPIClient sharedClient]
@@ -75,6 +110,24 @@
             }];
 }
 
+#pragma mark - Helpers
 
++(SitkolCoords*)getUpperLeftCornerFromRegion:(MKCoordinateRegion)region {
+    CLLocationCoordinate2D center = region.center;
+    CLLocationCoordinate2D northWestCorner;
+    northWestCorner.latitude  = center.latitude  + (region.span.latitudeDelta  / 2.0);
+    northWestCorner.longitude = center.longitude - (region.span.longitudeDelta / 2.0);
+    
+    return [[[CLLocation alloc] initWithLatitude:northWestCorner.latitude longitude:northWestCorner.longitude] convertToSitkolCoords];
+}
+
++(SitkolCoords*)getBottomRightCornerFromRegion:(MKCoordinateRegion)region {
+    CLLocationCoordinate2D center = region.center;
+    CLLocationCoordinate2D southEastCorner;
+    southEastCorner.latitude  = center.latitude  - (region.span.latitudeDelta  / 2.0);
+    southEastCorner.longitude = center.longitude + (region.span.longitudeDelta / 2.0);
+    
+    return [[[CLLocation alloc] initWithLatitude:southEastCorner.latitude longitude:southEastCorner.longitude] convertToSitkolCoords];
+}
 
 @end

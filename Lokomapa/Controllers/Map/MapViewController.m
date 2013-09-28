@@ -16,13 +16,16 @@
 {
     [super viewDidLoad];
 
-    [Schedule stationSchedule:@(5101118) withBlock:^(Schedule *schedule, NSError *error) {
-        NSLog(@"%@ %@", schedule, error);
-    }];
+    [self.mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(54.43574854705889f, 18.56841092715129), MKCoordinateSpanMake(0.5f, 0.5f))];
     
-    [Station stationsWithBlock:^(NSArray *stations, NSError *error) {
-        NSLog(@"%@ %@", stations, error);
+}
+
+-(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    [Station stationsInRegion:mapView.region withBlock:^(NSArray *stations, NSError *error) {
+        ;
     }];
 }
+
+
 
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
 @interface Station : NSObject
 
@@ -18,11 +19,9 @@
 @property (nonatomic, strong) NSNumber *puic;
 @property (nonatomic, strong) NSNumber *stopWeight;
 @property (nonatomic, strong) NSString *urlName;
-@property (nonatomic, strong) NSNumber *xCoord;
-@property (nonatomic, strong) NSNumber *yCoord;
-@property (nonatomic) CLLocationCoordinate2D coords;
+@property (nonatomic) CLLocation *coords;
 
 - (instancetype)initWithAttributes:(NSDictionary*)attributes;
-+ (NSURLSessionDataTask*)stationsWithBlock:(void (^)(NSArray *stations, NSError *error))block;
++ (NSURLSessionDataTask*)stationsInRegion:(MKCoordinateRegion)region withBlock:(void (^)(NSArray *stations, NSError *error))block;
 
 @end
