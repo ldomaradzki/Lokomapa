@@ -9,8 +9,6 @@
 #import "Station.h"
 #import "SitkolAPIClient.h"
 
-static NSString * const SitkolAPIStationsGETUrl = @"bin/query.exe/pny";
-
 @implementation Station
 
 -(instancetype)initWithAttributes:(NSDictionary *)attributes {
@@ -32,6 +30,12 @@ static NSString * const SitkolAPIStationsGETUrl = @"bin/query.exe/pny";
     return self;
 }
 
+-(NSString *)description {
+    return [NSString stringWithFormat:@"%@ (%@)", self.name, self.externalId];
+}
+
+#pragma mark - GET methods
+
 +(NSURLSessionDataTask *)stationsWithBlock:(void (^)(NSArray *, NSError *))block {
     
     NSDictionary *parameters =
@@ -50,7 +54,7 @@ static NSString * const SitkolAPIStationsGETUrl = @"bin/query.exe/pny";
     };
 
     return [[SitkolAPIClient sharedClient]
-            GET:SitkolAPIStationsGETUrl
+            GET:SitkolAPIQueryGETUrl
             parameters:parameters
             success:^(NSURLSessionDataTask *task, id JSON) {
                 NSMutableArray *stationsFromResponse = JSON[@"stops"];
@@ -71,8 +75,6 @@ static NSString * const SitkolAPIStationsGETUrl = @"bin/query.exe/pny";
             }];
 }
 
--(NSString *)description {
-    return [NSString stringWithFormat:@"%@ (%@)", self.name, self.externalId];
-}
+
 
 @end

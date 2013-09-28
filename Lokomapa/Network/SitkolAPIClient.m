@@ -22,4 +22,17 @@ static NSString * const SitkolAPIClientURLString = @"http://rozklad.sitkol.pl";
     return _sharedClient;
 }
 
+- (id)initWithBaseURL:(NSURL *)url
+{
+    self = [super initWithBaseURL:url];
+    if (self) {
+        AFJSONResponseSerializer *responseSerializer = [[AFJSONResponseSerializer alloc] init];
+        NSMutableSet *acceptableContentTypes = [responseSerializer.acceptableContentTypes mutableCopy];
+        [acceptableContentTypes addObject:@"text/html"];
+        responseSerializer.acceptableContentTypes = acceptableContentTypes;
+        self.responseSerializer = responseSerializer;
+    }
+    return self;
+}
+
 @end

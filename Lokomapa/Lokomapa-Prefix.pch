@@ -13,4 +13,8 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+
+    static NSString * const SitkolAPIQueryGETUrl = @"bin/query.exe/pny";
+    static NSString * const SitkolAPIStationGETUrl = @"bin/stboard.exe/pn";
+
 #endif

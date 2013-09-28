@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		179410AA17F708B300FD35BE /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 179410A917F708B300FD35BE /* Schedule.m */; };
 		179A96BD17F23DD6003FDC64 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96BC17F23DD6003FDC64 /* Foundation.framework */; };
 		179A96BF17F23DD6003FDC64 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96BE17F23DD6003FDC64 /* CoreGraphics.framework */; };
 		179A96C117F23DD6003FDC64 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96C017F23DD6003FDC64 /* UIKit.framework */; };
@@ -42,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		179410A817F708B300FD35BE /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
+		179410A917F708B300FD35BE /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schedule.m; sourceTree = "<group>"; };
 		179A96B917F23DD6003FDC64 /* Lokomapa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lokomapa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		179A96BC17F23DD6003FDC64 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		179A96BE17F23DD6003FDC64 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -221,6 +224,8 @@
 			children = (
 				17AC5F0617F6D1B9000A2DB1 /* Station.h */,
 				17AC5F0717F6D1B9000A2DB1 /* Station.m */,
+				179410A817F708B300FD35BE /* Schedule.h */,
+				179410A917F708B300FD35BE /* Schedule.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -360,6 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				179410AA17F708B300FD35BE /* Schedule.m in Sources */,
 				179A96CD17F23DD6003FDC64 /* AppDelegate.m in Sources */,
 				17AC5F0817F6D1B9000A2DB1 /* Station.m in Sources */,
 				179A96C917F23DD6003FDC64 /* main.m in Sources */,
