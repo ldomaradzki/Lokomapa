@@ -19,13 +19,32 @@
     self.title = self.station.name;
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     
+    // dirty hack: http://stackoverflow.com/a/12502450
+    UITableViewController *tableViewController = [[UITableViewController alloc] init];
+    tableViewController.tableView = self.tableView;
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
+    tableViewController.refreshControl = refreshControl;
+    
+    [self updateScheduleDataWithRefreshControl:nil];
+}
+
+-(void)updateScheduleDataWithRefreshControl:(UIRefreshControl*)sender {
     [Schedule stationSchedule:self.station.externalId withBlock:^(Schedule *schedule, NSError *error) {
         self.schedule = schedule;
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            if (sender) {
+                [sender endRefreshing];
+            }
+            
             [self.tableView reloadData];
         });
     }];
+}
+
+-(void)handleRefresh:(UIRefreshControl*)sender {
+    [self updateScheduleDataWithRefreshControl:sender];
 }
 
 -(void)prepareForStation:(Station *)scheduleForStation {
