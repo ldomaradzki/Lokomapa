@@ -33,9 +33,6 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
 
 @implementation CLLocation (CLLocation2Sitkol)
 
-// lat - y
-// lon - x
-
 -(SitkolCoords *)convertToSitkolCoords {
     NSString *yCoord = [[NSString stringWithFormat:@"%.06f", self.coordinate.latitude] stringByReplacingOccurrencesOfString:@"." withString:@""];
     NSString *xCoord = [[NSString stringWithFormat:@"%.06f", self.coordinate.longitude] stringByReplacingOccurrencesOfString:@"." withString:@""];

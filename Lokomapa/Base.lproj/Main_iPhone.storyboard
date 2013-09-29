@@ -21,6 +21,7 @@
         <scene sceneID="kSa-qL-cGN">
             <objects>
                 <navigationController definesPresentationContext="YES" id="4Ih-wa-uNr" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GCT-Pe-jsu">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

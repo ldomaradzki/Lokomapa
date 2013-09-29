@@ -16,7 +16,8 @@
 {
     [super viewDidLoad];
 
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HeaderLogo"]];
+    self.title = self.station.name;
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     
     [Schedule stationSchedule:self.station.externalId withBlock:^(Schedule *schedule, NSError *error) {
         self.schedule = schedule;
@@ -30,6 +31,8 @@
 -(void)prepareForStation:(Station *)scheduleForStation {
     self.station = scheduleForStation;
 }
+
+#pragma mark - TableView
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
