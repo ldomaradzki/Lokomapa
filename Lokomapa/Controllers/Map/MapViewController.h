@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "Station.h"
 
-@interface MapViewController : UIViewController <MKMapViewDelegate>
+@interface MapViewController : UIViewController <MKMapViewDelegate> {
+    Station *stationForSchedule;
+}
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 

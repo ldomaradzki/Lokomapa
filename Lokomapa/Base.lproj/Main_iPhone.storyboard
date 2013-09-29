@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="DUN-3H-COn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4Ih-wa-uNr">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
@@ -7,10 +7,40 @@
         <!--Map View Controller-->
         <scene sceneID="y39-Wv-lAG">
             <objects>
-                <viewController id="DUN-3H-COn" customClass="MapViewController" sceneMemberID="viewController"/>
+                <viewController id="DUN-3H-COn" customClass="MapViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="crZ-we-bg2"/>
+                    <connections>
+                        <segue destination="7BE-S7-hjG" kind="push" identifier="map2schedule" id="vGi-nI-jv4"/>
+                    </connections>
+                </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e7S-eh-mYF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="128" y="-51"/>
+            <point key="canvasLocation" x="146" y="-51"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="kSa-qL-cGN">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="4Ih-wa-uNr" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GCT-Pe-jsu">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="DUN-3H-COn" kind="relationship" relationship="rootViewController" id="OpN-IW-RTp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BO5-k2-aHh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-321" y="-51"/>
+        </scene>
+        <!--Schedule View Controller-->
+        <scene sceneID="2lw-iR-XFU">
+            <objects>
+                <viewController id="7BE-S7-hjG" customClass="ScheduleViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="j1g-eh-AkL"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7gn-YE-qmf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="603" y="-51"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
