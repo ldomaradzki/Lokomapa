@@ -57,9 +57,8 @@
     self.stopWeight = @([attributes[@"stopweight"] integerValue]);
     self.urlName = attributes[@"urlname"];
     self.coords = [[CLLocation alloc]
-                   initWithLatitude:([attributes[@"x"] floatValue] / 1000000.0f)
-                   longitude:([attributes[@"y"] floatValue] / 1000000.0f)];
-    NSLog(@"%@", [self.coords convertToSitkolCoords]);
+                   initWithLatitude:([attributes[@"y"] floatValue] / 1000000.0f)
+                   longitude:([attributes[@"x"] floatValue] / 1000000.0f)];
     return self;
 }
 
