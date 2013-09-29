@@ -21,7 +21,7 @@
     [self.mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(54.43574854705889f, 18.56841092715129), MKCoordinateSpanMake(0.5f, 0.5f))];
     
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HeaderLogo"]];
-    [self.navigationController.navigationBar setBarTintColor:RGBA(49, 95, 121, 0.5)];
+    [self.navigationController.navigationBar setBarTintColor:RGBA(49, 95, 121, 1)];
     
 }
 
