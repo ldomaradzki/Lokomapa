@@ -10,6 +10,7 @@
 #import "Station.h"
 #import "Schedule.h"
 #import "StationAnnotation.h"
+#import "StationAnnotationView.h"
 
 @implementation MapViewController
 
@@ -34,6 +35,10 @@
         });
         
     }];
+}
+
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    return [[StationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"STATION_ANNOTATION"];
 }
 
 @end

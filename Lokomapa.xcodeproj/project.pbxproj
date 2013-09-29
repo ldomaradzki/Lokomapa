@@ -30,6 +30,7 @@
 		17AC5F0817F6D1B9000A2DB1 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AC5F0717F6D1B9000A2DB1 /* Station.m */; };
 		17AC5F0A17F6D41F000A2DB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AC5F0917F6D41F000A2DB1 /* CoreLocation.framework */; };
 		17DF4B7217F881EE000F0B8A /* StationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF4B7117F881EE000F0B8A /* StationAnnotation.m */; };
+		17DF4B7617F89141000F0B8A /* StationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF4B7517F89141000F0B8A /* StationAnnotationView.m */; };
 		A61A266AAC334DA58E32A2AC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C57C5ADA7720400D8FDDF8AE /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +77,8 @@
 		17AC5F0917F6D41F000A2DB1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		17DF4B7017F881EE000F0B8A /* StationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationAnnotation.h; sourceTree = "<group>"; };
 		17DF4B7117F881EE000F0B8A /* StationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationAnnotation.m; sourceTree = "<group>"; };
+		17DF4B7417F89141000F0B8A /* StationAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationAnnotationView.h; sourceTree = "<group>"; };
+		17DF4B7517F89141000F0B8A /* StationAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationAnnotationView.m; sourceTree = "<group>"; };
 		290E48FB1F7047C7B9ABA920 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		C57C5ADA7720400D8FDDF8AE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -204,6 +207,7 @@
 		179A96F617F23E67003FDC64 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				17DF4B7317F890F8000F0B8A /* AnnotationViews */,
 				17DF4B6F17F881C6000F0B8A /* Annotations */,
 				179A96F717F23E8A003FDC64 /* MapViewController.h */,
 				179A96F817F23E8A003FDC64 /* MapViewController.m */,
@@ -241,6 +245,15 @@
 				17DF4B7117F881EE000F0B8A /* StationAnnotation.m */,
 			);
 			path = Annotations;
+			sourceTree = "<group>";
+		};
+		17DF4B7317F890F8000F0B8A /* AnnotationViews */ = {
+			isa = PBXGroup;
+			children = (
+				17DF4B7417F89141000F0B8A /* StationAnnotationView.h */,
+				17DF4B7517F89141000F0B8A /* StationAnnotationView.m */,
+			);
+			path = AnnotationViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,6 +393,7 @@
 			files = (
 				17DF4B7217F881EE000F0B8A /* StationAnnotation.m in Sources */,
 				179410AA17F708B300FD35BE /* Schedule.m in Sources */,
+				17DF4B7617F89141000F0B8A /* StationAnnotationView.m in Sources */,
 				179A96CD17F23DD6003FDC64 /* AppDelegate.m in Sources */,
 				17AC5F0817F6D1B9000A2DB1 /* Station.m in Sources */,
 				179A96C917F23DD6003FDC64 /* main.m in Sources */,
