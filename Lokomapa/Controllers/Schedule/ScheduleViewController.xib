@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScheduleViewController">
             <connections>
+                <outlet property="tableView" destination="4rw-dk-o13" id="opb-I2-H5w"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -13,7 +14,24 @@
         <view contentMode="scaleToFill" id="1">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4rw-dk-o13">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="gpS-6x-uno"/>
+                        <outlet property="delegate" destination="-1" id="MW9-1Q-H7g"/>
+                    </connections>
+                </tableView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="4rw-dk-o13" secondAttribute="trailing" id="OfX-l4-FXz"/>
+                <constraint firstAttribute="bottom" secondItem="4rw-dk-o13" secondAttribute="bottom" id="Oqt-Zj-Non"/>
+                <constraint firstItem="4rw-dk-o13" firstAttribute="top" secondItem="1" secondAttribute="top" id="Q1B-OB-89l"/>
+                <constraint firstItem="4rw-dk-o13" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="s7j-zx-7m7"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

@@ -14,7 +14,6 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 
-    static NSString * const SitkolAPIQueryGETUrl = @"bin/query.exe/pny";
-    static NSString * const SitkolAPIStationGETUrl = @"bin/stboard.exe/pn";
+    #define RGBA(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
 #endif

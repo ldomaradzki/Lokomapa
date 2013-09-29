@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Station.h"
+
+@class Station, Schedule;
 
 @interface ScheduleViewController : UIViewController
+<UITableViewDelegate, UITableViewDataSource>
 
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) Schedule *schedule;
 @property (nonatomic, strong) Station *station;
 
 -(void)prepareForStation:(Station*)scheduleForStation;

@@ -18,14 +18,11 @@
         self.multipleTouchEnabled = NO;
         self.draggable = NO;
         self.image = [UIImage imageNamed:@"StationPin"];
+        self.centerOffset = CGPointMake(-self.image.size.width/2+10, -self.image.size.height/2);
         self.calloutOffset = CGPointMake(0, -1);
-
+        self.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
     return self;
-}
-
--(UIView *)rightCalloutAccessoryView {
-    return [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 }
 
 @end

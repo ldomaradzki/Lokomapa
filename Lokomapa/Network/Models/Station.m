@@ -9,7 +9,10 @@
 #import "Station.h"
 #import "SitkolAPIClient.h"
 
+static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
+
 @interface SitkolCoords : NSObject
+
 @property (nonatomic, copy) NSString *xCoord, *yCoord;
 - (id)initWithXCoord:(NSString*)xCoord andYCoord:(NSString*)yCoord;
 @end
@@ -57,8 +60,8 @@
     self.stopWeight = @([attributes[@"stopweight"] integerValue]);
     self.urlName = attributes[@"urlname"];
     self.coords = [[CLLocation alloc]
-                   initWithLatitude:([attributes[@"y"] floatValue] / 1000000.0f)
-                   longitude:([attributes[@"x"] floatValue] / 1000000.0f)];
+                   initWithLatitude:([attributes[@"y"] doubleValue] / 1000000.0f)
+                   longitude:([attributes[@"x"] doubleValue] / 1000000.0f)];
     return self;
 }
 
@@ -88,7 +91,7 @@
     };
 
     return [[SitkolAPIClient sharedClient]
-            GET:SitkolAPIQueryGETUrl
+            GET:SitkolAPIQueryGETURLString
             parameters:parameters
             success:^(NSURLSessionDataTask *task, id JSON) {
                 NSMutableArray *stationsFromResponse = JSON[@"stops"];
