@@ -24,38 +24,39 @@
     [self.navigationController.navigationBar setBarTintColor:RGBA(91, 140, 169, 1)];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
-    self.mapView.userInteractionEnabled = YES;
+    self.mapView.showsUserLocation = YES;
     self.mapView.rotateEnabled = NO;
 }
 
 #pragma mark - MapView
 
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    [Station stationsInRegion:mapView.region withBlock:^(NSArray *stations, NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            NSMutableDictionary *annotationsDictionary = [NSMutableDictionary dictionaryWithCapacity:mapView.annotations.count];
-            for (StationAnnotation *annotation in mapView.annotations) {
-                annotationsDictionary[annotation.station.externalId] = annotation;
-            }
-            
-            
-            for (Station *station in stations) {
-                if ([[annotationsDictionary allKeys] containsObject:station.externalId]) {
-                    [annotationsDictionary removeObjectForKey:station.externalId];
-                } else {
-                    StationAnnotation *newStationAnnotation = [[StationAnnotation alloc] init];
-                    newStationAnnotation.station = station;
-                    [mapView addAnnotation:newStationAnnotation];
+    if (mapView.region.span.latitudeDelta < 0.6f) {
+        [Station stationsInRegion:mapView.region withBlock:^(NSArray *stations, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                NSMutableDictionary *annotationsDictionary = [NSMutableDictionary dictionaryWithCapacity:mapView.annotations.count];
+                for (StationAnnotation *annotation in mapView.annotations) {
+                    annotationsDictionary[annotation.station.externalId] = annotation;
                 }
-            }
-            
-            for (id key in [annotationsDictionary allKeys]) {
-                [mapView removeAnnotation:annotationsDictionary[key]];
-            }
-        });
-        
-    }];
+                
+                
+                for (Station *station in stations) {
+                    if ([[annotationsDictionary allKeys] containsObject:station.externalId]) {
+                        [annotationsDictionary removeObjectForKey:station.externalId];
+                    } else {
+                        StationAnnotation *newStationAnnotation = [[StationAnnotation alloc] init];
+                        newStationAnnotation.station = station;
+                        [mapView addAnnotation:newStationAnnotation];
+                    }
+                }
+                
+                for (id key in [annotationsDictionary allKeys]) {
+                    [mapView removeAnnotation:annotationsDictionary[key]];
+                }
+            });
+        }];
+    }
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
@@ -65,6 +66,29 @@
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     stationForSchedule = [(StationAnnotation*)view.annotation station];
     [self performSegueWithIdentifier:@"map2schedule" sender:self.view];
+}
+
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
+    MKAnnotationView *aV;
+    for (aV in views) {
+        if ([aV.annotation isKindOfClass:[MKUserLocation class]]) {
+            continue;
+        }
+
+        MKMapPoint point =  MKMapPointForCoordinate(aV.annotation.coordinate);
+        if (!MKMapRectContainsPoint(self.mapView.visibleMapRect, point)) {
+            continue;
+        }
+        
+        CGRect endFrame = aV.frame;
+        aV.frame = CGRectMake(aV.frame.origin.x, aV.frame.origin.y - 30, aV.frame.size.width, aV.frame.size.height);
+        aV.alpha = 0.0f;
+
+        [UIView animateWithDuration:0.2 delay:0.01*[views indexOfObject:aV] options: UIViewAnimationOptionCurveEaseInOut animations:^{
+            aV.frame = endFrame;
+            aV.alpha = 1.0f;
+        }completion:nil];
+    }
 }
 
 #pragma mark - Storyboard segue

@@ -26,7 +26,9 @@
     [refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
     tableViewController.refreshControl = refreshControl;
     
-    [self updateScheduleDataWithRefreshControl:nil];
+    [self updateScheduleDataWithRefreshControl:refreshControl];
+    [refreshControl beginRefreshing];
+    
 }
 
 -(void)updateScheduleDataWithRefreshControl:(UIRefreshControl*)sender {
