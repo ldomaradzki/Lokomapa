@@ -7,6 +7,7 @@
 //
 
 #import "AFHTTPSessionManager.h"
+#import "SitkolCoords.h"
 
 @interface SitkolAPIClient : AFHTTPSessionManager
 

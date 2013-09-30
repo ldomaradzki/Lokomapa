@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController">
             <connections>
                 <outlet property="mapView" destination="lFu-8m-efZ" id="3xZ-xh-4UU"/>
+                <outlet property="stationsTrainsSegmentedControl" destination="ARJ-wU-ulw" id="Spd-Od-ASD"/>
                 <outlet property="view" destination="1" id="SyI-SV-QVa"/>
             </connections>
         </placeholder>
@@ -22,8 +23,24 @@
                         <outlet property="delegate" destination="-1" id="Xay-OQ-1pY"/>
                     </connections>
                 </mapView>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ARJ-wU-ulw">
+                    <rect key="frame" x="190" y="531" width="123" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="123" id="fUU-4h-TXb"/>
+                    </constraints>
+                    <segments>
+                        <segment title="Stations"/>
+                        <segment title="Trains" width="56"/>
+                    </segments>
+                    <color key="tintColor" red="0.35686274509803922" green="0.5490196078431373" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
+                </segmentedControl>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ARJ-wU-ulw" secondAttribute="trailing" constant="7" id="hnR-ut-faH"/>
+                <constraint firstAttribute="bottom" secondItem="ARJ-wU-ulw" secondAttribute="bottom" constant="9" id="t6A-rd-76p"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MapKit/MapKit.h>
-#import "Station.h"
+
+@class Station;
 
 @interface MapViewController : UIViewController <MKMapViewDelegate> {
     Station *stationForSchedule;
 }
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *stationsTrainsSegmentedControl;
 
 @end

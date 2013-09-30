@@ -11,6 +11,8 @@
 #import "StationAnnotation.h"
 #import "StationAnnotationView.h"
 #import "ScheduleViewController.h"
+#import "Station.h"
+#import "Train.h"
 
 @implementation MapViewController
 
@@ -28,34 +30,59 @@
     self.mapView.rotateEnabled = NO;
 }
 
+
+- (void)getStations:(MKMapView *)mapView {
+    [Station stationsInRegion:mapView.region withBlock:^(NSArray *stations, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            NSMutableDictionary *annotationsDictionary = [NSMutableDictionary dictionaryWithCapacity:mapView.annotations.count];
+            for (StationAnnotation *annotation in mapView.annotations) {
+                annotationsDictionary[annotation.station.externalId] = annotation;
+            }
+            
+            
+            for (Station *station in stations) {
+                if ([[annotationsDictionary allKeys] containsObject:station.externalId]) {
+                    [annotationsDictionary removeObjectForKey:station.externalId];
+                } else {
+                    StationAnnotation *newStationAnnotation = [[StationAnnotation alloc] init];
+                    newStationAnnotation.station = station;
+                    [mapView addAnnotation:newStationAnnotation];
+                }
+            }
+            
+            for (id key in [annotationsDictionary allKeys]) {
+                [mapView removeAnnotation:annotationsDictionary[key]];
+            }
+        });
+    }];
+}
+
+- (void)getTrains:(MKMapView *)mapView {
+    [Train trainsInRegion:mapView.region withBlock:^(NSArray *trains, NSError *error) {
+        NSLog(@"%@", trains);
+    }];
+}
+
 #pragma mark - MapView
 
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     if (mapView.region.span.latitudeDelta < 0.6f) {
-        [Station stationsInRegion:mapView.region withBlock:^(NSArray *stations, NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+        switch (self.stationsTrainsSegmentedControl.selectedSegmentIndex) {
+            case 0: {
+                [self getStations:mapView];
+                break;
+            }
                 
-                NSMutableDictionary *annotationsDictionary = [NSMutableDictionary dictionaryWithCapacity:mapView.annotations.count];
-                for (StationAnnotation *annotation in mapView.annotations) {
-                    annotationsDictionary[annotation.station.externalId] = annotation;
-                }
+            case 1: {
+                [self getTrains:mapView];
+                break;
+            }
                 
-                
-                for (Station *station in stations) {
-                    if ([[annotationsDictionary allKeys] containsObject:station.externalId]) {
-                        [annotationsDictionary removeObjectForKey:station.externalId];
-                    } else {
-                        StationAnnotation *newStationAnnotation = [[StationAnnotation alloc] init];
-                        newStationAnnotation.station = station;
-                        [mapView addAnnotation:newStationAnnotation];
-                    }
-                }
-                
-                for (id key in [annotationsDictionary allKeys]) {
-                    [mapView removeAnnotation:annotationsDictionary[key]];
-                }
-            });
-        }];
+            default:
+                break;
+        }
+        
     }
 }
 

@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 ldomaradzki. All rights reserved.
 //
 
-#import <MapKit/MapKit.h>
-
 @interface StationAnnotationView : MKAnnotationView
 
 @end

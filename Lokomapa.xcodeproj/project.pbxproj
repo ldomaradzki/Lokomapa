@@ -29,6 +29,8 @@
 		17AC5F0417F6D02D000A2DB1 /* SitkolAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AC5F0317F6D02D000A2DB1 /* SitkolAPIClient.m */; };
 		17AC5F0817F6D1B9000A2DB1 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AC5F0717F6D1B9000A2DB1 /* Station.m */; };
 		17AC5F0A17F6D41F000A2DB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AC5F0917F6D41F000A2DB1 /* CoreLocation.framework */; };
+		17C0FCD317F9E71100B0A233 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0FCD217F9E71100B0A233 /* Train.m */; };
+		17C0FCD717F9E92600B0A233 /* SitkolCoords.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0FCD617F9E92600B0A233 /* SitkolCoords.m */; };
 		17DF4B7217F881EE000F0B8A /* StationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF4B7117F881EE000F0B8A /* StationAnnotation.m */; };
 		17DF4B7617F89141000F0B8A /* StationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF4B7517F89141000F0B8A /* StationAnnotationView.m */; };
 		17DF4B7B17F89D74000F0B8A /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF4B7917F89D74000F0B8A /* ScheduleViewController.m */; };
@@ -77,6 +79,10 @@
 		17AC5F0617F6D1B9000A2DB1 /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Station.h; sourceTree = "<group>"; };
 		17AC5F0717F6D1B9000A2DB1 /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Station.m; sourceTree = "<group>"; };
 		17AC5F0917F6D41F000A2DB1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		17C0FCD117F9E71100B0A233 /* Train.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Train.h; sourceTree = "<group>"; };
+		17C0FCD217F9E71100B0A233 /* Train.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Train.m; sourceTree = "<group>"; };
+		17C0FCD517F9E92600B0A233 /* SitkolCoords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SitkolCoords.h; sourceTree = "<group>"; };
+		17C0FCD617F9E92600B0A233 /* SitkolCoords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SitkolCoords.m; sourceTree = "<group>"; };
 		17DF4B7017F881EE000F0B8A /* StationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationAnnotation.h; sourceTree = "<group>"; };
 		17DF4B7117F881EE000F0B8A /* StationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationAnnotation.m; sourceTree = "<group>"; };
 		17DF4B7417F89141000F0B8A /* StationAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationAnnotationView.h; sourceTree = "<group>"; };
@@ -226,6 +232,7 @@
 		17AC5F0117F6CFC7000A2DB1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				17C0FCD417F9E8FF00B0A233 /* Helpers */,
 				17AC5F0517F6D193000A2DB1 /* Models */,
 				17AC5F0217F6D02D000A2DB1 /* SitkolAPIClient.h */,
 				17AC5F0317F6D02D000A2DB1 /* SitkolAPIClient.m */,
@@ -240,8 +247,19 @@
 				17AC5F0717F6D1B9000A2DB1 /* Station.m */,
 				179410A817F708B300FD35BE /* Schedule.h */,
 				179410A917F708B300FD35BE /* Schedule.m */,
+				17C0FCD117F9E71100B0A233 /* Train.h */,
+				17C0FCD217F9E71100B0A233 /* Train.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		17C0FCD417F9E8FF00B0A233 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				17C0FCD517F9E92600B0A233 /* SitkolCoords.h */,
+				17C0FCD617F9E92600B0A233 /* SitkolCoords.m */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		17DF4B6F17F881C6000F0B8A /* Annotations */ = {
@@ -410,12 +428,14 @@
 			files = (
 				17DF4B7217F881EE000F0B8A /* StationAnnotation.m in Sources */,
 				179410AA17F708B300FD35BE /* Schedule.m in Sources */,
+				17C0FCD717F9E92600B0A233 /* SitkolCoords.m in Sources */,
 				17DF4B7617F89141000F0B8A /* StationAnnotationView.m in Sources */,
 				179A96CD17F23DD6003FDC64 /* AppDelegate.m in Sources */,
 				17AC5F0817F6D1B9000A2DB1 /* Station.m in Sources */,
 				179A96C917F23DD6003FDC64 /* main.m in Sources */,
 				179A96FA17F23E8A003FDC64 /* MapViewController.m in Sources */,
 				17DF4B7B17F89D74000F0B8A /* ScheduleViewController.m in Sources */,
+				17C0FCD317F9E71100B0A233 /* Train.m in Sources */,
 				17AC5F0417F6D02D000A2DB1 /* SitkolAPIClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
