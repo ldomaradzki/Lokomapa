@@ -6,6 +6,14 @@
 //  Copyright (c) 2013 ldomaradzki. All rights reserved.
 //
 
-@interface StationAnnotationView : MKAnnotationView
+@interface StationAnnotationView : MKAnnotationView {
+    CAShapeLayer *circleLayer;
+    UILabel *label;
+    CAShapeLayer *labelBackground;
+    
+}
+
+-(void)prepareCustomViewWithTitle:(NSString*)title;
+-(void)animateWithDelay:(CFTimeInterval)delay;
 
 @end

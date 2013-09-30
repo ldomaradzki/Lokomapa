@@ -9,6 +9,8 @@
 #import "MapViewController.h"
 
 #import "StationAnnotation.h"
+#import "TrainAnnotation.h"
+
 #import "StationAnnotationView.h"
 #import "ScheduleViewController.h"
 #import "Station.h"
@@ -26,8 +28,7 @@
     [self.navigationController.navigationBar setBarTintColor:RGBA(91, 140, 169, 1)];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
-    self.mapView.showsUserLocation = YES;
-    self.mapView.rotateEnabled = NO;
+    self.mapView.showsUserLocation = NO;
 }
 
 
@@ -60,14 +61,37 @@
 
 - (void)getTrains:(MKMapView *)mapView {
     [Train trainsInRegion:mapView.region withBlock:^(NSArray *trains, NSError *error) {
-        NSLog(@"%@", trains);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            NSMutableDictionary *annotationsDictionary = [NSMutableDictionary dictionaryWithCapacity:mapView.annotations.count];
+            for (id<MKAnnotation> annotation in mapView.annotations) {
+                if ([annotation isKindOfClass:[TrainAnnotation class]])
+                    annotationsDictionary[[(TrainAnnotation*)annotation train].name] = annotation;
+            }
+            
+            
+            for (Train *train in trains) {
+                if ([[annotationsDictionary allKeys] containsObject:train.name]) {
+                    [(TrainAnnotation*)annotationsDictionary[train.name] setTrain:train];
+                    [annotationsDictionary removeObjectForKey:train.name];
+                } else {
+                    TrainAnnotation *newTrainAnnotation = [[TrainAnnotation alloc] init];
+                    newTrainAnnotation.train = train;
+                    [mapView addAnnotation:newTrainAnnotation];
+                }
+            }
+            
+            for (id key in [annotationsDictionary allKeys]) {
+                [mapView removeAnnotation:annotationsDictionary[key]];
+            }
+        });
     }];
 }
 
 #pragma mark - MapView
 
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    if (mapView.region.span.latitudeDelta < 0.6f) {
+    if (mapView.region.span.latitudeDelta < 0.7f) {
         switch (self.stationsTrainsSegmentedControl.selectedSegmentIndex) {
             case 0: {
                 [self getStations:mapView];
@@ -87,34 +111,31 @@
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    return [[StationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"STATION_ANNOTATION"];
+    StationAnnotationView *view = [[StationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:[(StationAnnotation*)annotation station].name];
+    [view prepareCustomViewWithTitle:[(StationAnnotation*)annotation station].name];
+    return view;
 }
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    stationForSchedule = [(StationAnnotation*)view.annotation station];
-    [self performSegueWithIdentifier:@"map2schedule" sender:self.view];
+    if ([view.annotation isKindOfClass:[StationAnnotation class]]) {
+        stationForSchedule = [(StationAnnotation*)view.annotation station];
+        [self performSegueWithIdentifier:@"map2schedule" sender:self.view];
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
-    MKAnnotationView *aV;
-    for (aV in views) {
-        if ([aV.annotation isKindOfClass:[MKUserLocation class]]) {
-            continue;
-        }
-
-        MKMapPoint point =  MKMapPointForCoordinate(aV.annotation.coordinate);
-        if (!MKMapRectContainsPoint(self.mapView.visibleMapRect, point)) {
-            continue;
-        }
-        
-        CGRect endFrame = aV.frame;
-        aV.frame = CGRectMake(aV.frame.origin.x, aV.frame.origin.y - 30, aV.frame.size.width, aV.frame.size.height);
-        aV.alpha = 0.0f;
-
-        [UIView animateWithDuration:0.2 delay:0.01*[views indexOfObject:aV] options: UIViewAnimationOptionCurveEaseInOut animations:^{
-            aV.frame = endFrame;
-            aV.alpha = 1.0f;
-        }completion:nil];
+    for (StationAnnotationView *annotationView in views) {
+        annotationView.alpha = 0.0f;
+        [UIView
+         animateWithDuration:0.3f
+         animations:^{
+             annotationView.alpha = 1.0f;
+         }
+         completion:^(BOOL finished) {
+             if (finished) {
+                 [annotationView animateWithDelay:0.02*[views indexOfObject:annotationView]];
+             }
+         }];
     }
 }
 
@@ -125,6 +146,13 @@
         ScheduleViewController *scheduleViewController = segue.destinationViewController;
         [scheduleViewController prepareForStation:stationForSchedule];
     }
+}
+
+#pragma mark - IB methods
+
+- (IBAction)handleStationsTrainSwitchChange:(UISegmentedControl *)sender {
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    [self mapView:self.mapView regionDidChangeAnimated:NO];
 }
 
 @end

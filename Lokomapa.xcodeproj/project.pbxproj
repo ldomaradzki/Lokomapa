@@ -31,6 +31,7 @@
 		17AC5F0A17F6D41F000A2DB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AC5F0917F6D41F000A2DB1 /* CoreLocation.framework */; };
 		17C0FCD317F9E71100B0A233 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0FCD217F9E71100B0A233 /* Train.m */; };
 		17C0FCD717F9E92600B0A233 /* SitkolCoords.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0FCD617F9E92600B0A233 /* SitkolCoords.m */; };
+		17C0FCDA17F9F04A00B0A233 /* TrainAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0FCD917F9F04A00B0A233 /* TrainAnnotation.m */; };
 		17DF4B7217F881EE000F0B8A /* StationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF4B7117F881EE000F0B8A /* StationAnnotation.m */; };
 		17DF4B7617F89141000F0B8A /* StationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF4B7517F89141000F0B8A /* StationAnnotationView.m */; };
 		17DF4B7B17F89D74000F0B8A /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF4B7917F89D74000F0B8A /* ScheduleViewController.m */; };
@@ -83,6 +84,8 @@
 		17C0FCD217F9E71100B0A233 /* Train.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Train.m; sourceTree = "<group>"; };
 		17C0FCD517F9E92600B0A233 /* SitkolCoords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SitkolCoords.h; sourceTree = "<group>"; };
 		17C0FCD617F9E92600B0A233 /* SitkolCoords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SitkolCoords.m; sourceTree = "<group>"; };
+		17C0FCD817F9F04A00B0A233 /* TrainAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainAnnotation.h; sourceTree = "<group>"; };
+		17C0FCD917F9F04A00B0A233 /* TrainAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainAnnotation.m; sourceTree = "<group>"; };
 		17DF4B7017F881EE000F0B8A /* StationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationAnnotation.h; sourceTree = "<group>"; };
 		17DF4B7117F881EE000F0B8A /* StationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationAnnotation.m; sourceTree = "<group>"; };
 		17DF4B7417F89141000F0B8A /* StationAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationAnnotationView.h; sourceTree = "<group>"; };
@@ -267,6 +270,8 @@
 			children = (
 				17DF4B7017F881EE000F0B8A /* StationAnnotation.h */,
 				17DF4B7117F881EE000F0B8A /* StationAnnotation.m */,
+				17C0FCD817F9F04A00B0A233 /* TrainAnnotation.h */,
+				17C0FCD917F9F04A00B0A233 /* TrainAnnotation.m */,
 			);
 			path = Annotations;
 			sourceTree = "<group>";
@@ -427,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17DF4B7217F881EE000F0B8A /* StationAnnotation.m in Sources */,
+				17C0FCDA17F9F04A00B0A233 /* TrainAnnotation.m in Sources */,
 				179410AA17F708B300FD35BE /* Schedule.m in Sources */,
 				17C0FCD717F9E92600B0A233 /* SitkolCoords.m in Sources */,
 				17DF4B7617F89141000F0B8A /* StationAnnotationView.m in Sources */,

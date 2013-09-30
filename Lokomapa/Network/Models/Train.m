@@ -26,6 +26,9 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
     self.direction = @([attributes[@"direction"] integerValue]);
     self.passedPercent = @([attributes[@"passproc"] integerValue]);
     self.prodClass = @([attributes[@"prodclass"] integerValue]);
+    self.coords = [[CLLocation alloc]
+                   initWithLatitude:([attributes[@"y"] doubleValue] / 1000000.0f)
+                   longitude:([attributes[@"x"] doubleValue] / 1000000.0f)];
 
     return self;
 }
