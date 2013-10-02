@@ -18,8 +18,7 @@
         self.multipleTouchEnabled = NO;
         self.draggable = NO;
 
-        self.centerOffset = CGPointMake(40, 0);
-        self.calloutOffset = CGPointMake(-41, -1);
+        
         self.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         isAnimated = NO;
     }
@@ -46,13 +45,31 @@
     labelBackground.fillColor = RGBA(90, 140, 169, 0.9).CGColor;
     [self.layer insertSublayer:labelBackground below:circleLayer];
     
+    [self setSmallerTouchView];
+}
+
+-(void)setSmallerTouchView {
+    self.centerOffset = CGPointMake(0, 0);
+    self.calloutOffset = CGPointMake(1, -1);
+    
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(20, 20), NO, 0.0);
+    UIImage *blank = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    self.image = blank;
+}
+
+-(void)setBiggerTouchView {
+    self.centerOffset = CGPointMake(40, 0);
+    self.calloutOffset = CGPointMake(-41, -1);
+    
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(100, 20), NO, 0.0);
     UIImage *blank = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     self.image = blank;
     
-
 }
+
+#pragma mark - Animations
 
 -(void)hideWithDelay:(CFTimeInterval)delay {
     if (isAnimated) {
@@ -75,6 +92,8 @@
         pathAnim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
         pathAnim.removedOnCompletion = NO;
         [labelBackground addAnimation:pathAnim forKey:nil];
+        
+        [self setSmallerTouchView];
     }
 }
 
@@ -104,6 +123,8 @@
         pathAnim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
         pathAnim.removedOnCompletion = NO;
         [labelBackground addAnimation:pathAnim forKey:nil];
+        
+        [self setBiggerTouchView];
     }
 }
 
