@@ -21,6 +21,7 @@
         self.centerOffset = CGPointMake(40, 0);
         self.calloutOffset = CGPointMake(-41, -1);
         self.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        isAnimated = NO;
     }
     return self;
 }
@@ -53,31 +54,57 @@
 
 }
 
--(void)animateWithDelay:(CFTimeInterval)delay {
+-(void)hideWithDelay:(CFTimeInterval)delay {
+    if (isAnimated) {
+        isAnimated = NO;
+        
+        [UIView
+         animateWithDuration:0.2f
+         delay:delay + 0.5f
+         options:UIViewAnimationOptionCurveEaseOut
+         animations:^{
+             label.alpha = 0.0f;
+         }
+         completion:nil];
+        
+        CABasicAnimation *pathAnim = [CABasicAnimation animationWithKeyPath:@"path"];
+        pathAnim.toValue = (id)[UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 20, 20) cornerRadius:10].CGPath;
+        pathAnim.duration = 0.2f;
+        pathAnim.beginTime = CACurrentMediaTime() + 0.5f + delay;
+        pathAnim.fillMode  = kCAFillModeForwards;
+        pathAnim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+        pathAnim.removedOnCompletion = NO;
+        [labelBackground addAnimation:pathAnim forKey:nil];
+    }
+}
 
-    [label sizeToFit];
-    label.center = CGPointMake(label.center.x, 10);
-    CGRect originalLabelRect = label.frame;
-    label.frame = CGRectMake(24, 0, 0, 20);
-    
-    [UIView
-     animateWithDuration:0.2f
-     delay:delay + 0.5f
-     options:UIViewAnimationOptionCurveEaseOut
-     animations:^{
-         label.frame = originalLabelRect;
-     }
-     completion:nil];
-    
-    CABasicAnimation *pathAnim = [CABasicAnimation animationWithKeyPath:@"path"];
-    pathAnim.toValue = (id)[UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, label.frame.size.width+30, 20) cornerRadius:10].CGPath;
-    pathAnim.duration = 0.2f;
-    pathAnim.beginTime = CACurrentMediaTime() + 0.5f + delay;
-    pathAnim.fillMode  = kCAFillModeForwards;
-    pathAnim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-    pathAnim.removedOnCompletion = NO;
-    [labelBackground addAnimation:pathAnim forKey:nil];
-    
+-(void)animateWithDelay:(CFTimeInterval)delay {
+    if (!isAnimated) {
+        isAnimated = YES;
+        [label sizeToFit];
+        label.center = CGPointMake(label.center.x, 10);
+        CGRect originalLabelRect = label.frame;
+        label.frame = CGRectMake(24, 0, 0, 20);
+        
+        [UIView
+         animateWithDuration:0.2f
+         delay:delay + 0.5f
+         options:UIViewAnimationOptionCurveEaseOut
+         animations:^{
+             label.frame = originalLabelRect;
+             label.alpha = 1.0f;
+         }
+         completion:nil];
+        
+        CABasicAnimation *pathAnim = [CABasicAnimation animationWithKeyPath:@"path"];
+        pathAnim.toValue = (id)[UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, label.frame.size.width+30, 20) cornerRadius:10].CGPath;
+        pathAnim.duration = 0.2f;
+        pathAnim.beginTime = CACurrentMediaTime() + 0.5f + delay;
+        pathAnim.fillMode  = kCAFillModeForwards;
+        pathAnim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+        pathAnim.removedOnCompletion = NO;
+        [labelBackground addAnimation:pathAnim forKey:nil];
+    }
 }
 
 @end

@@ -10,10 +10,10 @@
     CAShapeLayer *circleLayer;
     UILabel *label;
     CAShapeLayer *labelBackground;
-    
+    BOOL isAnimated;
 }
 
 -(void)prepareCustomViewWithTitle:(NSString*)title;
 -(void)animateWithDelay:(CFTimeInterval)delay;
-
+-(void)hideWithDelay:(CFTimeInterval)delay;
 @end

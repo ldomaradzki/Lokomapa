@@ -108,6 +108,17 @@
         }
         
     }
+    
+    if (mapView.region.span.latitudeDelta < 0.3f) {
+        for (id<MKAnnotation> annotation in mapView.annotations) {
+            [(StationAnnotationView*)[mapView viewForAnnotation:annotation] animateWithDelay:0.02*[mapView.annotations indexOfObject:annotation]];
+        }
+    }
+    else {
+        for (id<MKAnnotation> annotation in mapView.annotations) {
+            [(StationAnnotationView*)[mapView viewForAnnotation:annotation] hideWithDelay:0.02*[mapView.annotations indexOfObject:annotation]];
+        }
+    }
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
@@ -133,7 +144,9 @@
          }
          completion:^(BOOL finished) {
              if (finished) {
-                 [annotationView animateWithDelay:0.02*[views indexOfObject:annotationView]];
+                 if (mapView.region.span.latitudeDelta < 0.3f) {
+                     [annotationView animateWithDelay:0.02*[views indexOfObject:annotationView]];
+                 }
              }
          }];
     }
