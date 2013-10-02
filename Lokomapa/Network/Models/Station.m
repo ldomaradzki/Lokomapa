@@ -36,7 +36,7 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
     return [NSString stringWithFormat:@"%@ (%@)", self.name, self.externalId];
 }
 
-#pragma mark - GET methods
+#pragma mark - API methods
 
 +(NSURLSessionDataTask *)stationsInRegion:(MKCoordinateRegion)region withBlock:(void (^)(NSArray *, NSError *))block {
     SitkolCoords *bottomRight = [SitkolCoords getBottomRightCornerFromRegion:region];

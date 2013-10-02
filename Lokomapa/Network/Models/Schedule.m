@@ -138,6 +138,8 @@ static NSString * const SitkolAPIStationGETURLString = @"bin/stboard.exe/pn";
     return [NSString stringWithFormat:@"%@ (journeys count:%d)", self.name, self.journeys.count];
 }
 
+#pragma mark - API methods
+
 + (NSURLSessionDataTask*)stationSchedule:(NSNumber*)stationId withBlock:(void (^)(Schedule *schedule, NSError *error))block {
     
     NSDictionary *parameters =

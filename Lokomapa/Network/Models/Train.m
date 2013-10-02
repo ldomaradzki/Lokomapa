@@ -73,6 +73,8 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
     self.lastStop = [[TrainStop alloc] initWithPrefix:@"l" andAttributes:attributes];
 }
 
+#pragma mark - API methods
+
 +(NSURLSessionDataTask *)trainsInRegion:(MKCoordinateRegion)region withBlock:(void (^)(NSArray *, NSError *))block {
     SitkolCoords *bottomRight = [SitkolCoords getBottomRightCornerFromRegion:region];
     SitkolCoords *upperLeft = [SitkolCoords getUpperLeftCornerFromRegion:region];
