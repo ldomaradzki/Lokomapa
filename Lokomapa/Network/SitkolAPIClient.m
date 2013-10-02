@@ -7,6 +7,7 @@
 //
 
 #import "SitkolAPIClient.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 static NSString * const SitkolAPIClientURLString = @"http://rozklad.sitkol.pl";
 
@@ -31,6 +32,9 @@ static NSString * const SitkolAPIClientURLString = @"http://rozklad.sitkol.pl";
         [acceptableContentTypes addObject:@"text/html"];
         responseSerializer.acceptableContentTypes = acceptableContentTypes;
         self.responseSerializer = responseSerializer;
+        
+        [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+        
     }
     return self;
 }

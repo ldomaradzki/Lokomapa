@@ -13,8 +13,9 @@
 
 #import "StationAnnotationView.h"
 #import "ScheduleViewController.h"
-#import "Station.h"
+
 #import "Train.h"
+#import "UIAlertView+AFNetworking.h"
 
 @implementation MapViewController
 
@@ -33,7 +34,11 @@
 
 
 - (void)getStations:(MKMapView *)mapView {
-    [Station stationsInRegion:mapView.region withBlock:^(NSArray *stations, NSError *error) {
+    if (self.lastTask) {
+        [self.lastTask cancel];
+    }
+    
+    NSURLSessionDataTask *task = [Station stationsInRegion:mapView.region withBlock:^(NSArray *stations, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             
             NSMutableDictionary *annotationsDictionary = [NSMutableDictionary dictionaryWithCapacity:mapView.annotations.count];
@@ -57,10 +62,15 @@
             }
         });
     }];
+    self.lastTask = task;
 }
 
 - (void)getTrains:(MKMapView *)mapView {
-    [Train trainsInRegion:mapView.region withBlock:^(NSArray *trains, NSError *error) {
+    if (self.lastTask) {
+        [self.lastTask cancel];
+    }
+    
+    NSURLSessionDataTask *task = [Train trainsInRegion:mapView.region withBlock:^(NSArray *trains, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             
             NSMutableDictionary *annotationsDictionary = [NSMutableDictionary dictionaryWithCapacity:mapView.annotations.count];
@@ -86,11 +96,14 @@
             }
         });
     }];
+    self.lastTask = task;
 }
 
 #pragma mark - MapView
 
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    NSLog(@"%f", mapView.region.span.latitudeDelta);
+    
     if (mapView.region.span.latitudeDelta < 0.7f) {
         switch (self.stationsTrainsSegmentedControl.selectedSegmentIndex) {
             case 0: {
@@ -106,7 +119,9 @@
             default:
                 break;
         }
-        
+    }
+    else if (mapView.region.span.latitudeDelta > 1.0f) {
+        [mapView removeAnnotations:mapView.annotations];
     }
     
     if (mapView.region.span.latitudeDelta < 0.3f) {
@@ -122,9 +137,17 @@
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    StationAnnotationView *view = [[StationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:[(StationAnnotation*)annotation station].name];
-    [view prepareCustomViewWithTitle:[(StationAnnotation*)annotation station].name];
-    return view;
+    if ([annotation isKindOfClass:[StationAnnotation class]]) {
+        StationAnnotationView *view = [[StationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:[(StationAnnotation*)annotation station].name];
+        [view prepareCustomViewWithTitle:[(StationAnnotation*)annotation station].name];
+        return view;
+    }
+    else if ([annotation isKindOfClass:[TrainAnnotation class]]) {
+        StationAnnotationView *view = [[StationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:[(TrainAnnotation*)annotation train].name];
+        [view prepareCustomViewWithTitle:[(TrainAnnotation*)annotation train].name];
+        return view;
+    }
+    return nil;
 }
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
