@@ -11,11 +11,22 @@
                     <navigationItem key="navigationItem" id="crZ-we-bg2"/>
                     <connections>
                         <segue destination="7BE-S7-hjG" kind="push" identifier="map2schedule" id="vGi-nI-jv4"/>
+                        <segue destination="5wI-Pu-ohL" kind="push" identifier="map2train" id="4pz-ma-RHZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e7S-eh-mYF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="146" y="-51"/>
+        </scene>
+        <!--Train Details View Controller-->
+        <scene sceneID="oaB-f8-PPy">
+            <objects>
+                <viewController id="5wI-Pu-ohL" customClass="TrainDetailsViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="BLA-pq-69U"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vnh-N7-5Up" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="584" y="384"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kSa-qL-cGN">
@@ -41,7 +52,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7gn-YE-qmf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="603" y="-51"/>
+            <point key="canvasLocation" x="601" y="-313"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

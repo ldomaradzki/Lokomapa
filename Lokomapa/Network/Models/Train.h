@@ -8,6 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+@interface TrainStop : NSObject
+
+@property (nonatomic, strong) NSString *stopName;
+@property (nonatomic, strong) NSDate *departureTime;
+@property (nonatomic, strong) NSNumber *departureDelay;
+@property (nonatomic, strong) NSDate *arrivalTime;
+@property (nonatomic, strong) NSNumber *arrivalDelay;
+
+-(instancetype)initWithPrefix:(NSString*)prefix andAttributes:(NSDictionary*)attributes;
+
+@end
+
 @interface Train : NSObject
 
 @property (nonatomic, strong) NSString *stopName;
@@ -18,8 +30,13 @@
 @property (nonatomic, strong) NSNumber *direction;
 @property (nonatomic, strong) NSNumber *passedPercent;
 @property (nonatomic, strong) NSNumber *prodClass;
+@property (nonatomic, strong) TrainStop *firstStop;
+@property (nonatomic, strong) TrainStop *nowStop;
+@property (nonatomic, strong) TrainStop *passedStop;
+@property (nonatomic, strong) TrainStop *lastStop;
 
 - (instancetype)initWithAttributes:(NSDictionary*)attributes;
 + (NSURLSessionDataTask*)trainsInRegion:(MKCoordinateRegion)region withBlock:(void (^)(NSArray *trains, NSError *error))block;
+- (NSURLSessionDataTask*)trainDetailsWithBlock:(void (^)(NSError *error))block;
 
 @end

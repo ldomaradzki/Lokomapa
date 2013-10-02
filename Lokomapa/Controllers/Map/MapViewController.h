@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "Station.h"
+@class Station, Train;
 
 @interface MapViewController : UIViewController <MKMapViewDelegate> {
     Station *stationForSchedule;
+    Train *trainForTrainDetails;
 }
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;

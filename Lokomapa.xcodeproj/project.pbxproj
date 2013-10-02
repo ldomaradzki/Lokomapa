@@ -32,6 +32,8 @@
 		17C0FCD317F9E71100B0A233 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0FCD217F9E71100B0A233 /* Train.m */; };
 		17C0FCD717F9E92600B0A233 /* SitkolCoords.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0FCD617F9E92600B0A233 /* SitkolCoords.m */; };
 		17C0FCDA17F9F04A00B0A233 /* TrainAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0FCD917F9F04A00B0A233 /* TrainAnnotation.m */; };
+		17C0FCDF17FC5BF500B0A233 /* TrainDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0FCDD17FC5BF500B0A233 /* TrainDetailsViewController.m */; };
+		17C0FCE017FC5BF500B0A233 /* TrainDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17C0FCDE17FC5BF500B0A233 /* TrainDetailsViewController.xib */; };
 		17DF4B7217F881EE000F0B8A /* StationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF4B7117F881EE000F0B8A /* StationAnnotation.m */; };
 		17DF4B7617F89141000F0B8A /* StationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF4B7517F89141000F0B8A /* StationAnnotationView.m */; };
 		17DF4B7B17F89D74000F0B8A /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF4B7917F89D74000F0B8A /* ScheduleViewController.m */; };
@@ -86,6 +88,9 @@
 		17C0FCD617F9E92600B0A233 /* SitkolCoords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SitkolCoords.m; sourceTree = "<group>"; };
 		17C0FCD817F9F04A00B0A233 /* TrainAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainAnnotation.h; sourceTree = "<group>"; };
 		17C0FCD917F9F04A00B0A233 /* TrainAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainAnnotation.m; sourceTree = "<group>"; };
+		17C0FCDC17FC5BF500B0A233 /* TrainDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainDetailsViewController.h; sourceTree = "<group>"; };
+		17C0FCDD17FC5BF500B0A233 /* TrainDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainDetailsViewController.m; sourceTree = "<group>"; };
+		17C0FCDE17FC5BF500B0A233 /* TrainDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainDetailsViewController.xib; sourceTree = "<group>"; };
 		17DF4B7017F881EE000F0B8A /* StationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationAnnotation.h; sourceTree = "<group>"; };
 		17DF4B7117F881EE000F0B8A /* StationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationAnnotation.m; sourceTree = "<group>"; };
 		17DF4B7417F89141000F0B8A /* StationAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationAnnotationView.h; sourceTree = "<group>"; };
@@ -206,6 +211,7 @@
 				179A96F517F23E1A003FDC64 /* AppDelegate */,
 				179A96F617F23E67003FDC64 /* Map */,
 				17DF4B7717F89D51000F0B8A /* Schedule */,
+				17C0FCDB17FC5B9700B0A233 /* TrainDetails */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -263,6 +269,16 @@
 				17C0FCD617F9E92600B0A233 /* SitkolCoords.m */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		17C0FCDB17FC5B9700B0A233 /* TrainDetails */ = {
+			isa = PBXGroup;
+			children = (
+				17C0FCDC17FC5BF500B0A233 /* TrainDetailsViewController.h */,
+				17C0FCDD17FC5BF500B0A233 /* TrainDetailsViewController.m */,
+				17C0FCDE17FC5BF500B0A233 /* TrainDetailsViewController.xib */,
+			);
+			path = TrainDetails;
 			sourceTree = "<group>";
 		};
 		17DF4B6F17F881C6000F0B8A /* Annotations */ = {
@@ -375,6 +391,7 @@
 			files = (
 				179A96D317F23DD6003FDC64 /* Main_iPad.storyboard in Resources */,
 				179A96FD17F23F3F003FDC64 /* MapViewController.xib in Resources */,
+				17C0FCE017FC5BF500B0A233 /* TrainDetailsViewController.xib in Resources */,
 				179A96D817F23DD6003FDC64 /* Images.xcassets in Resources */,
 				17DF4B7C17F89D74000F0B8A /* ScheduleViewController.xib in Resources */,
 				179A96D017F23DD6003FDC64 /* Main_iPhone.storyboard in Resources */,
@@ -431,6 +448,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17C0FCDF17FC5BF500B0A233 /* TrainDetailsViewController.m in Sources */,
 				17DF4B7217F881EE000F0B8A /* StationAnnotation.m in Sources */,
 				17C0FCDA17F9F04A00B0A233 /* TrainAnnotation.m in Sources */,
 				179410AA17F708B300FD35BE /* Schedule.m in Sources */,

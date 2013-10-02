@@ -11,6 +11,35 @@
 
 static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
 
+@implementation NSString (prefixUtil)
+
+-(NSString*)addPrefix:(NSString*)prefix {
+    return [NSString stringWithFormat:@"%@%@", prefix, self];
+}
+
+@end
+
+@implementation TrainStop
+
+-(instancetype)initWithPrefix:(NSString *)prefix andAttributes:(NSDictionary*)attributes {
+    self = [super init];
+    if (self) {
+        NSDateFormatter *hourFormatter = [NSDateFormatter new];
+        [hourFormatter setDateFormat:@"HH:mm"];
+        
+        self.stopName = attributes[[@"stopname" addPrefix:prefix]];
+        
+        self.departureTime = [hourFormatter dateFromString:attributes[[@"dep" addPrefix:prefix]]];
+        self.arrivalTime = [hourFormatter dateFromString:attributes[[@"arr" addPrefix:prefix]]];
+        
+        self.departureDelay = @([attributes[[@"dep_d" addPrefix:prefix]] intValue]);
+        self.arrivalDelay = @([attributes[[@"arr_d" addPrefix:prefix]] intValue]);
+    }
+    return self;
+}
+
+@end
+
 @implementation Train
 
 -(instancetype)initWithAttributes:(NSDictionary *)attributes {
@@ -35,6 +64,13 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
 
 -(NSString *)description {
     return [NSString stringWithFormat:@"%@ -> %@", self.name, self.stopName];
+}
+
+-(void)updateTrainDetailsWithAttributes:(NSDictionary*)attributes {
+    self.firstStop = [[TrainStop alloc] initWithPrefix:@"f" andAttributes:attributes];
+    self.nowStop = [[TrainStop alloc] initWithPrefix:@"n" andAttributes:attributes];
+    self.passedStop = [[TrainStop alloc] initWithPrefix:@"p" andAttributes:attributes];
+    self.lastStop = [[TrainStop alloc] initWithPrefix:@"l" andAttributes:attributes];
 }
 
 +(NSURLSessionDataTask *)trainsInRegion:(MKCoordinateRegion)region withBlock:(void (^)(NSArray *, NSError *))block {
@@ -72,6 +108,35 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
             failure:^(NSURLSessionDataTask *task, NSError *error) {
                 if (block) {
                     block([NSArray array], error);
+                }
+            }];
+}
+
+-(NSURLSessionDataTask *)trainDetailsWithBlock:(void (^)(NSError *))block {
+    NSDictionary *parameters =
+    @{
+      @"tpl": @"singletrain2json",
+      @"look_nv": @"get_rtstoptimes|yes",
+      @"performLocating": @"8",
+      
+      @"look_trainid": self.trainId
+      };
+    
+    return [[SitkolAPIClient sharedClient]
+            GET:SitkolAPIQueryGETURLString
+            parameters:parameters
+            success:^(NSURLSessionDataTask *task, id JSON) {
+                NSDictionary *trainDetailsFromResponse = JSON[@"look"][@"singletrain"][0];
+                
+                [self updateTrainDetailsWithAttributes:trainDetailsFromResponse];
+                
+                if (block) {
+                    block(nil);
+                }
+            }
+            failure:^(NSURLSessionDataTask *task, NSError *error) {
+                if (block) {
+                    block(error);
                 }
             }];
 }

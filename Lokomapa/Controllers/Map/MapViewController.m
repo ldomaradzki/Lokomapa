@@ -13,7 +13,8 @@
 
 #import "StationAnnotationView.h"
 #import "ScheduleViewController.h"
-
+#import "TrainDetailsViewController.h"
+#import "Station.h"
 #import "Train.h"
 #import "UIAlertView+AFNetworking.h"
 
@@ -155,6 +156,10 @@
         stationForSchedule = [(StationAnnotation*)view.annotation station];
         [self performSegueWithIdentifier:@"map2schedule" sender:self.view];
     }
+    else if ([view.annotation isKindOfClass:[TrainAnnotation class]]) {
+        trainForTrainDetails = [(TrainAnnotation*)view.annotation train];
+        [self performSegueWithIdentifier:@"map2train" sender:self.view];
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
@@ -181,6 +186,10 @@
     if ([segue.destinationViewController isKindOfClass:[ScheduleViewController class]]) {
         ScheduleViewController *scheduleViewController = segue.destinationViewController;
         [scheduleViewController prepareForStation:stationForSchedule];
+    }
+    else if ([segue.destinationViewController isKindOfClass:[TrainDetailsViewController class]]) {
+        TrainDetailsViewController *trainDetailsViewController = segue.destinationViewController;
+        [trainDetailsViewController prepareForTrain:trainForTrainDetails];
     }
 }
 
