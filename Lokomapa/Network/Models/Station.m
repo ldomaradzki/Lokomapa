@@ -20,7 +20,7 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
     }
     
     self.externalId = @([attributes[@"extId"] integerValue]);
-    self.name = attributes[@"name"];
+    self.name = [attributes[@"name"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     self.planId = @([attributes[@"planId"] integerValue]);
     self.prodClass = @([attributes[@"prodclass"] integerValue]);
     self.puic = @([attributes[@"puic"] integerValue]);

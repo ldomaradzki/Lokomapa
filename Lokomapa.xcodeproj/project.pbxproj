@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1720366817FF3A8C00463419 /* TrainStopDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1720366717FF3A8C00463419 /* TrainStopDetailsCell.m */; };
+		1720366A17FF3AB800463419 /* TrainStopDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1720366917FF3AB800463419 /* TrainStopDetailsCell.xib */; };
 		179410AA17F708B300FD35BE /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 179410A917F708B300FD35BE /* Schedule.m */; };
 		179A96BD17F23DD6003FDC64 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96BC17F23DD6003FDC64 /* Foundation.framework */; };
 		179A96BF17F23DD6003FDC64 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96BE17F23DD6003FDC64 /* CoreGraphics.framework */; };
@@ -52,6 +54,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1720366617FF3A8C00463419 /* TrainStopDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainStopDetailsCell.h; sourceTree = "<group>"; };
+		1720366717FF3A8C00463419 /* TrainStopDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainStopDetailsCell.m; sourceTree = "<group>"; };
+		1720366917FF3AB800463419 /* TrainStopDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainStopDetailsCell.xib; sourceTree = "<group>"; };
 		179410A817F708B300FD35BE /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
 		179410A917F708B300FD35BE /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schedule.m; sourceTree = "<group>"; };
 		179A96B917F23DD6003FDC64 /* Lokomapa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lokomapa.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +134,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1720366517FF3A6B00463419 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1720366617FF3A8C00463419 /* TrainStopDetailsCell.h */,
+				1720366717FF3A8C00463419 /* TrainStopDetailsCell.m */,
+				1720366917FF3AB800463419 /* TrainStopDetailsCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		179A96B017F23DD6003FDC64 = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +289,7 @@
 		17C0FCDB17FC5B9700B0A233 /* TrainDetails */ = {
 			isa = PBXGroup;
 			children = (
+				1720366517FF3A6B00463419 /* Cells */,
 				17C0FCDC17FC5BF500B0A233 /* TrainDetailsViewController.h */,
 				17C0FCDD17FC5BF500B0A233 /* TrainDetailsViewController.m */,
 				17C0FCDE17FC5BF500B0A233 /* TrainDetailsViewController.xib */,
@@ -397,6 +413,7 @@
 				179A96D017F23DD6003FDC64 /* Main_iPhone.storyboard in Resources */,
 				179A96FB17F23E8A003FDC64 /* MapViewController~ipad.xib in Resources */,
 				179A96C717F23DD6003FDC64 /* InfoPlist.strings in Resources */,
+				1720366A17FF3AB800463419 /* TrainStopDetailsCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17C0FCDF17FC5BF500B0A233 /* TrainDetailsViewController.m in Sources */,
+				1720366817FF3A8C00463419 /* TrainStopDetailsCell.m in Sources */,
 				17DF4B7217F881EE000F0B8A /* StationAnnotation.m in Sources */,
 				17C0FCDA17F9F04A00B0A233 /* TrainAnnotation.m in Sources */,
 				179410AA17F708B300FD35BE /* Schedule.m in Sources */,

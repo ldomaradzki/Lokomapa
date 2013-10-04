@@ -38,6 +38,10 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
     return self;
 }
 
+-(NSString *)description {
+    return [NSString stringWithFormat:@"%@", self.stopName];
+}
+
 @end
 
 @implementation Train
@@ -48,8 +52,8 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
         return nil;
     }
     
-    self.stopName = attributes[@"lstopname"];
-    self.name = attributes[@"name"];
+    self.stopName = [attributes[@"lstopname"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    self.name = [attributes[@"name"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     self.trainId = attributes[@"trainid"];
     self.delay = @([attributes[@"delay"] integerValue]);
     self.direction = @([attributes[@"direction"] integerValue]);
@@ -71,6 +75,10 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
     self.nowStop = [[TrainStop alloc] initWithPrefix:@"n" andAttributes:attributes];
     self.passedStop = [[TrainStop alloc] initWithPrefix:@"p" andAttributes:attributes];
     self.lastStop = [[TrainStop alloc] initWithPrefix:@"l" andAttributes:attributes];
+}
+
+-(TrainStop *)sortedTrainStopForPlace:(int)number {
+    return @[self.firstStop, self.passedStop, self.nowStop, self.lastStop][number];
 }
 
 #pragma mark - API methods

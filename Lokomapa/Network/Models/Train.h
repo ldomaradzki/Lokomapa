@@ -36,6 +36,8 @@
 @property (nonatomic, strong) TrainStop *lastStop;
 
 - (instancetype)initWithAttributes:(NSDictionary*)attributes;
+- (TrainStop*)sortedTrainStopForPlace:(int)number;
+
 + (NSURLSessionDataTask*)trainsInRegion:(MKCoordinateRegion)region withBlock:(void (^)(NSArray *trains, NSError *error))block;
 - (NSURLSessionDataTask*)trainDetailsWithBlock:(void (^)(NSError *error))block;
 

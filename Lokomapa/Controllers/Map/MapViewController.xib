@@ -30,7 +30,7 @@
                         <segment title="Stations"/>
                         <segment title="Trains" width="56"/>
                     </segments>
-                    <color key="tintColor" red="0.35686274509803922" green="0.5490196078431373" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="tintColor" red="0.65490196078431373" green="0.45882352941176469" blue="0.34509803921568627" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <action selector="handleStationsTrainSwitchChange:" destination="-1" eventType="valueChanged" id="IwJ-Rm-gEb"/>
                     </connections>

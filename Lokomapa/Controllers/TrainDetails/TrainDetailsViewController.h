@@ -10,13 +10,14 @@
 
 @class Train;
 
-@interface TrainDetailsViewController : UIViewController
+@interface TrainDetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+{
+    int numberOfRows;
+}
 
 @property (nonatomic, strong) Train *train;
 
-@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *idLabel;
-
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 -(void)prepareForTrain:(Train*)train;
 
