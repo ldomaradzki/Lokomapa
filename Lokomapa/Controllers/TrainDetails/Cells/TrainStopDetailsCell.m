@@ -12,20 +12,16 @@
 @implementation TrainStopDetailsCell
 
 -(void)prepareCellWithTrainStop:(TrainStop *)trainStop atIndex:(NSIndexPath*)indexPath {
-    
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat:@"HH:mm"];
-    
     self.nameLabel.text = trainStop.stopName;
     if (trainStop.arrivalTime) {
-        self.arrivalLabel.text = [NSString stringWithFormat:@"%@ (+%@ min)", [dateFormatter stringFromDate:trainStop.arrivalTime], [trainStop.arrivalDelay stringValue]];
+        self.arrivalLabel.text = [NSString stringWithFormat:@"%@ (+%@ min)", [trainStop.arrivalTime getHourMinuteString], [trainStop.arrivalDelay stringValue]];
     }
     else {
         self.arrivalLabel.text = @"";
     }
     
     if (trainStop.departureTime) {
-        self.departureLabel.text = [NSString stringWithFormat:@"%@ (+%@ min)", [dateFormatter stringFromDate:trainStop.departureTime], [trainStop.departureDelay stringValue]];
+        self.departureLabel.text = [NSString stringWithFormat:@"%@ (+%@ min)", [trainStop.departureTime getHourMinuteString], [trainStop.departureDelay stringValue]];
     }
     else {
         self.departureLabel.text = @"";

@@ -24,13 +24,10 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
 -(instancetype)initWithPrefix:(NSString *)prefix andAttributes:(NSDictionary*)attributes {
     self = [super init];
     if (self) {
-        NSDateFormatter *hourFormatter = [NSDateFormatter new];
-        [hourFormatter setDateFormat:@"HH:mm"];
-        
         self.stopName = attributes[[@"stopname" addPrefix:prefix]];
         
-        self.departureTime = [hourFormatter dateFromString:attributes[[@"dep" addPrefix:prefix]]];
-        self.arrivalTime = [hourFormatter dateFromString:attributes[[@"arr" addPrefix:prefix]]];
+        self.departureTime = [attributes[[@"dep" addPrefix:prefix]] getHourMinuteDate];
+        self.arrivalTime = [attributes[[@"arr" addPrefix:prefix]] getHourMinuteDate];
         
         self.departureDelay = @([attributes[[@"dep_d" addPrefix:prefix]] intValue]);
         self.arrivalDelay = @([attributes[[@"arr_d" addPrefix:prefix]] intValue]);
@@ -52,8 +49,8 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
         return nil;
     }
     
-    self.stopName = [attributes[@"lstopname"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    self.name = [attributes[@"name"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    self.stopName = [attributes[@"lstopname"] cleanWhitespace];
+    self.name = [attributes[@"name"] cleanWhitespace];
     self.trainId = attributes[@"trainid"];
     self.delay = @([attributes[@"delay"] integerValue]);
     self.direction = @([attributes[@"direction"] integerValue]);

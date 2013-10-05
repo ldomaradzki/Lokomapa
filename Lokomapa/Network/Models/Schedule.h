@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSDate *arrivalTime;
 
 - (instancetype)initWithAttributes:(NSDictionary*)attributes;
+- (NSString*)getDelayString;
 
 @end
 

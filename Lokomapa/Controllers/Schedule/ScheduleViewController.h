@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MFMessageComposeViewController.h>
 
 @class Station, Schedule;
 
 @interface ScheduleViewController : UIViewController
-<UITableViewDelegate, UITableViewDataSource>
+<UITableViewDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) Schedule *schedule;

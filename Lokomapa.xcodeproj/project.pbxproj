@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1720366817FF3A8C00463419 /* TrainStopDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1720366717FF3A8C00463419 /* TrainStopDetailsCell.m */; };
 		1720366A17FF3AB800463419 /* TrainStopDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1720366917FF3AB800463419 /* TrainStopDetailsCell.xib */; };
+		1720367318003C5E00463419 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1720367218003C5E00463419 /* NSDate+Utils.m */; };
+		1720367618003CB900463419 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1720367518003CB900463419 /* NSString+Utils.m */; };
+		172036781800425F00463419 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172036771800425F00463419 /* MessageUI.framework */; };
 		179410AA17F708B300FD35BE /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 179410A917F708B300FD35BE /* Schedule.m */; };
 		179A96BD17F23DD6003FDC64 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96BC17F23DD6003FDC64 /* Foundation.framework */; };
 		179A96BF17F23DD6003FDC64 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96BE17F23DD6003FDC64 /* CoreGraphics.framework */; };
@@ -57,6 +60,11 @@
 		1720366617FF3A8C00463419 /* TrainStopDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainStopDetailsCell.h; sourceTree = "<group>"; };
 		1720366717FF3A8C00463419 /* TrainStopDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainStopDetailsCell.m; sourceTree = "<group>"; };
 		1720366917FF3AB800463419 /* TrainStopDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainStopDetailsCell.xib; sourceTree = "<group>"; };
+		1720367118003C5E00463419 /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
+		1720367218003C5E00463419 /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
+		1720367418003CB900463419 /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
+		1720367518003CB900463419 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
+		172036771800425F00463419 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		179410A817F708B300FD35BE /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
 		179410A917F708B300FD35BE /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schedule.m; sourceTree = "<group>"; };
 		179A96B917F23DD6003FDC64 /* Lokomapa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lokomapa.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				172036781800425F00463419 /* MessageUI.framework in Frameworks */,
 				17AC5F0A17F6D41F000A2DB1 /* CoreLocation.framework in Frameworks */,
 				179A96FF17F24042003FDC64 /* MapKit.framework in Frameworks */,
 				179A96BF17F23DD6003FDC64 /* CoreGraphics.framework in Frameworks */,
@@ -144,6 +153,17 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		1720367018003C3100463419 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				1720367118003C5E00463419 /* NSDate+Utils.h */,
+				1720367218003C5E00463419 /* NSDate+Utils.m */,
+				1720367418003CB900463419 /* NSString+Utils.h */,
+				1720367518003CB900463419 /* NSString+Utils.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		179A96B017F23DD6003FDC64 = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +187,7 @@
 		179A96BB17F23DD6003FDC64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				172036771800425F00463419 /* MessageUI.framework */,
 				17AC5F0917F6D41F000A2DB1 /* CoreLocation.framework */,
 				179A96FE17F24042003FDC64 /* MapKit.framework */,
 				179A96BC17F23DD6003FDC64 /* Foundation.framework */,
@@ -183,10 +204,11 @@
 			children = (
 				179A96F417F23E09003FDC64 /* Controllers */,
 				17AC5F0117F6CFC7000A2DB1 /* Network */,
+				1720367018003C3100463419 /* Categories */,
+				179A96C317F23DD6003FDC64 /* Supporting Files */,
 				179A96CE17F23DD6003FDC64 /* Main_iPhone.storyboard */,
 				179A96D117F23DD6003FDC64 /* Main_iPad.storyboard */,
 				179A96D717F23DD6003FDC64 /* Images.xcassets */,
-				179A96C317F23DD6003FDC64 /* Supporting Files */,
 			);
 			path = Lokomapa;
 			sourceTree = "<group>";
@@ -205,8 +227,8 @@
 		179A96E417F23DD7003FDC64 /* LokomapaTests */ = {
 			isa = PBXGroup;
 			children = (
-				179A96EA17F23DD7003FDC64 /* LokomapaTests.m */,
 				179A96E517F23DD7003FDC64 /* Supporting Files */,
+				179A96EA17F23DD7003FDC64 /* LokomapaTests.m */,
 			);
 			path = LokomapaTests;
 			sourceTree = "<group>";
@@ -470,8 +492,10 @@
 				17DF4B7217F881EE000F0B8A /* StationAnnotation.m in Sources */,
 				17C0FCDA17F9F04A00B0A233 /* TrainAnnotation.m in Sources */,
 				179410AA17F708B300FD35BE /* Schedule.m in Sources */,
+				1720367318003C5E00463419 /* NSDate+Utils.m in Sources */,
 				17C0FCD717F9E92600B0A233 /* SitkolCoords.m in Sources */,
 				17DF4B7617F89141000F0B8A /* StationAnnotationView.m in Sources */,
+				1720367618003CB900463419 /* NSString+Utils.m in Sources */,
 				179A96CD17F23DD6003FDC64 /* AppDelegate.m in Sources */,
 				17AC5F0817F6D1B9000A2DB1 /* Station.m in Sources */,
 				179A96C917F23DD6003FDC64 /* main.m in Sources */,

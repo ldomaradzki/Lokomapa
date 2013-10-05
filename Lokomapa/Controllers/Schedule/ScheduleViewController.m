@@ -10,17 +10,7 @@
 #import "Schedule.h"
 #import "Station.h"
 #import "UIActionSheet+Blocks.h"
-
-@implementation NSDate (hourFormatter)
-
--(NSString*)getHourMinuteString {
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat:@"HH:mm"];
-    
-    return [dateFormatter stringFromDate:self];
-}
-
-@end
+#import "UIAlertView+Blocks.h"
 
 @implementation ScheduleViewController
 
@@ -81,12 +71,19 @@
     
     Journey *cellJourney = self.schedule.journeys[indexPath.row];
     
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat:@"HH:mm"];
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [dateFormatter stringFromDate:cellJourney.arrivalTime], cellJourney.destinationStation];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [cellJourney. arrivalTime getHourMinuteString], cellJourney.destinationStation];
     cell.detailTextLabel.text = cellJourney.train;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    if ([cellJourney getDelayString].length > 0) {
+        UILabel *delayLabel = [[UILabel alloc] initWithFrame:CGRectMake(180, 21, 100, 24)];
+        delayLabel.font = [UIFont systemFontOfSize:12];
+        delayLabel.textColor = [UIColor blackColor];
+        delayLabel.textAlignment = NSTextAlignmentRight;
+        delayLabel.text = [cellJourney getDelayString];
+        
+        [cell.contentView addSubview:delayLabel];
+    }
     
     return cell;
 }
@@ -105,12 +102,7 @@
          switch (buttonNumber) {
              case 1: {
                  // clipboard
-                 NSString *pasteString = [NSString stringWithFormat:@"%@: %@ @ %@ (-> %@)",
-                                          self.station.name,
-                                          cellJourney.train,
-                                          [cellJourney.arrivalTime getHourMinuteString],
-                                          cellJourney.destinationStation];
-                 [[UIPasteboard generalPasteboard] setString:pasteString];
+                 [self clipboardActionsForJourney:cellJourney];
                  break;
              }
                  
@@ -126,5 +118,37 @@
      }];
 }
 
+-(void)clipboardActionsForJourney:(Journey*)journey {
+    NSString *pasteString =
+    [NSString stringWithFormat:@"%@: %@ (-> %@) @ %@",
+     self.station.name, journey.train, journey.destinationStation, [journey.arrivalTime getHourMinuteString]];
+    if ([journey getDelayString].length > 0) {
+        pasteString = [pasteString stringByAppendingFormat:@" (%@)", [journey getDelayString]];
+    }
+    
+    [[UIPasteboard generalPasteboard] setString:pasteString];
+    
+    [UIAlertView
+     showWithTitle:@"Saved to clipboard"
+     message:pasteString
+     cancelButtonTitle:@"Hide"
+     otherButtonTitles:@[@"Send message"]
+     tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+         if (buttonIndex == 1) {
+             if ([MFMessageComposeViewController canSendText]) {
+                 MFMessageComposeViewController *messageComposeViewController = [[MFMessageComposeViewController alloc] init];
+                 messageComposeViewController.body = pasteString;
+                 messageComposeViewController.messageComposeDelegate = self;
+                 
+                 [self presentViewController:messageComposeViewController animated:YES completion:nil];
+             }
+         }
+     }];
+
+}
+
+-(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

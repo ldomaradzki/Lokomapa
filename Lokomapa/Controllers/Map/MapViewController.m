@@ -103,8 +103,6 @@
 #pragma mark - MapView
 
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    NSLog(@"%f", mapView.region.span.latitudeDelta);
-    
     if (mapView.region.span.latitudeDelta < 0.7f) {
         switch (self.stationsTrainsSegmentedControl.selectedSegmentIndex) {
             case 0: {
