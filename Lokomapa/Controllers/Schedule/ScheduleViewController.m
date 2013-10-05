@@ -9,6 +9,18 @@
 #import "ScheduleViewController.h"
 #import "Schedule.h"
 #import "Station.h"
+#import "UIActionSheet+Blocks.h"
+
+@implementation NSDate (hourFormatter)
+
+-(NSString*)getHourMinuteString {
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"HH:mm"];
+    
+    return [dateFormatter stringFromDate:self];
+}
+
+@end
 
 @implementation ScheduleViewController
 
@@ -81,6 +93,37 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    Journey *cellJourney = self.schedule.journeys[indexPath.row];
+    
+    [UIActionSheet
+     presentOnView:self.view
+     withTitle:cellJourney.destinationStation
+     otherButtons:@[@"Send to clipboard", @"Set notification"]
+     onCancel:nil
+     onClickedButton:^(UIActionSheet *actionSheet, NSUInteger buttonNumber) {
+         switch (buttonNumber) {
+             case 1: {
+                 // clipboard
+                 NSString *pasteString = [NSString stringWithFormat:@"%@: %@ @ %@ (-> %@)",
+                                          self.station.name,
+                                          cellJourney.train,
+                                          [cellJourney.arrivalTime getHourMinuteString],
+                                          cellJourney.destinationStation];
+                 [[UIPasteboard generalPasteboard] setString:pasteString];
+                 break;
+             }
+                 
+             case 2: {
+                 // notification
+                 
+                 break;
+             }
+                 
+             default:
+                 break;
+         }
+     }];
 }
 
 
