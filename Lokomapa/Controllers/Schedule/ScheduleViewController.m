@@ -19,27 +19,28 @@
     self.title = self.station.name;
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     
-    // dirty hack: http://stackoverflow.com/a/12502450
-    UITableViewController *tableViewController = [[UITableViewController alloc] init];
-    tableViewController.tableView = self.tableView;
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
-    tableViewController.refreshControl = refreshControl;
+    UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicatorView.hidesWhenStopped = YES;
+    [indicatorView startAnimating];
+    indicatorView.center = self.view.center;
+    [self.view addSubview:indicatorView];
     
-    [self updateScheduleDataWithRefreshControl:refreshControl];
-    [refreshControl beginRefreshing];
-    
+    [self updateScheduleDataWithRefreshControl:indicatorView];
 }
 
--(void)updateScheduleDataWithRefreshControl:(UIRefreshControl*)sender {
+-(void)updateScheduleDataWithRefreshControl:(id)sender {
     [Schedule stationSchedule:self.station.externalId withBlock:^(Schedule *schedule, NSError *error) {
         self.schedule = schedule;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             if (sender) {
-                [sender endRefreshing];
+                if ([sender isKindOfClass:[UIActivityIndicatorView class]]) {
+                    [sender removeFromSuperview];
+                }
+                else if ([sender isKindOfClass:[UIRefreshControl class]]) {
+                    [sender endRefreshing];
+                }
             }
-            
             [self.tableView reloadData];
         });
     }];

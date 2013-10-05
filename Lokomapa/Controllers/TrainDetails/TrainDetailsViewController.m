@@ -22,9 +22,16 @@
     
     [self updateBasicLabels];
     
+    UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicatorView.hidesWhenStopped = YES;
+    [indicatorView startAnimating];
+    indicatorView.center = self.view.center;
+    [self.view addSubview:indicatorView];
+    
     numberOfRows = 0;
     [self.train trainDetailsWithBlock:^(NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [indicatorView removeFromSuperview];
             [self updateAdditionalDetails];
         });
         

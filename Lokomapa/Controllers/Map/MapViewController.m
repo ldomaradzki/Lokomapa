@@ -77,14 +77,14 @@
             NSMutableDictionary *annotationsDictionary = [NSMutableDictionary dictionaryWithCapacity:mapView.annotations.count];
             for (id<MKAnnotation> annotation in mapView.annotations) {
                 if ([annotation isKindOfClass:[TrainAnnotation class]])
-                    annotationsDictionary[[(TrainAnnotation*)annotation train].name] = annotation;
+                    annotationsDictionary[[(TrainAnnotation*)annotation train].trainId] = annotation;
             }
             
             
             for (Train *train in trains) {
-                if ([[annotationsDictionary allKeys] containsObject:train.name]) {
-                    [(TrainAnnotation*)annotationsDictionary[train.name] setTrain:train];
-                    [annotationsDictionary removeObjectForKey:train.name];
+                if ([[annotationsDictionary allKeys] containsObject:train.trainId]) {
+                    [(TrainAnnotation*)annotationsDictionary[train.trainId] setTrain:train];
+                    [annotationsDictionary removeObjectForKey:train.trainId];
                 } else {
                     TrainAnnotation *newTrainAnnotation = [[TrainAnnotation alloc] init];
                     newTrainAnnotation.train = train;
