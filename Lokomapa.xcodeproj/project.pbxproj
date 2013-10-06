@@ -12,6 +12,7 @@
 		1720367318003C5E00463419 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1720367218003C5E00463419 /* NSDate+Utils.m */; };
 		1720367618003CB900463419 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1720367518003CB900463419 /* NSString+Utils.m */; };
 		172036781800425F00463419 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172036771800425F00463419 /* MessageUI.framework */; };
+		1720367A1801760B00463419 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172036791801760B00463419 /* Social.framework */; };
 		179410AA17F708B300FD35BE /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 179410A917F708B300FD35BE /* Schedule.m */; };
 		179A96BD17F23DD6003FDC64 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96BC17F23DD6003FDC64 /* Foundation.framework */; };
 		179A96BF17F23DD6003FDC64 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96BE17F23DD6003FDC64 /* CoreGraphics.framework */; };
@@ -65,6 +66,7 @@
 		1720367418003CB900463419 /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		1720367518003CB900463419 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
 		172036771800425F00463419 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		172036791801760B00463419 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		179410A817F708B300FD35BE /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
 		179410A917F708B300FD35BE /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schedule.m; sourceTree = "<group>"; };
 		179A96B917F23DD6003FDC64 /* Lokomapa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lokomapa.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1720367A1801760B00463419 /* Social.framework in Frameworks */,
 				172036781800425F00463419 /* MessageUI.framework in Frameworks */,
 				17AC5F0A17F6D41F000A2DB1 /* CoreLocation.framework in Frameworks */,
 				179A96FF17F24042003FDC64 /* MapKit.framework in Frameworks */,
@@ -187,6 +190,7 @@
 		179A96BB17F23DD6003FDC64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				172036791801760B00463419 /* Social.framework */,
 				172036771800425F00463419 /* MessageUI.framework */,
 				17AC5F0917F6D41F000A2DB1 /* CoreLocation.framework */,
 				179A96FE17F24042003FDC64 /* MapKit.framework */,

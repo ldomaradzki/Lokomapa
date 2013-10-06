@@ -11,6 +11,7 @@
 #import "Station.h"
 #import "UIActionSheet+Blocks.h"
 #import "UIAlertView+Blocks.h"
+#import <Social/Social.h>
 
 @implementation ScheduleViewController
 
@@ -95,19 +96,17 @@
     
     [UIActionSheet
      presentOnView:self.view
-     withTitle:cellJourney.destinationStation
-     otherButtons:@[@"Send to clipboard", @"Set notification"]
+     withTitle:[self getInfoStringForJourney:cellJourney]
+     otherButtons:@[@"Send or share", @"Set notification"]
      onCancel:nil
      onClickedButton:^(UIActionSheet *actionSheet, NSUInteger buttonNumber) {
          switch (buttonNumber) {
              case 1: {
-                 // clipboard
                  [self clipboardActionsForJourney:cellJourney];
                  break;
              }
                  
              case 2: {
-                 // notification
                  
                  break;
              }
@@ -118,33 +117,72 @@
      }];
 }
 
--(void)clipboardActionsForJourney:(Journey*)journey {
+-(NSString*)getInfoStringForJourney:(Journey*)journey {
     NSString *pasteString =
     [NSString stringWithFormat:@"%@: %@ (-> %@) @ %@",
      self.station.name, journey.train, journey.destinationStation, [journey.arrivalTime getHourMinuteString]];
     if ([journey getDelayString].length > 0) {
         pasteString = [pasteString stringByAppendingFormat:@" (%@)", [journey getDelayString]];
     }
+    return pasteString;
+}
+
+-(void)clipboardActionsForJourney:(Journey*)journey {
+    
+    NSString *pasteString = [self getInfoStringForJourney:journey];
     
     [[UIPasteboard generalPasteboard] setString:pasteString];
     
-    [UIAlertView
-     showWithTitle:@"Saved to clipboard"
-     message:pasteString
-     cancelButtonTitle:@"Hide"
-     otherButtonTitles:@[@"Send message"]
-     tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-         if (buttonIndex == 1) {
-             if ([MFMessageComposeViewController canSendText]) {
-                 MFMessageComposeViewController *messageComposeViewController = [[MFMessageComposeViewController alloc] init];
-                 messageComposeViewController.body = pasteString;
-                 messageComposeViewController.messageComposeDelegate = self;
-                 
-                 [self presentViewController:messageComposeViewController animated:YES completion:nil];
+    [UIActionSheet
+     presentOnView:self.view
+     withTitle:pasteString
+     otherButtons:@[@"Send SMS/iMessage", @"Share on Facebook", @"Share on Twitter"]
+     onCancel:nil
+     onClickedButton:^(UIActionSheet *actionSheet, NSUInteger buttonNumber) {
+         switch (buttonNumber) {
+             case 1: {
+                 [self sendSMSMessage:pasteString];
+                 break;
              }
+                 
+             case 2: {
+                 [self sendSocialMessage:pasteString forType:SLServiceTypeFacebook];
+                 break;
+             }
+                 
+             case 3: {
+                 [self sendSocialMessage:pasteString forType:SLServiceTypeTwitter];
+                 break;
+             }
+                 
+             default:
+                 break;
          }
      }];
+}
 
+#pragma mark - Social method
+
+-(void)sendSocialMessage:(NSString*)message forType:(NSString*)type {
+    if ([SLComposeViewController isAvailableForServiceType:type]) {
+        SLComposeViewController *facebookComposeViewController = [SLComposeViewController composeViewControllerForServiceType:type];
+        
+        [facebookComposeViewController setInitialText:message];
+        [self presentViewController:facebookComposeViewController animated:YES completion:nil];
+    }
+}
+
+
+#pragma mark - Message method & delegate
+
+-(void)sendSMSMessage:(NSString*)message {
+    if ([MFMessageComposeViewController canSendText]) {
+        MFMessageComposeViewController *messageComposeViewController = [[MFMessageComposeViewController alloc] init];
+        messageComposeViewController.body = message;
+        messageComposeViewController.messageComposeDelegate = self;
+        
+        [self presentViewController:messageComposeViewController animated:YES completion:nil];
+    }
 }
 
 -(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
