@@ -9,8 +9,6 @@
 #import "ScheduleViewController.h"
 #import "Schedule.h"
 #import "Station.h"
-#import "UIActionSheet+Blocks.h"
-#import "UIAlertView+Blocks.h"
 #import <Social/Social.h>
 
 @implementation ScheduleViewController
@@ -92,29 +90,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    Journey *cellJourney = self.schedule.journeys[indexPath.row];
+    currentJourney = self.schedule.journeys[indexPath.row];
     
-    [UIActionSheet
-     presentOnView:self.view
-     withTitle:[self getInfoStringForJourney:cellJourney]
-     otherButtons:@[@"Send or share", @"Set notification"]
-     onCancel:nil
-     onClickedButton:^(UIActionSheet *actionSheet, NSUInteger buttonNumber) {
-         switch (buttonNumber) {
-             case 1: {
-                 [self clipboardActionsForJourney:cellJourney];
-                 break;
-             }
-                 
-             case 2: {
-                 
-                 break;
-             }
-                 
-             default:
-                 break;
-         }
-     }];
+    firstActionSheet = [[UIActionSheet alloc] initWithTitle:[self getInfoStringForJourney:currentJourney] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Send or share", @"Set notification", nil];
+    [firstActionSheet showInView:self.view];
 }
 
 -(NSString*)getInfoStringForJourney:(Journey*)journey {
@@ -128,37 +107,85 @@
 }
 
 -(void)clipboardActionsForJourney:(Journey*)journey {
+    [[UIPasteboard generalPasteboard] setString:[self getInfoStringForJourney:journey]];
     
-    NSString *pasteString = [self getInfoStringForJourney:journey];
+    shareActionSheet = [[UIActionSheet alloc] initWithTitle:[self getInfoStringForJourney:journey] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Send SMS/iMessage", @"Share of Facebook", @"Share on Twitter", nil];
+    [shareActionSheet showInView:self.view];
+}
+
+-(void)notificationActionForJourney:(Journey*)journey {
+    notificationActionSheet = [[UIActionSheet alloc] initWithTitle:@"Set notification for this train before:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"5 minutes", @"10 minutes", @"20 minutes", @"30 minutes", nil];
+    [notificationActionSheet showInView:self.view];
+}
+
+#pragma mark - Actionsheet methods
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (actionSheet == firstActionSheet) {
+        switch (buttonIndex) {
+            case 0: {
+                [self clipboardActionsForJourney:currentJourney];
+                break;
+            }
+                
+            case 1: {
+                [self notificationActionForJourney:currentJourney];
+                break;
+            }
+                
+            default:
+                break;
+        }
+    }
     
-    [[UIPasteboard generalPasteboard] setString:pasteString];
-    
-    [UIActionSheet
-     presentOnView:self.view
-     withTitle:pasteString
-     otherButtons:@[@"Send SMS/iMessage", @"Share on Facebook", @"Share on Twitter"]
-     onCancel:nil
-     onClickedButton:^(UIActionSheet *actionSheet, NSUInteger buttonNumber) {
-         switch (buttonNumber) {
+    if (actionSheet == shareActionSheet) {
+        switch (buttonIndex) {
+             case 0: {
+                 [self sendSMSMessage:[self getInfoStringForJourney:currentJourney]];
+                 break;
+             }
+
              case 1: {
-                 [self sendSMSMessage:pasteString];
+                 [self sendSocialMessage:[self getInfoStringForJourney:currentJourney] forType:SLServiceTypeFacebook];
                  break;
              }
-                 
+
              case 2: {
-                 [self sendSocialMessage:pasteString forType:SLServiceTypeFacebook];
-                 break;
-             }
-                 
-             case 3: {
-                 [self sendSocialMessage:pasteString forType:SLServiceTypeTwitter];
+                 [self sendSocialMessage:[self getInfoStringForJourney:currentJourney] forType:SLServiceTypeTwitter];
                  break;
              }
                  
              default:
                  break;
          }
-     }];
+    }
+    
+    if (actionSheet == notificationActionSheet) {
+        switch (buttonIndex) {
+            case 0: {
+//                [self setNotificationTime:(]
+                break;
+            }
+                
+            case 1: {
+                
+                break;
+            }
+                
+            case 2: {
+                
+                break;
+            }
+                
+            case 3: {
+                
+                break;
+            }
+                
+            default:
+                break;
+        }
+    }
 }
 
 #pragma mark - Social method

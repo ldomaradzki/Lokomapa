@@ -9,10 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MFMessageComposeViewController.h>
 
-@class Station, Schedule;
+@class Station, Schedule, Journey;
 
 @interface ScheduleViewController : UIViewController
-<UITableViewDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate>
+<UITableViewDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate, UIActionSheetDelegate>
+{
+    UIActionSheet *firstActionSheet, *shareActionSheet, *notificationActionSheet;
+    Journey *currentJourney;
+}
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) Schedule *schedule;
