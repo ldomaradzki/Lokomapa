@@ -114,7 +114,7 @@
 }
 
 -(void)notificationActionForJourney:(Journey*)journey {
-    notificationActionSheet = [[UIActionSheet alloc] initWithTitle:@"Set notification for this train before:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"5 minutes", @"10 minutes", @"20 minutes", @"30 minutes", nil];
+    notificationActionSheet = [[UIActionSheet alloc] initWithTitle:@"Set notification for this train before:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"5 minutes", @"10 minutes", @"20 minutes", @"30 minutes", @"1 hour", nil];
     [notificationActionSheet showInView:self.view];
 }
 
@@ -163,22 +163,27 @@
     if (actionSheet == notificationActionSheet) {
         switch (buttonIndex) {
             case 0: {
-//                [self setNotificationTime:(]
+                [self setNotificationTime:@5 forJourney:currentJourney];
                 break;
             }
                 
             case 1: {
-                
+                [self setNotificationTime:@10 forJourney:currentJourney];
                 break;
             }
                 
             case 2: {
-                
+                [self setNotificationTime:@20 forJourney:currentJourney];
                 break;
             }
                 
             case 3: {
+                [self setNotificationTime:@30 forJourney:currentJourney];
+                break;
+            }
                 
+            case 4: {
+                [self setNotificationTime:@60 forJourney:currentJourney];
                 break;
             }
                 
@@ -186,6 +191,12 @@
                 break;
         }
     }
+}
+
+#pragma mark - Local notification
+
+-(void)setNotificationTime:(NSNumber*)time forJourney:(Journey*)journey {
+    
 }
 
 #pragma mark - Social method
