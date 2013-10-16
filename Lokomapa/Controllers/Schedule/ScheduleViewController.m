@@ -196,7 +196,13 @@
 #pragma mark - Local notification
 
 -(void)setNotificationTime:(NSNumber*)time forJourney:(Journey*)journey {
+    UILocalNotification *localNotification = [UILocalNotification new];
     
+    localNotification.repeatInterval = 0;
+    localNotification.alertBody = @"Stuff";
+    localNotification.fireDate = [[NSDate date] dateByAddingTimeInterval:10];
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
 #pragma mark - Social method
