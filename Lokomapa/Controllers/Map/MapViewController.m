@@ -17,6 +17,52 @@
 #import "Station.h"
 #import "Train.h"
 #import "UIAlertView+AFNetworking.h"
+#import "MKMapView+ZoomLevel.h"
+
+@interface MKMapView (betterZoomLevel)
+
++ (double)longitudeToPixelSpaceX:(double)longitude;
++ (double)latitudeToPixelSpaceY:(double)latitude;
+
+@end
+
+@implementation MKMapView (betterZoomLevel)
+
+- (double) betterZoomLevel {
+    MKCoordinateRegion region = self.region;
+    
+    double centerPixelX = [MKMapView longitudeToPixelSpaceX: region.center.longitude];
+    double topLeftPixelX = [MKMapView longitudeToPixelSpaceX: region.center.longitude - region.span.longitudeDelta / 2];
+    
+    double scaledMapWidth = (centerPixelX - topLeftPixelX) * 2;
+    CGSize mapSizeInPixels = self.bounds.size;
+    double zoomScale = scaledMapWidth / mapSizeInPixels.width;
+    double zoomExponent = log(zoomScale) / log(2);
+    double zoomLevel = 20 - zoomExponent;
+    
+    return zoomLevel;
+}
+
+#define MERCATOR_OFFSET 268435456
+#define MERCATOR_RADIUS 85445659.44705395
+
++ (double)longitudeToPixelSpaceX:(double)longitude
+{
+    return round(MERCATOR_OFFSET + MERCATOR_RADIUS * longitude * M_PI / 180.0);
+}
+
++ (double)latitudeToPixelSpaceY:(double)latitude
+{
+	if (latitude == 90.0) {
+		return 0;
+	} else if (latitude == -90.0) {
+		return MERCATOR_OFFSET * 2;
+	} else {
+		return round(MERCATOR_OFFSET - MERCATOR_RADIUS * logf((1 + sinf(latitude * M_PI / 180.0)) / (1 - sinf(latitude * M_PI / 180.0))) / 2.0);
+	}
+}
+
+@end
 
 @implementation MapViewController
 
@@ -35,10 +81,6 @@
 
 
 - (void)getStations:(MKMapView *)mapView {
-    if (self.lastTask) {
-        [self.lastTask cancel];
-    }
-    
     NSURLSessionDataTask *task = [Station stationsInRegion:mapView.region withBlock:^(NSArray *stations, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             
@@ -67,10 +109,6 @@
 }
 
 - (void)getTrains:(MKMapView *)mapView {
-    if (self.lastTask) {
-        [self.lastTask cancel];
-    }
-    
     NSURLSessionDataTask *task = [Train trainsInRegion:mapView.region withBlock:^(NSArray *trains, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             
@@ -103,7 +141,7 @@
 #pragma mark - MapView
 
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    if (mapView.region.span.latitudeDelta < 0.7f) {
+    if ([mapView betterZoomLevel] > 8.0f) {
         switch (self.stationsTrainsSegmentedControl.selectedSegmentIndex) {
             case 0: {
                 [self getStations:mapView];
@@ -119,11 +157,11 @@
                 break;
         }
     }
-    else if (mapView.region.span.latitudeDelta > 1.0f) {
+    else {
         [mapView removeAnnotations:mapView.annotations];
     }
     
-    if (mapView.region.span.latitudeDelta < 0.3f) {
+    if ([mapView betterZoomLevel] > 9.5f) {
         for (id<MKAnnotation> annotation in mapView.annotations) {
             [(StationAnnotationView*)[mapView viewForAnnotation:annotation] animateWithDelay:0.02*[mapView.annotations indexOfObject:annotation]];
         }
@@ -170,7 +208,7 @@
          }
          completion:^(BOOL finished) {
              if (finished) {
-                 if (mapView.region.span.latitudeDelta < 0.3f) {
+                 if ([mapView betterZoomLevel] > 9.5f) {
                      [annotationView animateWithDelay:0.02*[views indexOfObject:annotationView]];
                  }
              }
