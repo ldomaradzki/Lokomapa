@@ -150,7 +150,12 @@
 -(void)updateZoomLevel {
     if (currentZoomLevel != [self.mapView betterZoomLevel]) {
         currentZoomLevel = [self.mapView betterZoomLevel];
-        [self.zoomIndicator updateZoomLevel:currentZoomLevel];
+        double percentageLevel = 1 - ((currentZoomLevel - ZOOM_LEVEL_CEILING) / 12);
+        [self.zoomIndicator updateZoomLevel:percentageLevel];
+        
+        if (percentageLevel > 1.0f) {
+            [self.mapView removeAnnotations:self.mapView.annotations];
+        }
     }
 }
 

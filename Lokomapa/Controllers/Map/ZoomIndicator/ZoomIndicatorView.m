@@ -10,15 +10,6 @@
 
 @implementation ZoomIndicatorView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
 -(void)show {
     [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.alpha = 0.6f;
@@ -26,12 +17,11 @@
 }
 
 -(void)updateZoomLevel:(double)level {
-    double percentageLevel = 1 - ((level - ZOOM_LEVEL_CEILING) / 12);
-    
-    if (percentageLevel < 1.0f) {
+    if (level < 1.0f) {
         [UIView animateWithDuration:0.1f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.frame = [self changeRectToWidth:percentageLevel * self.superview.bounds.size.width];
+            self.frame = [self changeRectToWidth:level * self.superview.bounds.size.width];
             self.frame = [self changeRectToHeight:3];
+            self.errorLabel.alpha = 0.0f;
             if ([self.backgroundColor isEqual:[UIColor redColor]]) {
                 self.backgroundColor = [UIColor greenColor];
             }
@@ -42,6 +32,7 @@
             self.frame = [self changeRectToWidth:self.superview.bounds.size.width];
             self.frame = [self changeRectToHeight:13];
             self.backgroundColor = [UIColor redColor];
+            self.errorLabel.alpha = 1.0f;
         } completion:nil];
     }
     

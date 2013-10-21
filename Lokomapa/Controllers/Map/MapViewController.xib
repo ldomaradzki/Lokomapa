@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="lFu-8m-efZ">
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="lFu-8m-efZ">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <connections>
@@ -27,6 +27,10 @@
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ARJ-wU-ulw">
                     <rect key="frame" x="99" y="520" width="123" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="123" id="ReR-Wo-cuT"/>
+                        <constraint firstAttribute="height" constant="28" id="Zdc-QB-GZl"/>
+                    </constraints>
                     <segments>
                         <segment title="Stations"/>
                         <segment title="Trains" width="56"/>
@@ -39,18 +43,25 @@
                 <view alpha="0.79999999999999982" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CSx-Wi-trm" customClass="ZoomIndicatorView">
                     <rect key="frame" x="0.0" y="64" width="320" height="3"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You are too far! Zoom in to see the stations / trains." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5dU-XO-e1S">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="13"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="11"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                     <color key="backgroundColor" red="0.36078432199999999" green="0.89411771299999998" blue="0.36470589040000001" alpha="1" colorSpace="deviceRGB"/>
+                    <connections>
+                        <outlet property="errorLabel" destination="5dU-XO-e1S" id="QQm-Py-PuE"/>
+                    </connections>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="ARJ-wU-ulw" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="99" id="6aM-Ic-Gpc"/>
-                <constraint firstItem="lFu-8m-efZ" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="OsG-EA-M37"/>
-                <constraint firstItem="lFu-8m-efZ" firstAttribute="top" secondItem="1" secondAttribute="top" id="SFa-Qd-rFy"/>
-                <constraint firstItem="ARJ-wU-ulw" firstAttribute="centerX" secondItem="lFu-8m-efZ" secondAttribute="centerX" id="V0n-RL-9p2"/>
-                <constraint firstAttribute="bottom" secondItem="lFu-8m-efZ" secondAttribute="bottom" id="cNt-kM-2xQ"/>
-                <constraint firstAttribute="bottom" secondItem="ARJ-wU-ulw" secondAttribute="bottom" constant="20" symbolic="YES" id="nQQ-gM-C9d"/>
-                <constraint firstItem="ARJ-wU-ulw" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="s4f-FG-5jE"/>
+                <constraint firstAttribute="centerX" secondItem="ARJ-wU-ulw" secondAttribute="centerX" id="K0n-jB-WJN"/>
+                <constraint firstAttribute="bottom" secondItem="ARJ-wU-ulw" secondAttribute="bottom" constant="20" id="VdV-vk-8r0"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
