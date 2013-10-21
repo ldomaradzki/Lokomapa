@@ -148,8 +148,10 @@
 }
 
 -(void)updateZoomLevel {
-    currentZoomLevel = [self.mapView betterZoomLevel];
-    [self.zoomIndicator updateZoomLevel:currentZoomLevel];
+    if (currentZoomLevel != [self.mapView betterZoomLevel]) {
+        currentZoomLevel = [self.mapView betterZoomLevel];
+        [self.zoomIndicator updateZoomLevel:currentZoomLevel];
+    }
 }
 
 -(void)stopWatchingZoomLevel {
