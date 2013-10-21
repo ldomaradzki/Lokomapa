@@ -13,6 +13,11 @@
 		1720367618003CB900463419 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1720367518003CB900463419 /* NSString+Utils.m */; };
 		172036781800425F00463419 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172036771800425F00463419 /* MessageUI.framework */; };
 		1720367A1801760B00463419 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 172036791801760B00463419 /* Social.framework */; };
+		175747181814E865004E540E /* TestStationResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 175747171814E865004E540E /* TestStationResponse.json */; };
+		1757471A1814ED80004E540E /* TestScheduleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 175747191814ED80004E540E /* TestScheduleResponse.json */; };
+		1757471C1814EDD3004E540E /* TestTrainResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 1757471B1814EDD3004E540E /* TestTrainResponse.json */; };
+		1757471E1814EE5B004E540E /* TestTrainDetailResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 1757471D1814EE5B004E540E /* TestTrainDetailResponse.json */; };
+		175747211814EFEE004E540E /* NSJSONSerialization+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 175747201814EFEE004E540E /* NSJSONSerialization+Utils.m */; };
 		179410AA17F708B300FD35BE /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 179410A917F708B300FD35BE /* Schedule.m */; };
 		179A96BD17F23DD6003FDC64 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96BC17F23DD6003FDC64 /* Foundation.framework */; };
 		179A96BF17F23DD6003FDC64 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96BE17F23DD6003FDC64 /* CoreGraphics.framework */; };
@@ -67,6 +72,12 @@
 		1720367518003CB900463419 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
 		172036771800425F00463419 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		172036791801760B00463419 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		175747171814E865004E540E /* TestStationResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestStationResponse.json; sourceTree = "<group>"; };
+		175747191814ED80004E540E /* TestScheduleResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestScheduleResponse.json; sourceTree = "<group>"; };
+		1757471B1814EDD3004E540E /* TestTrainResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestTrainResponse.json; sourceTree = "<group>"; };
+		1757471D1814EE5B004E540E /* TestTrainDetailResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestTrainDetailResponse.json; sourceTree = "<group>"; };
+		1757471F1814EFEE004E540E /* NSJSONSerialization+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSJSONSerialization+Utils.h"; sourceTree = "<group>"; };
+		175747201814EFEE004E540E /* NSJSONSerialization+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSJSONSerialization+Utils.m"; sourceTree = "<group>"; };
 		179410A817F708B300FD35BE /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
 		179410A917F708B300FD35BE /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schedule.m; sourceTree = "<group>"; };
 		179A96B917F23DD6003FDC64 /* Lokomapa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lokomapa.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,8 +174,29 @@
 				1720367218003C5E00463419 /* NSDate+Utils.m */,
 				1720367418003CB900463419 /* NSString+Utils.h */,
 				1720367518003CB900463419 /* NSString+Utils.m */,
+				1757471F1814EFEE004E540E /* NSJSONSerialization+Utils.h */,
+				175747201814EFEE004E540E /* NSJSONSerialization+Utils.m */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		175747151814E80E004E540E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				175747161814E81E004E540E /* JSON */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		175747161814E81E004E540E /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				175747171814E865004E540E /* TestStationResponse.json */,
+				175747191814ED80004E540E /* TestScheduleResponse.json */,
+				1757471B1814EDD3004E540E /* TestTrainResponse.json */,
+				1757471D1814EE5B004E540E /* TestTrainDetailResponse.json */,
+			);
+			path = JSON;
 			sourceTree = "<group>";
 		};
 		179A96B017F23DD6003FDC64 = {
@@ -206,6 +238,7 @@
 		179A96C217F23DD6003FDC64 /* Lokomapa */ = {
 			isa = PBXGroup;
 			children = (
+				175747151814E80E004E540E /* Resources */,
 				179A96F417F23E09003FDC64 /* Controllers */,
 				17AC5F0117F6CFC7000A2DB1 /* Network */,
 				1720367018003C3100463419 /* Categories */,
@@ -434,12 +467,16 @@
 				179A96D317F23DD6003FDC64 /* Main_iPad.storyboard in Resources */,
 				179A96FD17F23F3F003FDC64 /* MapViewController.xib in Resources */,
 				17C0FCE017FC5BF500B0A233 /* TrainDetailsViewController.xib in Resources */,
+				1757471A1814ED80004E540E /* TestScheduleResponse.json in Resources */,
 				179A96D817F23DD6003FDC64 /* Images.xcassets in Resources */,
 				17DF4B7C17F89D74000F0B8A /* ScheduleViewController.xib in Resources */,
 				179A96D017F23DD6003FDC64 /* Main_iPhone.storyboard in Resources */,
 				179A96FB17F23E8A003FDC64 /* MapViewController~ipad.xib in Resources */,
+				1757471E1814EE5B004E540E /* TestTrainDetailResponse.json in Resources */,
+				175747181814E865004E540E /* TestStationResponse.json in Resources */,
 				179A96C717F23DD6003FDC64 /* InfoPlist.strings in Resources */,
 				1720366A17FF3AB800463419 /* TrainStopDetailsCell.xib in Resources */,
+				1757471C1814EDD3004E540E /* TestTrainResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +539,7 @@
 				1720367618003CB900463419 /* NSString+Utils.m in Sources */,
 				179A96CD17F23DD6003FDC64 /* AppDelegate.m in Sources */,
 				17AC5F0817F6D1B9000A2DB1 /* Station.m in Sources */,
+				175747211814EFEE004E540E /* NSJSONSerialization+Utils.m in Sources */,
 				179A96C917F23DD6003FDC64 /* main.m in Sources */,
 				179A96FA17F23E8A003FDC64 /* MapViewController.m in Sources */,
 				17DF4B7B17F89D74000F0B8A /* ScheduleViewController.m in Sources */,

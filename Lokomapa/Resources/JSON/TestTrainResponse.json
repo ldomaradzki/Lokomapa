@@ -1,0 +1,263 @@
+{
+  "look" : {
+    "look_maxx" : "18818411",
+    "trains" : [
+      {
+        "x" : "18548620",
+        "direction" : "9",
+        "y" : "54476590",
+        "name" : "POGORIA",
+        "trainid" : "84\/252853\/18\/19\/55",
+        "lstopname" : "Gdynia Główna",
+        "passproc" : "44",
+        "prodclass" : "4",
+        "delay" : ""
+      },
+      {
+        "x" : "18579219",
+        "direction" : "27",
+        "y" : "54398069",
+        "name" : "STOCZNIOWIEC",
+        "trainid" : "84\/252956\/18\/19\/55",
+        "lstopname" : "Kraków Płaszów",
+        "passproc" : "36",
+        "prodclass" : "4",
+        "delay" : ""
+      },
+      {
+        "x" : "18530534",
+        "direction" : "25",
+        "y" : "54520133",
+        "name" : "SKM  306",
+        "trainid" : "84\/276848\/18\/19\/55",
+        "lstopname" : "Gdańsk Główny",
+        "passproc" : "8",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18553286",
+        "direction" : "25",
+        "y" : "54463286",
+        "name" : "SKM  116",
+        "trainid" : "84\/244365\/18\/19\/55",
+        "lstopname" : "Gdańsk Główny",
+        "passproc" : "3",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18472823",
+        "direction" : "29",
+        "y" : "54543182",
+        "name" : "SKM  118",
+        "trainid" : "84\/244373\/18\/19\/55",
+        "lstopname" : "Gdańsk Główny",
+        "passproc" : "62",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18426861",
+        "direction" : "30",
+        "y" : "54552351",
+        "name" : "SKM  120",
+        "trainid" : "84\/244384\/18\/19\/55",
+        "lstopname" : "Gdańsk Główny",
+        "passproc" : "56",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18410537",
+        "direction" : "14",
+        "y" : "54556737",
+        "name" : "SKM  115",
+        "trainid" : "84\/244362\/18\/19\/55",
+        "lstopname" : "Wejherowo",
+        "passproc" : "85",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18534939",
+        "direction" : "8",
+        "y" : "54501535",
+        "name" : "SKM  117",
+        "trainid" : "84\/244370\/18\/19\/55",
+        "lstopname" : "Wejherowo",
+        "passproc" : "62",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18643852",
+        "direction" : "8",
+        "y" : "54354687",
+        "name" : "SKM  119",
+        "trainid" : "84\/244379\/18\/19\/55",
+        "lstopname" : "Wejherowo",
+        "passproc" : "8",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18558967",
+        "direction" : "9",
+        "y" : "54448049",
+        "name" : "SKM  801",
+        "trainid" : "84\/244874\/18\/19\/55",
+        "lstopname" : "Wejherowo",
+        "passproc" : "5",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18630395",
+        "direction" : "27",
+        "y" : "54373187",
+        "name" : "SKM  304",
+        "trainid" : "84\/244652\/18\/19\/55",
+        "lstopname" : "Gdańsk Główny",
+        "passproc" : "17",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18530534",
+        "direction" : "25",
+        "y" : "54520133",
+        "name" : "SKM  306",
+        "trainid" : "84\/244655\/18\/19\/55",
+        "lstopname" : "Gdańsk Główny",
+        "passproc" : "8",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18494074",
+        "direction" : "12",
+        "y" : "54535172",
+        "name" : "SKM  305",
+        "trainid" : "84\/244653\/18\/19\/55",
+        "lstopname" : "Gdynia Cisowa",
+        "passproc" : "8",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18584847",
+        "direction" : "11",
+        "y" : "54394051",
+        "name" : "SKM  405",
+        "trainid" : "84\/244715\/18\/19\/55",
+        "lstopname" : "Gdynia Chylonia",
+        "passproc" : "40",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18644014",
+        "direction" : "25",
+        "y" : "54355936",
+        "name" : "GDYNIA-BERLIN-EXPRESS",
+        "trainid" : "84\/253848\/18\/19\/55",
+        "lstopname" : "Berlin Hbf",
+        "passproc" : "0",
+        "prodclass" : "2",
+        "delay" : ""
+      },
+      {
+        "x" : "18575111",
+        "direction" : "25",
+        "y" : "54402411",
+        "name" : "SKM  114",
+        "trainid" : "84\/276815\/18\/19\/55",
+        "lstopname" : "Gdańsk Główny",
+        "passproc" : "8",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18630395",
+        "direction" : "27",
+        "y" : "54373187",
+        "name" : "SKM  304",
+        "trainid" : "84\/276844\/18\/19\/55",
+        "lstopname" : "Gdańsk Główny",
+        "passproc" : "17",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18528889",
+        "direction" : "25",
+        "y" : "54520852",
+        "name" : "    2022",
+        "trainid" : "84\/258465\/18\/19\/55",
+        "lstopname" : "Bydgoszcz Główna",
+        "passproc" : "0",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18548144",
+        "direction" : "9",
+        "y" : "54477093",
+        "name" : "    6025",
+        "trainid" : "84\/258641\/18\/19\/55",
+        "lstopname" : "Gdynia Chylonia",
+        "passproc" : "0",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18528889",
+        "direction" : "13",
+        "y" : "54520852",
+        "name" : "   10021",
+        "trainid" : "84\/258765\/18\/19\/55",
+        "lstopname" : "Gdynia Chylonia",
+        "passproc" : "0",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18643016",
+        "direction" : "11",
+        "y" : "54356611",
+        "name" : "   20125",
+        "trainid" : "84\/258791\/18\/19\/55",
+        "lstopname" : "Gdynia Chylonia",
+        "passproc" : "2",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18461703",
+        "direction" : "4",
+        "y" : "54429918",
+        "name" : "   90135",
+        "trainid" : "84\/259360\/18\/19\/55",
+        "lstopname" : "Gdynia Główna",
+        "passproc" : "19",
+        "prodclass" : "8",
+        "delay" : ""
+      },
+      {
+        "x" : "18635366",
+        "direction" : "7",
+        "y" : "54327207",
+        "name" : "   91425",
+        "trainid" : "84\/259431\/18\/19\/55",
+        "lstopname" : "Gdynia Chylonia",
+        "passproc" : "9",
+        "prodclass" : "8",
+        "delay" : ""
+      }
+    ],
+    "look_miny" : "54217498",
+    "look_maxy" : "54595818",
+    "look_minx" : "18318411"
+  }
+}

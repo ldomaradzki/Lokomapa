@@ -1,0 +1,25 @@
+{
+  "look" : {
+    "singletrain" : [
+      {
+        "narr" : "7:03",
+        "x" : "18551676",
+        "nstopname" : "Sopot Kamienny Potok",
+        "lstopname" : "Wejherowo",
+        "y" : "54473569",
+        "trainid" : "84\/244874\/18\/19\/55",
+        "pdep" : "7:00",
+        "fstopname" : "Gdańsk Główny",
+        "pass" : "9",
+        "larr" : "7:58",
+        "ndep" : "7:03",
+        "name" : "SKM  801",
+        "pstopname" : "Sopot",
+        "parr" : "7:00",
+        "fdep" : "6:40",
+        "edgeid" : "10",
+        "passproc" : "88"
+      }
+    ]
+  }
+}

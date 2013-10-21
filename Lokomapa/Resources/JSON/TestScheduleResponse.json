@@ -1,0 +1,155 @@
+{
+  "stBoard" : {
+    "journey" : [
+      {
+        "dest" : "Gda&#324;sk G&#322;&#243;wny",
+        "id" : "244337-420",
+        "time" : "07:00",
+        "timeId" : "420",
+        "product" : "SKM  116"
+      },
+      {
+        "dest" : "Wejherowo",
+        "id" : "244846-423",
+        "time" : "07:03",
+        "timeId" : "423",
+        "product" : "SKM  801"
+      },
+      {
+        "dest" : "Gda&#324;sk G&#322;&#243;wny",
+        "id" : "244627-430",
+        "time" : "07:10",
+        "timeId" : "430",
+        "product" : "SKM  306"
+      },
+      {
+        "dest" : "Gdynia Chylonia",
+        "id" : "244687-433",
+        "time" : "07:13",
+        "timeId" : "433",
+        "product" : "SKM  405"
+      },
+      {
+        "dest" : "Gda&#324;sk G&#322;&#243;wny",
+        "id" : "244345-440",
+        "time" : "07:20",
+        "timeId" : "440",
+        "product" : "SKM  118"
+      },
+      {
+        "dest" : "Wejherowo",
+        "id" : "244351-443",
+        "time" : "07:23",
+        "timeId" : "443",
+        "product" : "SKM  119"
+      },
+      {
+        "dest" : "Gda&#324;sk G&#322;&#243;wny",
+        "id" : "244356-450",
+        "time" : "07:30",
+        "timeId" : "450",
+        "product" : "SKM  120"
+      },
+      {
+        "dest" : "Rumia",
+        "id" : "244360-453",
+        "time" : "07:33",
+        "timeId" : "453",
+        "product" : "SKM  121"
+      },
+      {
+        "dest" : "Gda&#324;sk G&#322;&#243;wny",
+        "id" : "244870-460",
+        "time" : "07:40",
+        "timeId" : "460",
+        "product" : "SKM  806"
+      },
+      {
+        "dest" : "Gdynia Cisowa",
+        "id" : "244688-463",
+        "time" : "07:43",
+        "timeId" : "463",
+        "product" : "SKM  409"
+      },
+      {
+        "dest" : "Gda&#324;sk G&#322;&#243;wny",
+        "id" : "244633-470",
+        "time" : "07:50",
+        "timeId" : "470",
+        "product" : "SKM  310"
+      },
+      {
+        "dest" : "Wejherowo",
+        "id" : "244369-473",
+        "time" : "07:53",
+        "timeId" : "473",
+        "product" : "SKM  123"
+      },
+      {
+        "dest" : "Gda&#324;sk G&#322;&#243;wny",
+        "id" : "244356-480",
+        "time" : "08:00",
+        "timeId" : "480",
+        "product" : "SKM  122"
+      },
+      {
+        "dest" : "Wejherowo",
+        "id" : "244375-483",
+        "time" : "08:03",
+        "timeId" : "483",
+        "product" : "SKM  125"
+      },
+      {
+        "dest" : "Gda&#324;sk G&#322;&#243;wny",
+        "id" : "244371-490",
+        "time" : "08:10",
+        "timeId" : "490",
+        "product" : "SKM  124"
+      },
+      {
+        "dest" : "Gdynia Cisowa",
+        "id" : "244694-493",
+        "time" : "08:13",
+        "timeId" : "493",
+        "product" : "SKM  413"
+      },
+      {
+        "dest" : "Gda&#324;sk G&#322;&#243;wny",
+        "id" : "244689-500",
+        "time" : "08:20",
+        "timeId" : "500",
+        "product" : "SKM  412"
+      },
+      {
+        "dest" : "Wejherowo",
+        "id" : "244381-503",
+        "time" : "08:23",
+        "timeId" : "503",
+        "product" : "SKM  127"
+      },
+      {
+        "dest" : "Gda&#324;sk G&#322;&#243;wny",
+        "id" : "244884-510",
+        "time" : "08:30",
+        "timeId" : "510",
+        "product" : "SKM  808"
+      },
+      {
+        "dest" : "Gdynia Cisowa",
+        "id" : "244695-513",
+        "time" : "08:33",
+        "timeId" : "513",
+        "product" : "SKM  417"
+      }
+    ],
+    "exactTimeHour" : "06",
+    "name" : "Sopot Kamienny Potok",
+    "exactTimeMinute" : "58",
+    "evaId" : "5103557",
+    "exactTimeSecond" : "51",
+    "todayYear" : "2013",
+    "exactTime" : "06:58",
+    "todayMonth" : "10",
+    "todayDay" : "21"
+  }
+}

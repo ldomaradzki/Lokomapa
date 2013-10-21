@@ -61,22 +61,34 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
             GET:SitkolAPIQueryGETURLString
             parameters:parameters
             success:^(NSURLSessionDataTask *task, id JSON) {
-                NSMutableArray *stationsFromResponse = JSON[@"stops"];
-                NSMutableArray *stations = [NSMutableArray arrayWithCapacity:stationsFromResponse.count];
-                for (NSDictionary *attributes in stationsFromResponse) {
-                    Station *station = [[Station alloc] initWithAttributes:attributes];
-                    [stations addObject:station];
-                }
-                
+
                 if (block) {
-                    block([NSArray arrayWithArray:stations], nil);
+                    block([Station parseStationData:JSON], nil);
                 }
             }
             failure:^(NSURLSessionDataTask *task, NSError *error) {
+            #if NETWORK_DEBUG
+                if (block) {
+                    
+                    block([Station parseStationData:[NSJSONSerialization JSONObjectWithResourceJSONFile:@"TestStationResponse"]], nil);
+                }
+            #else
                 if (block) {
                     block([NSArray array], error);
                 }
+            #endif
             }];
+}
+
++(NSArray*)parseStationData:(id)JSON {
+    NSMutableArray *stationsFromResponse = JSON[@"stops"];
+    NSMutableArray *stations = [NSMutableArray arrayWithCapacity:stationsFromResponse.count];
+    for (NSDictionary *attributes in stationsFromResponse) {
+        Station *station = [[Station alloc] initWithAttributes:attributes];
+        [stations addObject:station];
+    }
+    
+    return [NSArray arrayWithArray:stations];
 }
 
 @end

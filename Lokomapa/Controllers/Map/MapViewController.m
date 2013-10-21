@@ -19,6 +19,9 @@
 #import "UIAlertView+AFNetworking.h"
 #import "MKMapView+ZoomLevel.h"
 
+#define ZOOM_LEVEL_CEILING 8.0f
+#define ZOOM_LEVEL_DETAILS 9.5f
+
 @interface MKMapView (betterZoomLevel)
 
 + (double)longitudeToPixelSpaceX:(double)longitude;
@@ -77,8 +80,8 @@
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
     self.mapView.showsUserLocation = NO;
+    
 }
-
 
 - (void)getStations:(MKMapView *)mapView {
     NSURLSessionDataTask *task = [Station stationsInRegion:mapView.region withBlock:^(NSArray *stations, NSError *error) {
@@ -138,10 +141,50 @@
     self.lastTask = task;
 }
 
+#pragma mark - ZoomLevel watcher
+
+-(void)startWatchingZoomLevel {
+    zoomLevelTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateZoomLevel) userInfo:nil repeats:YES];
+    currentZoomLevel = [self.mapView betterZoomLevel];
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.zoomIndicator.alpha = 1.0f;
+    } completion:nil];
+
+}
+
+-(void)updateZoomLevel {
+    currentZoomLevel = [self.mapView betterZoomLevel];
+    [UIView animateWithDuration:0.1f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.zoomIndicator.frame = [self changeRect:self.zoomIndicator.frame toWidth:(1-((currentZoomLevel - ZOOM_LEVEL_CEILING) / 12)) * self.view.bounds.size.width];
+    } completion:nil];
+}
+
+-(CGRect)changeRect:(CGRect)rect toWidth:(CGFloat)width {
+    return CGRectMake(0, rect.origin.y, width, rect.size.height);
+}
+
+-(void)stopWatchingZoomLevel {
+    if (zoomLevelTimer) {
+        [zoomLevelTimer invalidate];
+        zoomLevelTimer = nil;
+    }
+    currentZoomLevel = [self.mapView betterZoomLevel];
+    
+    [UIView animateWithDuration:1.0f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.zoomIndicator.alpha = 0.0f;
+    } completion:nil];
+}
+
 #pragma mark - MapView
 
+-(void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
+    [self startWatchingZoomLevel];
+}
+
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    if ([mapView betterZoomLevel] > 8.0f) {
+    [self stopWatchingZoomLevel];
+    
+    if ([mapView betterZoomLevel] > ZOOM_LEVEL_CEILING) {
         switch (self.stationsTrainsSegmentedControl.selectedSegmentIndex) {
             case 0: {
                 [self getStations:mapView];
@@ -161,7 +204,7 @@
         [mapView removeAnnotations:mapView.annotations];
     }
     
-    if ([mapView betterZoomLevel] > 9.5f) {
+    if ([mapView betterZoomLevel] > ZOOM_LEVEL_DETAILS) {
         for (id<MKAnnotation> annotation in mapView.annotations) {
             [(StationAnnotationView*)[mapView viewForAnnotation:annotation] animateWithDelay:0.02*[mapView.annotations indexOfObject:annotation]];
         }
@@ -208,7 +251,7 @@
          }
          completion:^(BOOL finished) {
              if (finished) {
-                 if ([mapView betterZoomLevel] > 9.5f) {
+                 if ([mapView betterZoomLevel] > ZOOM_LEVEL_DETAILS) {
                      [annotationView animateWithDelay:0.02*[views indexOfObject:annotationView]];
                  }
              }

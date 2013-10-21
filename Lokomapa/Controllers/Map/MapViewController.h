@@ -13,11 +13,14 @@
 @interface MapViewController : UIViewController <MKMapViewDelegate> {
     Station *stationForSchedule;
     Train *trainForTrainDetails;
+    NSTimer *zoomLevelTimer;
+    double currentZoomLevel;
 }
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *stationsTrainsSegmentedControl;
 @property (nonatomic, weak) NSURLSessionDataTask *lastTask;
+@property (weak, nonatomic) IBOutlet UIView *zoomIndicator;
 
 - (IBAction)handleStationsTrainSwitchChange:(UISegmentedControl *)sender;
 

@@ -89,10 +89,9 @@ static NSString * const SitkolAPIStationGETURLString = @"bin/stboard.exe/pn";
             GET:SitkolAPIStationGETURLString
             parameters:parameters
             success:^(NSURLSessionDataTask *task, id JSON) {
-                NSDictionary *attributesFromResponse = JSON[@"stBoard"];
-                Schedule *schedule = [[Schedule alloc] initWithAttributes:attributesFromResponse];
+                
                 if (block) {
-                    block(schedule, nil);
+                    block([Schedule parseScheduleData:JSON], nil);
                 }
             }
             failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -100,6 +99,13 @@ static NSString * const SitkolAPIStationGETURLString = @"bin/stboard.exe/pn";
                     block([Schedule new], error);
                 }
             }];
+}
+
++(Schedule*)parseScheduleData:(id)JSON {
+    NSDictionary *attributesFromResponse = JSON[@"stBoard"];
+    Schedule *schedule = [[Schedule alloc] initWithAttributes:attributesFromResponse];
+    
+    return schedule;
 }
 
 @end
