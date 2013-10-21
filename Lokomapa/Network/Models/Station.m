@@ -69,7 +69,6 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
             failure:^(NSURLSessionDataTask *task, NSError *error) {
             #if NETWORK_DEBUG
                 if (block) {
-                    
                     block([Station parseStationData:[NSJSONSerialization JSONObjectWithResourceJSONFile:@"TestStationResponse"]], nil);
                 }
             #else

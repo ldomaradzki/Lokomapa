@@ -101,22 +101,32 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
             GET:SitkolAPIQueryGETURLString
             parameters:parameters
             success:^(NSURLSessionDataTask *task, id JSON) {
-                NSMutableArray *trainsFromResponse = JSON[@"look"][@"trains"];
-                NSMutableArray *trains = [NSMutableArray arrayWithCapacity:trainsFromResponse.count];
-                for (NSDictionary *attributes in trainsFromResponse) {
-                    Train *train = [[Train alloc] initWithAttributes:attributes];
-                    [trains addObject:train];
-                }
-                
                 if (block) {
-                    block([NSArray arrayWithArray:trains], nil);
+                    block([Train parseTrainData:JSON], nil);
                 }
             }
             failure:^(NSURLSessionDataTask *task, NSError *error) {
+            #if NETWORK_DEBUG
+                if (block) {
+                    block([Train parseTrainData:[NSJSONSerialization JSONObjectWithResourceJSONFile:@"TestTrainResponse"]], nil);
+                }
+            #else
                 if (block) {
                     block([NSArray array], error);
                 }
+            #endif
             }];
+}
+
++(NSArray*)parseTrainData:(id)JSON {
+    NSMutableArray *trainsFromResponse = JSON[@"look"][@"trains"];
+    NSMutableArray *trains = [NSMutableArray arrayWithCapacity:trainsFromResponse.count];
+    for (NSDictionary *attributes in trainsFromResponse) {
+        Train *train = [[Train alloc] initWithAttributes:attributes];
+        [trains addObject:train];
+    }
+    
+    return [NSArray arrayWithArray:trains];
 }
 
 -(NSURLSessionDataTask *)trainDetailsWithBlock:(void (^)(NSError *))block {
@@ -133,19 +143,32 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
             GET:SitkolAPIQueryGETURLString
             parameters:parameters
             success:^(NSURLSessionDataTask *task, id JSON) {
-                NSDictionary *trainDetailsFromResponse = JSON[@"look"][@"singletrain"][0];
                 
-                [self updateTrainDetailsWithAttributes:trainDetailsFromResponse];
+                [Train parseTrainDetailsData:JSON forObject:self];
                 
                 if (block) {
                     block(nil);
                 }
             }
             failure:^(NSURLSessionDataTask *task, NSError *error) {
+            #if NETWORK_DEBUG
+                if (block) {
+                    [Train parseTrainDetailsData:[NSJSONSerialization JSONObjectWithResourceJSONFile:@"TestTrainDetailResponse"] forObject:self];
+                    
+                    block(nil);
+                }
+            #else
                 if (block) {
                     block(error);
                 }
+            #endif
             }];
+}
+
++(void)parseTrainDetailsData:(id)JSON forObject:(Train*)train {
+    NSDictionary *trainDetailsFromResponse = JSON[@"look"][@"singletrain"][0];
+    
+    [train updateTrainDetailsWithAttributes:trainDetailsFromResponse];
 }
 
 @end

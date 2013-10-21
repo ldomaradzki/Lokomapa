@@ -95,9 +95,15 @@ static NSString * const SitkolAPIStationGETURLString = @"bin/stboard.exe/pn";
                 }
             }
             failure:^(NSURLSessionDataTask *task, NSError *error) {
+            #if NETWORK_DEBUG
+                if (block) {
+                    block([Schedule parseScheduleData:[NSJSONSerialization JSONObjectWithResourceJSONFile:@"TestScheduleResponse"]], nil);
+                }
+            #else
                 if (block) {
                     block([Schedule new], error);
                 }
+            #endif
             }];
 }
 
