@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class Station, Train;
+@class Station, Train, ZoomIndicatorView;
 
 @interface MapViewController : UIViewController <MKMapViewDelegate> {
     Station *stationForSchedule;
@@ -20,7 +20,7 @@
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *stationsTrainsSegmentedControl;
 @property (nonatomic, weak) NSURLSessionDataTask *lastTask;
-@property (weak, nonatomic) IBOutlet UIView *zoomIndicator;
+@property (weak, nonatomic) IBOutlet ZoomIndicatorView *zoomIndicator;
 
 - (IBAction)handleStationsTrainSwitchChange:(UISegmentedControl *)sender;
 

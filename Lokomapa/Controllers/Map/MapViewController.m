@@ -18,9 +18,7 @@
 #import "Train.h"
 #import "UIAlertView+AFNetworking.h"
 #import "MKMapView+ZoomLevel.h"
-
-#define ZOOM_LEVEL_CEILING 8.0f
-#define ZOOM_LEVEL_DETAILS 9.5f
+#import "ZoomIndicatorView.h"
 
 @interface MKMapView (betterZoomLevel)
 
@@ -146,21 +144,12 @@
 -(void)startWatchingZoomLevel {
     zoomLevelTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateZoomLevel) userInfo:nil repeats:YES];
     currentZoomLevel = [self.mapView betterZoomLevel];
-    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.zoomIndicator.alpha = 1.0f;
-    } completion:nil];
-
+    [self.zoomIndicator show];
 }
 
 -(void)updateZoomLevel {
     currentZoomLevel = [self.mapView betterZoomLevel];
-    [UIView animateWithDuration:0.1f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.zoomIndicator.frame = [self changeRect:self.zoomIndicator.frame toWidth:(1-((currentZoomLevel - ZOOM_LEVEL_CEILING) / 12)) * self.view.bounds.size.width];
-    } completion:nil];
-}
-
--(CGRect)changeRect:(CGRect)rect toWidth:(CGFloat)width {
-    return CGRectMake(0, rect.origin.y, width, rect.size.height);
+    [self.zoomIndicator updateZoomLevel:currentZoomLevel];
 }
 
 -(void)stopWatchingZoomLevel {
@@ -170,9 +159,7 @@
     }
     currentZoomLevel = [self.mapView betterZoomLevel];
     
-    [UIView animateWithDuration:1.0f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.zoomIndicator.alpha = 0.0f;
-    } completion:nil];
+    [self.zoomIndicator hide];
 }
 
 #pragma mark - MapView

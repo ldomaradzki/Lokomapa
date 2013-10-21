@@ -18,6 +18,7 @@
 		1757471C1814EDD3004E540E /* TestTrainResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 1757471B1814EDD3004E540E /* TestTrainResponse.json */; };
 		1757471E1814EE5B004E540E /* TestTrainDetailResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 1757471D1814EE5B004E540E /* TestTrainDetailResponse.json */; };
 		175747211814EFEE004E540E /* NSJSONSerialization+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 175747201814EFEE004E540E /* NSJSONSerialization+Utils.m */; };
+		175747251815063D004E540E /* ZoomIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 175747241815063D004E540E /* ZoomIndicatorView.m */; };
 		179410AA17F708B300FD35BE /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 179410A917F708B300FD35BE /* Schedule.m */; };
 		179A96BD17F23DD6003FDC64 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96BC17F23DD6003FDC64 /* Foundation.framework */; };
 		179A96BF17F23DD6003FDC64 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96BE17F23DD6003FDC64 /* CoreGraphics.framework */; };
@@ -78,6 +79,8 @@
 		1757471D1814EE5B004E540E /* TestTrainDetailResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestTrainDetailResponse.json; sourceTree = "<group>"; };
 		1757471F1814EFEE004E540E /* NSJSONSerialization+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSJSONSerialization+Utils.h"; sourceTree = "<group>"; };
 		175747201814EFEE004E540E /* NSJSONSerialization+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSJSONSerialization+Utils.m"; sourceTree = "<group>"; };
+		175747231815063D004E540E /* ZoomIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomIndicatorView.h; sourceTree = "<group>"; };
+		175747241815063D004E540E /* ZoomIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomIndicatorView.m; sourceTree = "<group>"; };
 		179410A817F708B300FD35BE /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
 		179410A917F708B300FD35BE /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schedule.m; sourceTree = "<group>"; };
 		179A96B917F23DD6003FDC64 /* Lokomapa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lokomapa.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,6 +202,15 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
+		175747221815060F004E540E /* ZoomIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				175747231815063D004E540E /* ZoomIndicatorView.h */,
+				175747241815063D004E540E /* ZoomIndicatorView.m */,
+			);
+			path = ZoomIndicator;
+			sourceTree = "<group>";
+		};
 		179A96B017F23DD6003FDC64 = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +314,7 @@
 		179A96F617F23E67003FDC64 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				175747221815060F004E540E /* ZoomIndicator */,
 				17DF4B7317F890F8000F0B8A /* AnnotationViews */,
 				17DF4B6F17F881C6000F0B8A /* Annotations */,
 				179A96F717F23E8A003FDC64 /* MapViewController.h */,
@@ -545,6 +558,7 @@
 				17DF4B7B17F89D74000F0B8A /* ScheduleViewController.m in Sources */,
 				17C0FCD317F9E71100B0A233 /* Train.m in Sources */,
 				17AC5F0417F6D02D000A2DB1 /* SitkolAPIClient.m in Sources */,
+				175747251815063D004E540E /* ZoomIndicatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
