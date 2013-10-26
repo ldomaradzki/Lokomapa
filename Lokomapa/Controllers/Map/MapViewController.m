@@ -19,6 +19,7 @@
 #import "UIAlertView+AFNetworking.h"
 #import "MKMapView+ZoomLevel.h"
 #import "ZoomIndicatorView.h"
+#import "FontAwesomeKit/FAKFontAwesome.h"
 
 @interface MKMapView (betterZoomLevel)
 
@@ -77,8 +78,50 @@
     [self.navigationController.navigationBar setBarTintColor:RGBA(91, 140, 169, 1)]; //#5B8CA9
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
-    self.mapView.showsUserLocation = NO;
+    self.mapView.showsUserLocation = YES;
     
+    [self addSettingsBarButton];
+    [self addUserLocationButton];
+    
+}
+
+-(void)addSettingsBarButton {
+    FAKFontAwesome *cogIcon = [FAKFontAwesome cogIconWithSize:20];
+    [cogIcon addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor]];
+    UIImage *leftImage = [cogIcon imageWithSize:CGSizeMake(20, 20)];
+    cogIcon.iconFontSize = 15;
+    UIImage *leftLandscapeImage = [cogIcon imageWithSize:CGSizeMake(15, 15)];
+    self.navigationItem.leftBarButtonItem =
+    [[UIBarButtonItem alloc] initWithImage:leftImage
+                       landscapeImagePhone:leftLandscapeImage
+                                     style:UIBarButtonItemStylePlain
+                                    target:nil
+                                    action:nil];
+}
+
+-(void)addUserLocationButton {
+    FAKFontAwesome *locationIcon = [FAKFontAwesome locationArrowIconWithSize:20];
+    [locationIcon addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor]];
+    UIImage *leftImage = [locationIcon imageWithSize:CGSizeMake(20, 20)];
+    locationIcon.iconFontSize = 15;
+    UIImage *leftLandscapeImage = [locationIcon imageWithSize:CGSizeMake(15, 15)];
+    self.navigationItem.rightBarButtonItem =
+    [[UIBarButtonItem alloc] initWithImage:leftImage
+                       landscapeImagePhone:leftLandscapeImage
+                                     style:UIBarButtonItemStylePlain
+                                    target:self
+                                    action:@selector(zoomToUserLocation)];
+}
+
+-(void)zoomToUserLocation {
+    [self.mapView setCenterCoordinate:self.mapView.userLocation.coordinate zoomLevel:12 animated:YES];
+    
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        // just to be sure
+        [self mapView:self.mapView regionDidChangeAnimated:YES];
+    });
 }
 
 - (void)getStations:(MKMapView *)mapView {
@@ -87,9 +130,10 @@
             
             NSMutableDictionary *annotationsDictionary = [NSMutableDictionary dictionaryWithCapacity:mapView.annotations.count];
             for (StationAnnotation *annotation in mapView.annotations) {
-                annotationsDictionary[annotation.station.externalId] = annotation;
+                if ([annotation respondsToSelector:@selector(station)]) {
+                    annotationsDictionary[annotation.station.externalId] = annotation;
+                }
             }
-            
             
             for (Station *station in stations) {
                 if ([[annotationsDictionary allKeys] containsObject:station.externalId]) {
@@ -114,11 +158,11 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             
             NSMutableDictionary *annotationsDictionary = [NSMutableDictionary dictionaryWithCapacity:mapView.annotations.count];
-            for (id<MKAnnotation> annotation in mapView.annotations) {
-                if ([annotation isKindOfClass:[TrainAnnotation class]])
-                    annotationsDictionary[[(TrainAnnotation*)annotation train].trainId] = annotation;
+            for (TrainAnnotation* annotation in mapView.annotations) {
+                if ([annotation respondsToSelector:@selector(train)]) {
+                    annotationsDictionary[[annotation train].trainId] = annotation;
+                }
             }
-            
             
             for (Train *train in trains) {
                 if ([[annotationsDictionary allKeys] containsObject:train.trainId]) {
@@ -144,6 +188,9 @@
 -(void)startWatchingZoomLevel {
     zoomLevelTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateZoomLevel) userInfo:nil repeats:YES];
     currentZoomLevel = [self.mapView betterZoomLevel];
+    double percentageLevel = 1 - ((currentZoomLevel - ZOOM_LEVEL_CEILING) / 12);
+    [self.zoomIndicator updateZoomLevel:percentageLevel];
+    
     [self.zoomIndicator show];
 }
 
@@ -165,6 +212,8 @@
         zoomLevelTimer = nil;
     }
     currentZoomLevel = [self.mapView betterZoomLevel];
+    double percentageLevel = 1 - ((currentZoomLevel - ZOOM_LEVEL_CEILING) / 12);
+    [self.zoomIndicator updateZoomLevel:percentageLevel];
     
     [self.zoomIndicator hide];
 }
@@ -195,17 +244,23 @@
         }
     }
     else {
-        [mapView removeAnnotations:mapView.annotations];
+        NSMutableArray *annotationsToRemove = [mapView.annotations mutableCopy] ;
+        [annotationsToRemove removeObject:mapView.userLocation] ;
+        [mapView removeAnnotations:annotationsToRemove] ;
     }
     
     if ([mapView betterZoomLevel] > ZOOM_LEVEL_DETAILS) {
         for (id<MKAnnotation> annotation in mapView.annotations) {
+            if ([[mapView viewForAnnotation:annotation] respondsToSelector:@selector(animateWithDelay:)]) {
             [(StationAnnotationView*)[mapView viewForAnnotation:annotation] animateWithDelay:0.02*[mapView.annotations indexOfObject:annotation]];
+            }
         }
     }
     else {
         for (id<MKAnnotation> annotation in mapView.annotations) {
-            [(StationAnnotationView*)[mapView viewForAnnotation:annotation] hideWithDelay:0.02*[mapView.annotations indexOfObject:annotation]];
+            if ([[mapView viewForAnnotation:annotation] respondsToSelector:@selector(hideWithDelay:)]) {
+                [(StationAnnotationView*)[mapView viewForAnnotation:annotation] hideWithDelay:0.02*[mapView.annotations indexOfObject:annotation]];
+            }
         }
     }
 }
@@ -216,12 +271,14 @@
         [view prepareCustomViewWithTitle:[(StationAnnotation*)annotation station].name];
         return view;
     }
-    else if ([annotation isKindOfClass:[TrainAnnotation class]]) {
+    
+    if ([annotation isKindOfClass:[TrainAnnotation class]]) {
         StationAnnotationView *view = [[StationAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:[(TrainAnnotation*)annotation train].name];
         [view prepareCustomViewWithTitle:[(TrainAnnotation*)annotation train].name];
         return view;
     }
     return nil;
+
 }
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
@@ -229,7 +286,8 @@
         stationForSchedule = [(StationAnnotation*)view.annotation station];
         [self performSegueWithIdentifier:@"map2schedule" sender:self.view];
     }
-    else if ([view.annotation isKindOfClass:[TrainAnnotation class]]) {
+    
+    if ([view.annotation isKindOfClass:[TrainAnnotation class]]) {
         trainForTrainDetails = [(TrainAnnotation*)view.annotation train];
         [self performSegueWithIdentifier:@"map2train" sender:self.view];
     }
@@ -269,7 +327,10 @@
 #pragma mark - IB methods
 
 - (IBAction)handleStationsTrainSwitchChange:(UISegmentedControl *)sender {
-    [self.mapView removeAnnotations:self.mapView.annotations];
+    NSMutableArray *annotationsToRemove = [self.mapView.annotations mutableCopy] ;
+    [annotationsToRemove removeObject:self.mapView.userLocation] ;
+    [self.mapView removeAnnotations:annotationsToRemove] ;
+    
     [self mapView:self.mapView regionDidChangeAnimated:NO];
 }
 

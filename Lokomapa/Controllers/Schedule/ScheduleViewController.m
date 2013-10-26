@@ -33,18 +33,39 @@
     [Schedule stationSchedule:self.station.externalId withBlock:^(Schedule *schedule, NSError *error) {
         self.schedule = schedule;
         
+        [self setStationColors];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             if (sender) {
                 if ([sender isKindOfClass:[UIActivityIndicatorView class]]) {
                     [sender removeFromSuperview];
                 }
-                else if ([sender isKindOfClass:[UIRefreshControl class]]) {
-                    [sender endRefreshing];
-                }
             }
             [self.tableView reloadData];
         });
     }];
+}
+
+-(void)setStationColors {
+    NSMutableArray *stationsStringArray = [NSMutableArray array];
+    for (Journey *journey in self.schedule.journeys) {
+        [stationsStringArray addObject:journey.destinationStation];
+    }
+    
+    NSArray *singleStations = [[NSSet setWithArray:stationsStringArray] allObjects];
+    
+    stationColors = [NSDictionary dictionaryWithObjects:[self getRandomColorsArrayForCount:singleStations.count] forKeys:singleStations];
+
+}
+
+-(NSArray *)getRandomColorsArrayForCount:(int)count {
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:count];
+    
+    for (int k = 0; k < count; k++) {
+        [array addObject:RGBA(arc4random()%255, arc4random()%255, arc4random()%255, 1)];
+    }
+    
+    return array;
 }
 
 -(void)handleRefresh:(UIRefreshControl*)sender {
@@ -83,6 +104,11 @@
         
         [cell.contentView addSubview:delayLabel];
     }
+    
+    UIView *colorBar = [[UIView alloc] initWithFrame:CGRectMake(3, 10, 10, 10)];
+    colorBar.backgroundColor = stationColors[cellJourney.destinationStation];
+    colorBar.layer.cornerRadius = 5;
+    [cell.contentView addSubview:colorBar];
     
     return cell;
 }

@@ -17,14 +17,14 @@
         self.arrivalLabel.text = [NSString stringWithFormat:@"%@ (+%@ min)", [trainStop.arrivalTime getHourMinuteString], [trainStop.arrivalDelay stringValue]];
     }
     else {
-        self.arrivalLabel.text = @"";
+        self.arrivalLabel.text = @"Departure station";
     }
     
     if (trainStop.departureTime) {
         self.departureLabel.text = [NSString stringWithFormat:@"%@ (+%@ min)", [trainStop.departureTime getHourMinuteString], [trainStop.departureDelay stringValue]];
     }
     else {
-        self.departureLabel.text = @"";
+        self.departureLabel.text = @"Destination station";
     }
     
     if (indexPath.row == 0 || indexPath.row == 2) {

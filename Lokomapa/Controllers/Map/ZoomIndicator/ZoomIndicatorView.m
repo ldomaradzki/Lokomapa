@@ -40,7 +40,8 @@
 
 -(void)hide {
     [UIView animateWithDuration:1.0f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.alpha = 0.0f;
+        if ([self.backgroundColor isEqual:[UIColor greenColor]])
+            self.alpha = 0.0f;
     } completion:nil];
 }
 

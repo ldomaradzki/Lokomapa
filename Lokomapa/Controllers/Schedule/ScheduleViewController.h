@@ -16,6 +16,7 @@
 {
     UIActionSheet *firstActionSheet, *shareActionSheet, *notificationActionSheet;
     Journey *currentJourney;
+    NSDictionary *stationColors;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
