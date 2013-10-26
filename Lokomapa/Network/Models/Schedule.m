@@ -78,7 +78,7 @@ static NSString * const SitkolAPIStationGETURLString = @"bin/stboard.exe/pn";
       @"selectDate": @"today",
       @"time": @"now",
       @"productsFilter": @"1111111111",
-      @"maxJourneys": @"20",
+      @"maxJourneys": @"30",
       @"start": @"1343079701735",
       @"ajax": @"yes",
       

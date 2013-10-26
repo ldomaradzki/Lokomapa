@@ -94,7 +94,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.schedule.journeys.count;
+    return self.filteredJourneys.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -295,7 +295,21 @@
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    NSLog(@"%d", row);
+    if (row == 0) {
+        self.filteredJourneys = [self.schedule.journeys mutableCopy];
+    }
+    else {
+        row--;
+        
+        self.filteredJourneys = [NSMutableArray array];
+        
+        for (Journey *journey in self.schedule.journeys) {
+            if ([journey.destinationStation isEqualToString:stationNames[row]]) {
+                [self.filteredJourneys addObject:journey];
+            }
+        }
+    }
+    [self.tableView reloadData];
 }
 
 @end

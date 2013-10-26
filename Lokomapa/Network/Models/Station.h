@@ -20,6 +20,6 @@
 @property (nonatomic) CLLocation *coords;
 
 - (instancetype)initWithAttributes:(NSDictionary*)attributes;
-+ (NSURLSessionDataTask*)stationsInRegion:(MKCoordinateRegion)region withBlock:(void (^)(NSArray *stations, NSError *error))block;
++ (NSURLSessionDataTask*)stationsInRegion:(MKCoordinateRegion)region forZoomLevel:(double)zoomLevel withBlock:(void (^)(NSArray *stations, NSError *error))block;
 
 @end

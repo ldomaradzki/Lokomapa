@@ -38,14 +38,27 @@ static NSString * const SitkolAPIQueryGETURLString = @"bin/query.exe/pny";
 
 #pragma mark - API methods
 
-+(NSURLSessionDataTask *)stationsInRegion:(MKCoordinateRegion)region withBlock:(void (^)(NSArray *, NSError *))block {
++(NSURLSessionDataTask *)stationsInRegion:(MKCoordinateRegion)region
+                             forZoomLevel:(double)zoomLevel
+                                withBlock:(void (^)(NSArray *, NSError *))block {
     SitkolCoords *bottomRight = [SitkolCoords getBottomRightCornerFromRegion:region];
     SitkolCoords *upperLeft = [SitkolCoords getUpperLeftCornerFromRegion:region];
+    
+    // stopclass
+    // 2 = regional
+    // 8 = local
+    // 10 = all
+    NSString *stopClass;
+    
+    if (zoomLevel > ZOOM_LEVEL_DETAILS)
+        stopClass = @"10";
+    else if (zoomLevel >= ZOOM_LEVEL_CEILING)
+        stopClass = @"2";
     
     NSDictionary *parameters =
   @{
     @"tpl": @"stop2json",
-    @"look_stopclass": @"8",
+    @"look_stopclass": stopClass,
     @"look_maxdist": @"2088642",
     @"look_nv": @"get_stopweight|yes",
     @"look_maxno": @"150",

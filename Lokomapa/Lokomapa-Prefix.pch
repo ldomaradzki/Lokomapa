@@ -22,7 +22,7 @@
 
     #define RGBA(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
-    #define ZOOM_LEVEL_CEILING 8.0f
+    #define ZOOM_LEVEL_CEILING 7.0f
     #define ZOOM_LEVEL_DETAILS 9.5f
     #define NETWORK_DEBUG 1
 

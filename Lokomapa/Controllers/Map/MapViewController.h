@@ -15,6 +15,7 @@
     Train *trainForTrainDetails;
     NSTimer *zoomLevelTimer;
     double currentZoomLevel;
+    BOOL showedInitialUserLocation;
 }
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;

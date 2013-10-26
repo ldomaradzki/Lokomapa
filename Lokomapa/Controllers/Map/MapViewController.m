@@ -72,7 +72,8 @@
 {
     [super viewDidLoad];
 
-//    [self.mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(54.43574854705889f, 18.56841092715129), MKCoordinateSpanMake(0.5f, 0.5f))];
+    if (TARGET_IPHONE_SIMULATOR)
+        [self.mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(54.43574854705889f, 18.56841092715129), MKCoordinateSpanMake(0.5f, 0.5f))];
     
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HeaderLogo"]];
     [self.navigationController.navigationBar setBarTintColor:RGBA(91, 140, 169, 1)]; //#5B8CA9
@@ -83,6 +84,7 @@
     [self addSettingsBarButton];
     [self addUserLocationButton];
     
+    showedInitialUserLocation = NO;
 }
 
 -(void)addSettingsBarButton {
@@ -127,7 +129,7 @@
 }
 
 - (void)getStations:(MKMapView *)mapView {
-    NSURLSessionDataTask *task = [Station stationsInRegion:mapView.region withBlock:^(NSArray *stations, NSError *error) {
+    NSURLSessionDataTask *task = [Station stationsInRegion:mapView.region forZoomLevel:[mapView betterZoomLevel] withBlock:^(NSArray *stations, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             
             NSMutableDictionary *annotationsDictionary = [NSMutableDictionary dictionaryWithCapacity:mapView.annotations.count];
@@ -316,8 +318,11 @@
 }
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-    if (self.mapView.userLocation.location.verticalAccuracy < 100.0f) {
-        [self zoomToUserLocation:NO];
+    if (!showedInitialUserLocation) {
+        if (self.mapView.userLocation.location.verticalAccuracy < 100.0f) {
+            showedInitialUserLocation = YES;
+            [self zoomToUserLocation:NO];
+        }
     }
 }
 
