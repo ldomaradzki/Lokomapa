@@ -72,7 +72,7 @@
 {
     [super viewDidLoad];
 
-    [self.mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(54.43574854705889f, 18.56841092715129), MKCoordinateSpanMake(0.5f, 0.5f))];
+//    [self.mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(54.43574854705889f, 18.56841092715129), MKCoordinateSpanMake(0.5f, 0.5f))];
     
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HeaderLogo"]];
     [self.navigationController.navigationBar setBarTintColor:RGBA(91, 140, 169, 1)]; //#5B8CA9
@@ -110,18 +110,20 @@
                        landscapeImagePhone:leftLandscapeImage
                                      style:UIBarButtonItemStylePlain
                                     target:self
-                                    action:@selector(zoomToUserLocation)];
+                                    action:@selector(zoomToUserLocation:)];
 }
 
--(void)zoomToUserLocation {
-    [self.mapView setCenterCoordinate:self.mapView.userLocation.coordinate zoomLevel:12 animated:YES];
-    
-    double delayInSeconds = 1.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        // just to be sure
-        [self mapView:self.mapView regionDidChangeAnimated:YES];
-    });
+-(void)zoomToUserLocation:(BOOL)animated {
+    if (self.mapView.userLocation.location) {
+        [self.mapView setCenterCoordinate:self.mapView.userLocation.coordinate zoomLevel:12 animated:animated];
+        
+        double delayInSeconds = 1.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            // just to be sure
+            [self mapView:self.mapView regionDidChangeAnimated:YES];
+        });
+    }
 }
 
 - (void)getStations:(MKMapView *)mapView {
@@ -304,10 +306,18 @@
          completion:^(BOOL finished) {
              if (finished) {
                  if ([mapView betterZoomLevel] > ZOOM_LEVEL_DETAILS) {
-                     [annotationView animateWithDelay:0.02*[views indexOfObject:annotationView]];
+                     if ([annotationView respondsToSelector:@selector(animateWithDelay:)]) {
+                         [annotationView animateWithDelay:0.02*[views indexOfObject:annotationView]];
+                     }
                  }
              }
          }];
+    }
+}
+
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    if (self.mapView.userLocation.location.verticalAccuracy < 100.0f) {
+        [self zoomToUserLocation:NO];
     }
 }
 

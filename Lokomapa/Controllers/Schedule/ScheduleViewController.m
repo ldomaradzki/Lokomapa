@@ -33,7 +33,7 @@
     [Schedule stationSchedule:self.station.externalId withBlock:^(Schedule *schedule, NSError *error) {
         self.schedule = schedule;
         
-        [self setStationColors];
+        [self setStationNames];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             if (sender) {
@@ -41,31 +41,42 @@
                     [sender removeFromSuperview];
                 }
             }
+            
+            self.filteredJourneys = [self.schedule.journeys mutableCopy];
+            
             [self.tableView reloadData];
+            [self.pickerView reloadAllComponents];
         });
     }];
 }
 
--(void)setStationColors {
+-(void)setStationNames {
     NSMutableArray *stationsStringArray = [NSMutableArray array];
     for (Journey *journey in self.schedule.journeys) {
         [stationsStringArray addObject:journey.destinationStation];
     }
     
-    NSArray *singleStations = [[NSSet setWithArray:stationsStringArray] allObjects];
+    stationNames = [[[NSSet setWithArray:stationsStringArray] allObjects] mutableCopy];
     
-    stationColors = [NSDictionary dictionaryWithObjects:[self getRandomColorsArrayForCount:singleStations.count] forKeys:singleStations];
-
-}
-
--(NSArray *)getRandomColorsArrayForCount:(int)count {
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:count];
-    
-    for (int k = 0; k < count; k++) {
-        [array addObject:RGBA(arc4random()%255, arc4random()%255, arc4random()%255, 1)];
-    }
-    
-    return array;
+    [stationNames sortUsingComparator:^NSComparisonResult(NSString* obj1, NSString* obj2) {
+        int obj1count = 0;
+        int obj2count = 1;
+        
+        for (NSString *station in stationsStringArray) {
+            if ([station isEqualToString:obj1])
+                obj1count++;
+            
+            if ([station isEqualToString:obj2])
+                obj2count++;
+        }
+        
+        if (obj1count > obj2count)
+            return NSOrderedAscending;
+        else if (obj1count < obj2count)
+            return NSOrderedDescending;
+        
+        return NSOrderedSame;
+    }];
 }
 
 -(void)handleRefresh:(UIRefreshControl*)sender {
@@ -88,8 +99,8 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"CELL"];
-    
-    Journey *cellJourney = self.schedule.journeys[indexPath.row];
+
+    Journey *cellJourney = self.filteredJourneys[indexPath.row];
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [cellJourney. arrivalTime getHourMinuteString], cellJourney.destinationStation];
     cell.detailTextLabel.text = cellJourney.train;
@@ -105,18 +116,13 @@
         [cell.contentView addSubview:delayLabel];
     }
     
-    UIView *colorBar = [[UIView alloc] initWithFrame:CGRectMake(3, 10, 10, 10)];
-    colorBar.backgroundColor = stationColors[cellJourney.destinationStation];
-    colorBar.layer.cornerRadius = 5;
-    [cell.contentView addSubview:colorBar];
-    
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    currentJourney = self.schedule.journeys[indexPath.row];
+    currentJourney = self.filteredJourneys[indexPath.row];
     
     firstActionSheet = [[UIActionSheet alloc] initWithTitle:[self getInfoStringForJourney:currentJourney] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Send or share", @"Set notification", nil];
     [firstActionSheet showInView:self.view];
@@ -257,6 +263,39 @@
 
 -(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
     [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIPickerview delegate & datasource
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    if (stationNames.count > 0)
+        return stationNames.count + 1;
+    return 0;
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    if (row == 0) {
+        return @"ALL";
+    } else {
+        row--;
+        int count = 0;
+        for (Journey *journey in self.schedule.journeys) {
+            if ([journey.destinationStation isEqualToString:stationNames[row]])
+                count++;
+        }
+        
+        return [NSString stringWithFormat:@"%@ (%d)", stationNames[row], count];
+    }
+    
+    return nil;
+}
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    NSLog(@"%d", row);
 }
 
 @end

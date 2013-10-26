@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController">
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3cw-Kn-e6Q">
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3cw-Kn-e6Q">
                     <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <connections>
@@ -24,6 +24,12 @@
                 </mapView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="3cw-Kn-e6Q" firstAttribute="top" secondItem="2" secondAttribute="top" id="81D-0h-h8S"/>
+                <constraint firstItem="3cw-Kn-e6Q" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="CdR-Su-QRO"/>
+                <constraint firstAttribute="bottom" secondItem="3cw-Kn-e6Q" secondAttribute="bottom" id="KSF-0n-FPF"/>
+                <constraint firstAttribute="trailing" secondItem="3cw-Kn-e6Q" secondAttribute="trailing" id="gzK-9c-gz5"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
         </view>
     </objects>

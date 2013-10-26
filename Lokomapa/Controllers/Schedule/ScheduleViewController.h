@@ -12,16 +12,18 @@
 @class Station, Schedule, Journey;
 
 @interface ScheduleViewController : UIViewController
-<UITableViewDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate, UIActionSheetDelegate>
+<UITableViewDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 {
     UIActionSheet *firstActionSheet, *shareActionSheet, *notificationActionSheet;
     Journey *currentJourney;
-    NSDictionary *stationColors;
+    NSMutableArray *stationNames;
 }
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (nonatomic, strong) Schedule *schedule;
 @property (nonatomic, strong) Station *station;
+@property (nonatomic, strong) NSMutableArray *filteredJourneys;
 
 -(void)prepareForStation:(Station*)scheduleForStation;
 
