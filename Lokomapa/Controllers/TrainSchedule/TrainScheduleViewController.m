@@ -35,6 +35,18 @@
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
+    
+    NSArray *iPhonePrettyAttributes =
+  @[
+    @"document.getElementsByClassName(\"hafasResult\")[1].setAttribute(\"style\",\"width:400px\");",
+    @"document.getElementsByClassName('hafasButtons')[0].style.display = 'none';",
+    @"document.getElementById('cookieInfo').style.display = 'none';"    
+    ];
+    
+    for (NSString *prettyAttributes in iPhonePrettyAttributes) {
+        [webView stringByEvaluatingJavaScriptFromString:prettyAttributes];
+    }
+    
     [indicatorView stopAnimating];
 }
 

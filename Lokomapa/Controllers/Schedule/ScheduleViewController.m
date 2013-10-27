@@ -27,6 +27,8 @@
     [self.view addSubview:indicatorView];
     
     [self updateScheduleDataWithRefreshControl:indicatorView];
+    
+    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
 }
 
 -(void)updateScheduleDataWithRefreshControl:(id)sender {

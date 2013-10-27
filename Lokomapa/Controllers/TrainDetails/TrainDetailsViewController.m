@@ -74,7 +74,7 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text = @"Check full schedule";
-        cell.textLabel.textColor = RGBA(127, 127, 127, 1);
+        cell.textLabel.textColor = RGBA(91, 140, 169, 1);
         
         return cell;
     }
@@ -97,7 +97,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
         
         [self performSegueWithIdentifier:@"train2web" sender:self];
     }
@@ -106,7 +106,7 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     TrainScheduleViewController *trainSchedule = (TrainScheduleViewController*)segue.destinationViewController;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://rozklad.sitkol.pl/bin/traininfo.exe/en/%@?date=%@", self.train.trainId, [[NSDate date] getDefaultDateString]];
+    NSString *urlString = [NSString stringWithFormat:@"http://rozklad.sitkol.pl/bin/traininfo.exe/en/%@?date=%@&pageViewMode=PRINT", self.train.trainId, [[NSDate date] getDefaultDateString]];
     
     trainSchedule.url = [NSURL URLWithString:urlString];
 }
