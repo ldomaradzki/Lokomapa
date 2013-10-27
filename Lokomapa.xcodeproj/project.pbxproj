@@ -50,6 +50,8 @@
 		17DF4B7617F89141000F0B8A /* StationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF4B7517F89141000F0B8A /* StationAnnotationView.m */; };
 		17DF4B7B17F89D74000F0B8A /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF4B7917F89D74000F0B8A /* ScheduleViewController.m */; };
 		17DF4B7C17F89D74000F0B8A /* ScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17DF4B7A17F89D74000F0B8A /* ScheduleViewController.xib */; };
+		17E7F7F7181D2C3A00C3455D /* TrainScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E7F7F5181D2C3A00C3455D /* TrainScheduleViewController.m */; };
+		17E7F7F8181D2C3A00C3455D /* TrainScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17E7F7F6181D2C3A00C3455D /* TrainScheduleViewController.xib */; };
 		A61A266AAC334DA58E32A2AC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C57C5ADA7720400D8FDDF8AE /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +129,9 @@
 		17DF4B7817F89D74000F0B8A /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
 		17DF4B7917F89D74000F0B8A /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
 		17DF4B7A17F89D74000F0B8A /* ScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScheduleViewController.xib; sourceTree = "<group>"; };
+		17E7F7F4181D2C3A00C3455D /* TrainScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainScheduleViewController.h; sourceTree = "<group>"; };
+		17E7F7F5181D2C3A00C3455D /* TrainScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainScheduleViewController.m; sourceTree = "<group>"; };
+		17E7F7F6181D2C3A00C3455D /* TrainScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainScheduleViewController.xib; sourceTree = "<group>"; };
 		290E48FB1F7047C7B9ABA920 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		C57C5ADA7720400D8FDDF8AE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -298,6 +303,7 @@
 				179A96F617F23E67003FDC64 /* Map */,
 				17DF4B7717F89D51000F0B8A /* Schedule */,
 				17C0FCDB17FC5B9700B0A233 /* TrainDetails */,
+				17E7F7F3181D2BD600C3455D /* TrainSchedule */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -399,6 +405,16 @@
 			path = Schedule;
 			sourceTree = "<group>";
 		};
+		17E7F7F3181D2BD600C3455D /* TrainSchedule */ = {
+			isa = PBXGroup;
+			children = (
+				17E7F7F4181D2C3A00C3455D /* TrainScheduleViewController.h */,
+				17E7F7F5181D2C3A00C3455D /* TrainScheduleViewController.m */,
+				17E7F7F6181D2C3A00C3455D /* TrainScheduleViewController.xib */,
+			);
+			path = TrainSchedule;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -477,6 +493,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17E7F7F8181D2C3A00C3455D /* TrainScheduleViewController.xib in Resources */,
 				179A96D317F23DD6003FDC64 /* Main_iPad.storyboard in Resources */,
 				179A96FD17F23F3F003FDC64 /* MapViewController.xib in Resources */,
 				17C0FCE017FC5BF500B0A233 /* TrainDetailsViewController.xib in Resources */,
@@ -559,6 +576,7 @@
 				17C0FCD317F9E71100B0A233 /* Train.m in Sources */,
 				17AC5F0417F6D02D000A2DB1 /* SitkolAPIClient.m in Sources */,
 				175747251815063D004E540E /* ZoomIndicatorView.m in Sources */,
+				17E7F7F7181D2C3A00C3455D /* TrainScheduleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

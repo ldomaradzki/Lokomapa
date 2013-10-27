@@ -9,6 +9,7 @@
 #import "TrainDetailsViewController.h"
 #import "Train.h"
 #import "TrainStopDetailsCell.h"
+#import "TrainScheduleViewController.h"
 
 #define TrainStopDetailsCellReuseIdentifier @"TRAIN_STOP_DETAILS_CELL"
 
@@ -36,7 +37,6 @@
         });
         
     }];
-    
 }
 
 -(void)prepareForTrain:(Train *)train {
@@ -60,19 +60,55 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return numberOfRows;
+    if (numberOfRows > 0)
+        return numberOfRows + 1;
+    
+    return 1;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TrainStopDetailsCell *cell = [tableView dequeueReusableCellWithIdentifier:TrainStopDetailsCellReuseIdentifier forIndexPath:indexPath];
+    if (indexPath.row == 0) {
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
+        
+        cell.contentView.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.textLabel.text = @"Check full schedule";
+        cell.textLabel.textColor = RGBA(127, 127, 127, 1);
+        
+        return cell;
+    }
+    else {
+        TrainStopDetailsCell *cell = [tableView dequeueReusableCellWithIdentifier:TrainStopDetailsCellReuseIdentifier forIndexPath:indexPath];
+        
+        indexPath = [NSIndexPath indexPathForRow:indexPath.row-1 inSection:indexPath.section];
+        
+        [cell prepareCellWithTrainStop:[self.train sortedTrainStopForPlace:indexPath.row] atIndex:indexPath];
+        
+        return cell;
+    }
     
-    [cell prepareCellWithTrainStop:[self.train sortedTrainStopForPlace:indexPath.row] atIndex:indexPath];
-    
-    return cell;
+    return nil;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 76;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        [self performSegueWithIdentifier:@"train2web" sender:self];
+    }
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    TrainScheduleViewController *trainSchedule = (TrainScheduleViewController*)segue.destinationViewController;
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://rozklad.sitkol.pl/bin/traininfo.exe/en/%@?date=%@", self.train.trainId, [[NSDate date] getDefaultDateString]];
+    
+    trainSchedule.url = [NSURL URLWithString:urlString];
 }
 
 @end

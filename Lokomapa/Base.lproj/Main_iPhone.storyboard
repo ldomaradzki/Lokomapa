@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4Ih-wa-uNr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4Ih-wa-uNr">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <scenes>
         <!--Map View Controller-->
@@ -23,10 +23,23 @@
             <objects>
                 <viewController id="5wI-Pu-ohL" customClass="TrainDetailsViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="BLA-pq-69U"/>
+                    <connections>
+                        <segue destination="U7k-zt-fOW" kind="push" identifier="train2web" id="1Ss-aG-u18"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vnh-N7-5Up" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="584" y="384"/>
+        </scene>
+        <!--Train Schedule View Controller-->
+        <scene sceneID="GyU-eV-7oc">
+            <objects>
+                <viewController id="U7k-zt-fOW" customClass="TrainScheduleViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ooU-dd-OcF"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rhg-bs-Qjz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1020" y="384"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kSa-qL-cGN">

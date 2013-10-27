@@ -14,14 +14,22 @@
 -(void)prepareCellWithTrainStop:(TrainStop *)trainStop atIndex:(NSIndexPath*)indexPath {
     self.nameLabel.text = trainStop.stopName;
     if (trainStop.arrivalTime) {
-        self.arrivalLabel.text = [NSString stringWithFormat:@"%@ (+%@ min)", [trainStop.arrivalTime getHourMinuteString], [trainStop.arrivalDelay stringValue]];
+        NSString *delayString = @"";
+        if ([trainStop.arrivalDelay intValue] != 0)
+            delayString = [NSString stringWithFormat:@"(+%@ min)", [trainStop.arrivalDelay stringValue]];
+        
+        self.arrivalLabel.text = [NSString stringWithFormat:@"%@ %@", [trainStop.arrivalTime getHourMinuteString], delayString];
     }
     else {
         self.arrivalLabel.text = @"Departure station";
     }
     
     if (trainStop.departureTime) {
-        self.departureLabel.text = [NSString stringWithFormat:@"%@ (+%@ min)", [trainStop.departureTime getHourMinuteString], [trainStop.departureDelay stringValue]];
+        NSString *delayString = @"";
+        if ([trainStop.departureDelay intValue] != 0)
+            delayString = [NSString stringWithFormat:@"(+%@ min)", [trainStop.departureDelay stringValue]];
+        
+        self.departureLabel.text = [NSString stringWithFormat:@"%@ %@", [trainStop.departureTime getHourMinuteString], delayString];
     }
     else {
         self.departureLabel.text = @"Destination station";

@@ -17,4 +17,11 @@
     return [dateFormatter stringFromDate:self];
 }
 
+-(NSString*)getDefaultDateString {
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"dd.MM.yy"];
+    
+    return [dateFormatter stringFromDate:self];
+}
+
 @end
