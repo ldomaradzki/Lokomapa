@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) NSURLRequest *request;
 @property (nonatomic, strong) NSURL *url;
+@property (nonatomic, strong) NSString *trainId;
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 

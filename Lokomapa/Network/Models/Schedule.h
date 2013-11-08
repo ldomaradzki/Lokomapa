@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString *destinationStation;
 @property (nonatomic, strong) NSString *journeyId;
 @property (nonatomic, strong) NSString *train;
+@property (nonatomic, strong) NSString *trainId;
 @property (nonatomic, strong) NSDate *arrivalTime;
 
 - (instancetype)initWithAttributes:(NSDictionary*)attributes;
@@ -29,5 +30,7 @@
 - (instancetype)initWithAttributes:(NSDictionary*)attributes;
 
 + (NSURLSessionDataTask*)stationSchedule:(NSNumber*)stationId withBlock:(void (^)(Schedule *schedule, NSError *error))block;
+
++ (NSURLSessionDataTask*)stationBetterSchedule:(NSNumber*)stationId withBlock:(void (^)(Schedule *schedule, NSError *error))block;
 
 @end

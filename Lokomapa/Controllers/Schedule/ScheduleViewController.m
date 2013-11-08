@@ -9,6 +9,7 @@
 #import "ScheduleViewController.h"
 #import "Schedule.h"
 #import "Station.h"
+#import "TrainScheduleViewController.h"
 #import <Social/Social.h>
 
 @implementation ScheduleViewController
@@ -32,7 +33,7 @@
 }
 
 -(void)updateScheduleDataWithRefreshControl:(id)sender {
-    [Schedule stationSchedule:self.station.externalId withBlock:^(Schedule *schedule, NSError *error) {
+    [Schedule stationBetterSchedule:self.station.externalId withBlock:^(Schedule *schedule, NSError *error) {
         self.schedule = schedule;
         
         [self setStationNames];
@@ -126,7 +127,7 @@
     
     currentJourney = self.filteredJourneys[indexPath.row];
     
-    firstActionSheet = [[UIActionSheet alloc] initWithTitle:[self getInfoStringForJourney:currentJourney] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Send or share", @"Set notification", nil];
+    firstActionSheet = [[UIActionSheet alloc] initWithTitle:[self getInfoStringForJourney:currentJourney] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Check full schedule", @"Send or share", @"Set notification", nil];
     [firstActionSheet showInView:self.view];
 }
 
@@ -158,11 +159,16 @@
     if (actionSheet == firstActionSheet) {
         switch (buttonIndex) {
             case 0: {
-                [self clipboardActionsForJourney:currentJourney];
+                [self showFullScheduleScreen];
                 break;
             }
                 
             case 1: {
+                [self clipboardActionsForJourney:currentJourney];
+                break;
+            }
+                
+            case 2: {
                 [self notificationActionForJourney:currentJourney];
                 break;
             }
@@ -225,6 +231,16 @@
                 break;
         }
     }
+}
+
+-(void)showFullScheduleScreen {
+    [self performSegueWithIdentifier:@"schedule2web" sender:self];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    TrainScheduleViewController *trainSchedule = (TrainScheduleViewController*)segue.destinationViewController;
+    
+    trainSchedule.trainId = currentJourney.trainId;
 }
 
 #pragma mark - Local notification

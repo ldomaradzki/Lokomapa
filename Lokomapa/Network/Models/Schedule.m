@@ -19,11 +19,25 @@ static NSString * const SitkolAPIStationGETURLString = @"bin/stboard.exe/pn";
         return nil;
     }
     
-    self.destinationStation = [attributes[@"dest"] stringByDecodingXMLEntities];
-    self.delay = [[attributes[@"delay"] stringByDecodingXMLEntities] stringByReplacingOccurrencesOfString:@"ok. " withString:@""];
-    self.journeyId = attributes[@"id"];
-    self.train = [attributes[@"product"] cleanWhitespace];
-    self.arrivalTime = [attributes[@"time"] getHourMinuteDate];
+    if ([attributes[@"dest"] length] > 0) {
+        self.destinationStation = [attributes[@"dest"] stringByDecodingXMLEntities];
+        self.delay = [[attributes[@"delay"] stringByDecodingXMLEntities] stringByReplacingOccurrencesOfString:@"ok. " withString:@""];
+        self.journeyId = attributes[@"id"];
+        self.train = [attributes[@"product"] cleanWhitespace];
+        self.arrivalTime = [attributes[@"time"] getHourMinuteDate];
+    }
+    else {
+        // better schedule
+        self.destinationStation = [attributes[@"st"] stringByDecodingXMLEntities];
+        self.delay = @""; // ??
+        self.journeyId = attributes[@"id"];
+        self.train = [attributes[@"pr"] cleanWhitespace];
+        self.arrivalTime = [attributes[@"ti"] getHourMinuteDate];
+        self.trainId = [[attributes[@"tinfo"]
+                         stringByReplacingOccurrencesOfString:@"http://rozklad.sitkol.pl/bin/traininfo.exe/pn/" withString:@""] componentsSeparatedByString:@"?"][0];
+    }
+    
+    
     
     return self;
 }
@@ -67,6 +81,47 @@ static NSString * const SitkolAPIStationGETURLString = @"bin/stboard.exe/pn";
 }
 
 #pragma mark - API methods
+
++ (NSURLSessionDataTask*)stationBetterSchedule:(NSNumber*)stationId withBlock:(void (^)(Schedule *schedule, NSError *error))block {
+    
+    NSDictionary *parameters =
+    @{
+      @"L": @"vs_stb",
+      @"boardType": @"dep",
+      @"selectDate": @"today",
+      @"time": @"now",
+      @"productsFilter": @"1111111111",
+      @"additionalTime": @"0",
+      @"maxJourneys": @"30",
+      @"outputMode": @"undefined",
+      @"start": @"yes",
+      @"monitor": @"1",
+      @"requestType": @"0",
+      
+      @"input": [stationId stringValue]
+      };
+    
+    return [[SitkolAPIClient sharedClient]
+            GET:SitkolAPIStationGETURLString
+            parameters:parameters
+            success:^(NSURLSessionDataTask *task, id JSON) {
+                
+                if (block) {
+                    block([Schedule parseBetterScheduleData:JSON], nil);
+                }
+            }
+            failure:^(NSURLSessionDataTask *task, NSError *error) {
+#if NETWORK_DEBUG
+                if (block) {
+                    block([Schedule parseScheduleData:[NSJSONSerialization JSONObjectWithResourceJSONFile:@"TestScheduleResponse"]], nil);
+                }
+#else
+                if (block) {
+                    block([Schedule new], error);
+                }
+#endif
+            }];
+}
 
 + (NSURLSessionDataTask*)stationSchedule:(NSNumber*)stationId withBlock:(void (^)(Schedule *schedule, NSError *error))block {
     
@@ -112,6 +167,14 @@ static NSString * const SitkolAPIStationGETURLString = @"bin/stboard.exe/pn";
     Schedule *schedule = [[Schedule alloc] initWithAttributes:attributesFromResponse];
     
     return schedule;
+}
+
++(Schedule*)parseBetterScheduleData:(id)JSON {
+    NSDictionary *attributesFromResponse = JSON;
+    Schedule *schedule = [[Schedule alloc] initWithAttributes:attributesFromResponse];
+    
+    return schedule;
+    
 }
 
 @end

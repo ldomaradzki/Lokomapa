@@ -15,6 +15,8 @@
     
     self.title = @"Schedule";
     
+    self.url = [NSURL URLWithString:[NSString stringWithFormat:@"http://rozklad.sitkol.pl/bin/traininfo.exe/en/%@?date=%@&pageViewMode=PRINT", self.trainId, [[NSDate date] getDefaultDateString]]];
+    
     self.request = [NSURLRequest requestWithURL:self.url];
     [self.webView loadRequest:self.request];
 }

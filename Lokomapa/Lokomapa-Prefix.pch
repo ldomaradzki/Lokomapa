@@ -24,6 +24,6 @@
 
     #define ZOOM_LEVEL_CEILING 7.0f
     #define ZOOM_LEVEL_DETAILS 9.5f
-    #define NETWORK_DEBUG 1
+    #define NETWORK_DEBUG 0
 
 #endif

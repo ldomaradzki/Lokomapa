@@ -11,6 +11,39 @@
 
 static NSString * const SitkolAPIClientURLString = @"http://rozklad.sitkol.pl";
 
+@interface LDJSONResponseSerializer : AFJSONResponseSerializer {}
+@end
+
+@implementation LDJSONResponseSerializer
+
+-(BOOL)validateResponse:(NSHTTPURLResponse *)response
+                   data:(NSData *)data
+                  error:(NSError *__autoreleasing *)error {
+    
+    NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    if ([dataString hasPrefix:@"journeysObj"]) {
+
+        return NO;
+    }
+    
+    return YES;
+}
+
+-(id)responseObjectForResponse:(NSURLResponse *)response
+                          data:(NSData *)data
+                         error:(NSError *__autoreleasing *)error {
+    NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    dataString = [dataString stringByReplacingOccurrencesOfString:@"journeysObj = " withString:@""];
+    dataString = [dataString stringByReplacingOccurrencesOfString:@"\\" withString:@" "];
+    
+    return [super responseObjectForResponse:response data:[dataString dataUsingEncoding:NSUTF8StringEncoding] error:error];
+}
+
+@end
+
+
 @implementation SitkolAPIClient
 
 + (instancetype)sharedClient {
@@ -27,7 +60,7 @@ static NSString * const SitkolAPIClientURLString = @"http://rozklad.sitkol.pl";
 {
     self = [super initWithBaseURL:url];
     if (self) {
-        AFJSONResponseSerializer *responseSerializer = [[AFJSONResponseSerializer alloc] init];
+        LDJSONResponseSerializer *responseSerializer = [[LDJSONResponseSerializer alloc] init];
         NSMutableSet *acceptableContentTypes = [responseSerializer.acceptableContentTypes mutableCopy];
         [acceptableContentTypes addObject:@"text/html"];
         responseSerializer.acceptableContentTypes = acceptableContentTypes;

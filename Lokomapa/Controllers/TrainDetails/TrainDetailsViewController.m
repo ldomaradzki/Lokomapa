@@ -106,9 +106,7 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     TrainScheduleViewController *trainSchedule = (TrainScheduleViewController*)segue.destinationViewController;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://rozklad.sitkol.pl/bin/traininfo.exe/en/%@?date=%@&pageViewMode=PRINT", self.train.trainId, [[NSDate date] getDefaultDateString]];
-    
-    trainSchedule.url = [NSURL URLWithString:urlString];
+    trainSchedule.trainId = self.train.trainId;
 }
 
 @end

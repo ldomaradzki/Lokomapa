@@ -62,6 +62,9 @@
             <objects>
                 <viewController id="7BE-S7-hjG" customClass="ScheduleViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="j1g-eh-AkL"/>
+                    <connections>
+                        <segue destination="U7k-zt-fOW" kind="push" identifier="schedule2web" id="BDe-Xl-Kny"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7gn-YE-qmf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -73,4 +76,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="BDe-Xl-Kny"/>
+    </inferredMetricsTieBreakers>
 </document>
