@@ -7,30 +7,78 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController">
             <connections>
                 <outlet property="mapView" destination="3cw-Kn-e6Q" id="yuV-Qg-7I0"/>
+                <outlet property="stationsTrainsSegmentedControl" destination="inA-AV-WBO" id="Y51-W1-kDL"/>
                 <outlet property="view" destination="2" id="3"/>
+                <outlet property="zoomIndicator" destination="XKp-BN-Rmc" id="fM7-gG-4lv"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="2">
-            <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3cw-Kn-e6Q">
-                    <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="OVs-Mb-k31"/>
                     </connections>
                 </mapView>
+                <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKp-BN-Rmc" customClass="ZoomIndicatorView">
+                    <rect key="frame" x="0.0" y="64" width="768" height="3"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are too far! Zoom in to see the stations / trains." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Isl-Ug-EsF">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="13"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="320" id="pSK-ds-tIc"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="11"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.36078432199999999" green="0.89411771299999998" blue="0.36470589040000001" alpha="1" colorSpace="deviceRGB"/>
+                    <constraints>
+                        <constraint firstItem="Isl-Ug-EsF" firstAttribute="leading" secondItem="XKp-BN-Rmc" secondAttribute="leading" id="Rkw-2a-62P"/>
+                        <constraint firstAttribute="bottom" secondItem="Isl-Ug-EsF" secondAttribute="bottom" constant="-10" id="W5A-gw-HVc"/>
+                        <constraint firstItem="Isl-Ug-EsF" firstAttribute="top" secondItem="XKp-BN-Rmc" secondAttribute="top" id="yqt-sv-qYN"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="errorLabel" destination="Isl-Ug-EsF" id="Oeb-1B-c3r"/>
+                    </connections>
+                </view>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="inA-AV-WBO">
+                    <rect key="frame" x="625" y="976" width="123" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="123" id="MG7-LZ-opV"/>
+                    </constraints>
+                    <segments>
+                        <segment title="Stations"/>
+                        <segment title="Trains" width="56"/>
+                    </segments>
+                    <color key="tintColor" red="0.2666666667" green="0.41176470590000003" blue="0.4941176471" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="handleStationsTrainSwitchChange:" destination="-1" eventType="valueChanged" id="cEi-7T-ryd"/>
+                    </connections>
+                </segmentedControl>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="3cw-Kn-e6Q" firstAttribute="top" secondItem="2" secondAttribute="top" id="81D-0h-h8S"/>
-                <constraint firstItem="3cw-Kn-e6Q" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="CdR-Su-QRO"/>
-                <constraint firstAttribute="bottom" secondItem="3cw-Kn-e6Q" secondAttribute="bottom" id="KSF-0n-FPF"/>
-                <constraint firstAttribute="trailing" secondItem="3cw-Kn-e6Q" secondAttribute="trailing" id="gzK-9c-gz5"/>
+                <constraint firstItem="3cw-Kn-e6Q" firstAttribute="top" secondItem="2" secondAttribute="top" id="2fL-1R-zsZ"/>
+                <constraint firstItem="XKp-BN-Rmc" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="ABW-ne-Eku"/>
+                <constraint firstAttribute="trailing" secondItem="3cw-Kn-e6Q" secondAttribute="trailing" id="HoZ-dX-FbG"/>
+                <constraint firstAttribute="bottom" secondItem="inA-AV-WBO" secondAttribute="bottom" constant="20" symbolic="YES" id="IZ1-pO-JbH"/>
+                <constraint firstAttribute="bottom" secondItem="3cw-Kn-e6Q" secondAttribute="bottom" id="URJ-uQ-CiT"/>
+                <constraint firstItem="3cw-Kn-e6Q" firstAttribute="trailing" secondItem="XKp-BN-Rmc" secondAttribute="trailing" id="UzY-bw-K9O"/>
+                <constraint firstAttribute="trailing" secondItem="inA-AV-WBO" secondAttribute="trailing" constant="20" symbolic="YES" id="jZn-Un-XwW"/>
+                <constraint firstItem="XKp-BN-Rmc" firstAttribute="top" secondItem="2" secondAttribute="top" constant="64" id="oRB-i8-AZ2"/>
+                <constraint firstItem="XKp-BN-Rmc" firstAttribute="leading" secondItem="3cw-Kn-e6Q" secondAttribute="leading" id="qxk-bd-MhQ"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
         </view>
     </objects>
 </document>
