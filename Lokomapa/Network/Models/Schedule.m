@@ -84,6 +84,8 @@ static NSString * const SitkolAPIStationGETURLString = @"bin/stboard.exe/pn";
 
 + (NSURLSessionDataTask*)stationBetterSchedule:(NSNumber*)stationId withBlock:(void (^)(Schedule *schedule, NSError *error))block {
     
+    if (!stationId) return nil;
+    
     NSDictionary *parameters =
     @{
       @"L": @"vs_stb",

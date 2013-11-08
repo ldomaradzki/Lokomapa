@@ -88,6 +88,7 @@
 
 -(void)prepareForStation:(Station *)scheduleForStation {
     self.station = scheduleForStation;
+    [self updateScheduleDataWithRefreshControl:nil];
 }
 
 #pragma mark - TableView
@@ -108,6 +109,7 @@
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [cellJourney. arrivalTime getHourMinuteString], cellJourney.destinationStation];
     cell.detailTextLabel.text = cellJourney.train;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.backgroundColor = [UIColor clearColor];
     
     if ([cellJourney getDelayString].length > 0) {
         UILabel *delayLabel = [[UILabel alloc] initWithFrame:CGRectMake(180, 21, 100, 24)];

@@ -4,13 +4,29 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="lhX-cZ-Efy">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="6dR-4H-dV5" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ij9-Xs-aAW">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.35686274509999999" green="0.54901960780000003" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="MXq-UW-c5a" kind="relationship" relationship="rootViewController" id="KWc-QN-TmM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dqs-mG-qRB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1604" y="-323"/>
+        </scene>
         <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MapViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="D1V-a4-9vd"/>
                     <connections>
-                        <segue destination="MXq-UW-c5a" kind="push" identifier="map2schedule" id="g7V-b2-cUC"/>
+                        <segue destination="6dR-4H-dV5" kind="custom" identifier="map2schedule" customClass="MCPanelSegue" id="Crx-vX-eoR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -25,7 +41,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CDs-TS-gxG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1861" y="-39"/>
+            <point key="canvasLocation" x="2521" y="-323"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Eyh-b8-apC">

@@ -20,6 +20,31 @@
 #import "MKMapView+ZoomLevel.h"
 #import "ZoomIndicatorView.h"
 #import "FontAwesomeKit/FAKFontAwesome.h"
+#import "MCPanelViewController.h"
+
+@interface MCPanelSegue : UIStoryboardSegue
+
+@property (nonatomic, strong) MCPanelViewController *panelViewController;
+
+@end
+
+@implementation MCPanelSegue
+
+-(id)initWithIdentifier:(NSString *)identifier
+                 source:(UIViewController *)source
+            destination:(UIViewController *)destination {
+    
+    self.panelViewController = [[MCPanelViewController alloc] initWithRootViewController:destination];
+    self.panelViewController.masking = NO;
+    
+    return [super initWithIdentifier:identifier source:source destination:destination];
+}
+
+-(void)perform {
+    [self.panelViewController presentInViewController:[(UIViewController*)self.sourceViewController navigationController] withDirection:MCPanelAnimationDirectionRight];
+}
+
+@end
 
 @interface MKMapView (betterZoomLevel)
 
@@ -334,6 +359,7 @@
 #pragma mark - Storyboard segue
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     if ([segue.destinationViewController isKindOfClass:[ScheduleViewController class]]) {
         ScheduleViewController *scheduleViewController = segue.destinationViewController;
         [scheduleViewController prepareForStation:stationForSchedule];
@@ -341,6 +367,9 @@
     else if ([segue.destinationViewController isKindOfClass:[TrainDetailsViewController class]]) {
         TrainDetailsViewController *trainDetailsViewController = segue.destinationViewController;
         [trainDetailsViewController prepareForTrain:trainForTrainDetails];
+    } else if ([[(UINavigationController*)segue.destinationViewController viewControllers][0] isKindOfClass:[ScheduleViewController class]]) {
+        ScheduleViewController *scheduleViewController = [(UINavigationController*)segue.destinationViewController viewControllers][0];
+        [scheduleViewController prepareForStation:stationForSchedule];
     }
 }
 
