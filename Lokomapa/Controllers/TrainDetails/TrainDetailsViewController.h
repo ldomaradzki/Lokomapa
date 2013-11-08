@@ -13,6 +13,7 @@
 @interface TrainDetailsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
     int numberOfRows;
+    UIActivityIndicatorView *indicatorView;
 }
 
 @property (nonatomic, strong) Train *train;

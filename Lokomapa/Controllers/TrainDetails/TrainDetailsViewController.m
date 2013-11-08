@@ -23,13 +23,21 @@
     
     [self updateBasicLabels];
     
-    UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     indicatorView.hidesWhenStopped = YES;
     [indicatorView startAnimating];
     indicatorView.center = self.view.center;
     [self.view addSubview:indicatorView];
     
     numberOfRows = 0;
+    [self updateData];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    self.title = self.train.name;
+}
+
+-(void)updateData {
     [self.train trainDetailsWithBlock:^(NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [indicatorView removeFromSuperview];
@@ -41,6 +49,7 @@
 
 -(void)prepareForTrain:(Train *)train {
     self.train = train;
+    [self updateData];
 }
 
 -(void)updateBasicLabels {
@@ -81,6 +90,7 @@
     else {
         TrainStopDetailsCell *cell = [tableView dequeueReusableCellWithIdentifier:TrainStopDetailsCellReuseIdentifier forIndexPath:indexPath];
         
+        cell.backgroundColor = [UIColor clearColor];
         indexPath = [NSIndexPath indexPathForRow:indexPath.row-1 inSection:indexPath.section];
         
         [cell prepareCellWithTrainStop:[self.train sortedTrainStopForPlace:indexPath.row] atIndex:indexPath];

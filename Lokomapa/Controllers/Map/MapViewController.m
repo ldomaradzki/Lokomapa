@@ -359,17 +359,18 @@
 #pragma mark - Storyboard segue
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    UIViewController *destinationViewController = segue.destinationViewController;
     
-    if ([segue.destinationViewController isKindOfClass:[ScheduleViewController class]]) {
-        ScheduleViewController *scheduleViewController = segue.destinationViewController;
+    if ([destinationViewController isKindOfClass:[UINavigationController class]])
+        destinationViewController = [(UINavigationController*)destinationViewController viewControllers][0];
+    
+    if ([destinationViewController isKindOfClass:[ScheduleViewController class]]) {
+        ScheduleViewController *scheduleViewController = (ScheduleViewController*)destinationViewController;
         [scheduleViewController prepareForStation:stationForSchedule];
     }
-    else if ([segue.destinationViewController isKindOfClass:[TrainDetailsViewController class]]) {
-        TrainDetailsViewController *trainDetailsViewController = segue.destinationViewController;
+    else if ([destinationViewController isKindOfClass:[TrainDetailsViewController class]]) {
+        TrainDetailsViewController *trainDetailsViewController = (TrainDetailsViewController*)destinationViewController;
         [trainDetailsViewController prepareForTrain:trainForTrainDetails];
-    } else if ([[(UINavigationController*)segue.destinationViewController viewControllers][0] isKindOfClass:[ScheduleViewController class]]) {
-        ScheduleViewController *scheduleViewController = [(UINavigationController*)segue.destinationViewController viewControllers][0];
-        [scheduleViewController prepareForStation:stationForSchedule];
     }
 }
 

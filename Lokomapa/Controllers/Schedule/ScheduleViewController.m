@@ -18,7 +18,7 @@
 {
     [super viewDidLoad];
 
-    self.title = self.station.name;
+
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     
     UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -30,6 +30,10 @@
     [self updateScheduleDataWithRefreshControl:indicatorView];
     
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    self.title = self.station.name;
 }
 
 -(void)updateScheduleDataWithRefreshControl:(id)sender {

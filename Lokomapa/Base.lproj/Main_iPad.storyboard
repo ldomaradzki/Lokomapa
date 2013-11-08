@@ -10,7 +10,12 @@
                 <navigationController definesPresentationContext="YES" id="6dR-4H-dV5" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ij9-Xs-aAW">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.35686274509999999" green="0.54901960780000003" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="MXq-UW-c5a" kind="relationship" relationship="rootViewController" id="KWc-QN-TmM"/>
@@ -18,7 +23,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dqs-mG-qRB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1604" y="-323"/>
+            <point key="canvasLocation" x="1932" y="309"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -27,6 +32,7 @@
                     <navigationItem key="navigationItem" id="D1V-a4-9vd"/>
                     <connections>
                         <segue destination="6dR-4H-dV5" kind="custom" identifier="map2schedule" customClass="MCPanelSegue" id="Crx-vX-eoR"/>
+                        <segue destination="fh7-Kp-BO4" kind="custom" identifier="map2train" customClass="MCPanelSegue" id="W0A-kE-jaa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -38,10 +44,13 @@
             <objects>
                 <viewController id="MXq-UW-c5a" customClass="ScheduleViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="UNz-dq-fi8"/>
+                    <connections>
+                        <segue destination="79z-i5-eiR" kind="push" identifier="schedule2web" id="TNM-5a-7qN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CDs-TS-gxG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2521" y="-323"/>
+            <point key="canvasLocation" x="2849" y="309"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Eyh-b8-apC">
@@ -58,10 +67,57 @@
             </objects>
             <point key="canvasLocation" x="-23" y="1014"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="71B-9z-DMK">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="fh7-Kp-BO4" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xbR-OP-2Qg">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.35686274509999999" green="0.54901960780000003" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Wfv-7o-rR5" kind="relationship" relationship="rootViewController" id="Kis-eo-iLD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DcM-cd-ymd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1940" y="1697"/>
+        </scene>
+        <!--Train Details View Controller-->
+        <scene sceneID="ybC-sl-cM0">
+            <objects>
+                <viewController id="Wfv-7o-rR5" customClass="TrainDetailsViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="53v-0b-36p"/>
+                    <connections>
+                        <segue destination="79z-i5-eiR" kind="push" identifier="train2web" id="3Ef-65-0cQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="edE-p5-BpY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2821" y="1697"/>
+        </scene>
+        <!--Train Schedule View Controller-->
+        <scene sceneID="83O-lA-dyq">
+            <objects>
+                <viewController id="79z-i5-eiR" customClass="TrainScheduleViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ePY-xC-qsb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lgz-1q-Ydh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3946" y="1099"/>
+        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackOpaque"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="TNM-5a-7qN"/>
+    </inferredMetricsTieBreakers>
 </document>
