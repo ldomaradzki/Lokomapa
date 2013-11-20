@@ -26,12 +26,14 @@
 }
 
 -(void)prepareCustomViewWithTitle:(NSString*)title {
-    circleLayer = [CAShapeLayer layer];
-    circleLayer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 20, 20)].CGPath;
-    circleLayer.fillColor = RGBA(90, 140, 169, 1.0).CGColor;
-    circleLayer.strokeColor = [UIColor whiteColor].CGColor;
-    circleLayer.lineWidth = 1.0f;
-    [self.layer addSublayer:circleLayer];
+//    circleLayer = [CAShapeLayer layer];
+//    circleLayer.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 20, 20)].CGPath;
+//    circleLayer.fillColor = RGBA(90, 140, 169, 1.0).CGColor;
+//    circleLayer.strokeColor = [UIColor whiteColor].CGColor;
+//    circleLayer.lineWidth = 1.0f;
+//    [self.layer addSublayer:circleLayer];
+
+    [self addSubview:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PinCircle"]]];
     
     label = [[UILabel alloc] initWithFrame:CGRectMake(24, 0, 0, 20)];
     label.backgroundColor = [UIColor clearColor];

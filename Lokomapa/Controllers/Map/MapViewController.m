@@ -127,8 +127,8 @@
     [[UIBarButtonItem alloc] initWithImage:leftImage
                        landscapeImagePhone:leftLandscapeImage
                                      style:UIBarButtonItemStylePlain
-                                    target:nil
-                                    action:nil];
+                                    target:self
+                                    action:@selector(showSettings:)];
 }
 
 -(void)addUserLocationButton {
@@ -382,6 +382,10 @@
     [self.mapView removeAnnotations:annotationsToRemove] ;
     
     [self mapView:self.mapView regionDidChangeAnimated:NO];
+}
+
+-(void)showSettings:(id)sender {
+    [self performSegueWithIdentifier:@"map2settings" sender:self.view];
 }
 
 @end

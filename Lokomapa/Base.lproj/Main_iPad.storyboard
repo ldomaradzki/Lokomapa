@@ -25,6 +25,35 @@
             </objects>
             <point key="canvasLocation" x="1932" y="309"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="h1K-J2-2rl">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="nrX-cg-aen" sceneMemberID="viewController">
+                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JP4-a7-UJ7">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ogY-hB-maE" kind="relationship" relationship="rootViewController" id="Drz-oQ-s28"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FB1-Qg-25P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="662" y="-322"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="Xqv-HD-djw">
+            <objects>
+                <viewController id="ogY-hB-maE" customClass="SettingsViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="IUx-gS-RCN"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ejJ-jl-dbG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1298" y="-322"/>
+        </scene>
         <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -33,6 +62,7 @@
                     <connections>
                         <segue destination="6dR-4H-dV5" kind="custom" identifier="map2schedule" customClass="MCPanelSegue" id="Crx-vX-eoR"/>
                         <segue destination="fh7-Kp-BO4" kind="custom" identifier="map2train" customClass="MCPanelSegue" id="W0A-kE-jaa"/>
+                        <segue destination="nrX-cg-aen" kind="modal" identifier="map2settings" modalPresentationStyle="formSheet" modalTransitionStyle="coverVertical" id="yAz-sY-sPo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
