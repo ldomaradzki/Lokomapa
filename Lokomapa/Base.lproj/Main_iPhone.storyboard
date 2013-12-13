@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4Ih-wa-uNr">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Map View Controller-->
@@ -12,6 +12,7 @@
                     <connections>
                         <segue destination="7BE-S7-hjG" kind="push" identifier="map2schedule" id="vGi-nI-jv4"/>
                         <segue destination="5wI-Pu-ohL" kind="push" identifier="map2train" id="4pz-ma-RHZ"/>
+                        <segue destination="W16-lD-KKN" kind="push" identifier="map2settings" id="r0J-uS-m68"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e7S-eh-mYF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -56,6 +57,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BO5-k2-aHh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-321" y="-51"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="NC2-XP-vQg">
+            <objects>
+                <viewController id="W16-lD-KKN" customClass="SettingsViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="INL-yL-31o"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bDY-S6-ZeM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="601" y="-975"/>
         </scene>
         <!--Schedule View Controller-->
         <scene sceneID="2lw-iR-XFU">

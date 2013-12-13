@@ -24,6 +24,8 @@
 @property (nonatomic, strong) Schedule *schedule;
 @property (nonatomic, strong) Station *station;
 @property (nonatomic, strong) NSMutableArray *filteredJourneys;
+@property (weak, nonatomic) IBOutlet UIView *separatorLineView;
+
 
 -(void)prepareForStation:(Station*)scheduleForStation;
 
