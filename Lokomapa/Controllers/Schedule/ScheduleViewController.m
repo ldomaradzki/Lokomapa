@@ -24,6 +24,9 @@
     indicatorView.center = self.view.center;
     [self.view addSubview:indicatorView];
     
+    self.separatorLineView.hidden = YES;
+    self.pickerView.hidden = YES;
+    
     [self updateScheduleDataWithRefreshControl:indicatorView];
     
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
@@ -45,6 +48,9 @@
                     [sender removeFromSuperview];
                 }
             }
+            
+            self.separatorLineView.hidden = NO;
+            self.pickerView.hidden = NO;
             
             self.filteredJourneys = [self.schedule.journeys mutableCopy];
             
