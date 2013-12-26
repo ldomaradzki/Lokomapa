@@ -20,7 +20,7 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"Settings";
 
-    fontAwesomes = @[@[[FAKFontAwesome mapMarkerIconWithSize:ICON_SIZE], [FAKFontAwesome clockOIconWithSize:ICON_SIZE]], @[[FAKFontAwesome linkIconWithSize:ICON_SIZE], [FAKFontAwesome questionIconWithSize:ICON_SIZE], [FAKFontAwesome githubIconWithSize:ICON_SIZE]]];
+    fontAwesomes = @[@[[FAKFontAwesome mapMarkerIconWithSize:ICON_SIZE], [FAKFontAwesome clockOIconWithSize:ICON_SIZE], [FAKFontAwesome bellOIconWithSize:ICON_SIZE]], @[[FAKFontAwesome linkIconWithSize:ICON_SIZE], [FAKFontAwesome questionIconWithSize:ICON_SIZE], [FAKFontAwesome githubIconWithSize:ICON_SIZE]]];
 }
 
 -(UIImage *)fontAwesomeImageWithIcon:(FAKFontAwesome*)fontAwesome {
@@ -36,7 +36,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0)
-        return 2;
+        return 3;
     if (section == 1)
         return 3;
     
@@ -49,12 +49,15 @@
     if (indexPath.section == 0) {
         cell.textLabel.text =
         @[@"Showing pin title",
-          @"Auto update (10 sec timer)"][indexPath.row];
+          @"Auto update", @"Clear all notifications"][indexPath.row];
+        cell.detailTextLabel.text = @[@"", @"10 sec timer", @""][indexPath.row];
         
-        UISwitch *cellSwitch = [[UISwitch alloc] init];
-        cellSwitch.onTintColor = RGBA(91, 140, 169, 1);
-        cell.accessoryView = cellSwitch;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (indexPath.row < 2) {
+            UISwitch *cellSwitch = [[UISwitch alloc] init];
+            cellSwitch.onTintColor = RGBA(91, 140, 169, 1);
+            cell.accessoryView = cellSwitch;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
     }
     
     if (indexPath.section == 1) {
@@ -78,6 +81,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 0 && indexPath.row == 2) {
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    }
     
     if (indexPath.section == 1) {
         if (indexPath.row == 0) { // SITkol

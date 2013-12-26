@@ -258,8 +258,8 @@
     UILocalNotification *localNotification = [UILocalNotification new];
     
     localNotification.repeatInterval = 0;
-    localNotification.alertBody = @"Stuff";
-    localNotification.fireDate = [[NSDate date] dateByAddingTimeInterval:10];
+    localNotification.alertBody = [NSString stringWithFormat:@"Scheduled train notification: %@", [self getInfoStringForJourney:journey]];
+    localNotification.fireDate = [[NSDate date] dateByAddingTimeInterval:60 * time.intValue];
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
