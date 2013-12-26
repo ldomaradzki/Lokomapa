@@ -113,8 +113,15 @@
     
     [self addSettingsBarButton];
     [self addUserLocationButton];
+    [self localizeGUI];
     
     showedInitialUserLocation = NO;
+}
+
+-(void)localizeGUI {
+    [self.stationsTrainsSegmentedControl setTitle:NSLocalizedString(@"Stations", nil) forSegmentAtIndex:0];
+    [self.stationsTrainsSegmentedControl setTitle:NSLocalizedString(@"Trains", nil) forSegmentAtIndex:1];
+    self.zoomIndicator.errorLabel.text = NSLocalizedString(@"You are too far! Zoom in to see the stations / trains.", nil);
 }
 
 -(void)addSettingsBarButton {

@@ -10,7 +10,7 @@
 
 @interface ZoomIndicatorView : UIView
 
-@property (nonatomic, weak) IBOutlet UIView *errorLabel;
+@property (nonatomic, weak) IBOutlet UILabel *errorLabel;
 
 -(void)show;
 -(void)updateZoomLevel:(double)level;

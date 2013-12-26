@@ -26,8 +26,6 @@
 		179A96C717F23DD6003FDC64 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 179A96C517F23DD6003FDC64 /* InfoPlist.strings */; };
 		179A96C917F23DD6003FDC64 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 179A96C817F23DD6003FDC64 /* main.m */; };
 		179A96CD17F23DD6003FDC64 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 179A96CC17F23DD6003FDC64 /* AppDelegate.m */; };
-		179A96D017F23DD6003FDC64 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 179A96CE17F23DD6003FDC64 /* Main_iPhone.storyboard */; };
-		179A96D317F23DD6003FDC64 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 179A96D117F23DD6003FDC64 /* Main_iPad.storyboard */; };
 		179A96D817F23DD6003FDC64 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 179A96D717F23DD6003FDC64 /* Images.xcassets */; };
 		179A96DF17F23DD7003FDC64 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96DE17F23DD7003FDC64 /* XCTest.framework */; };
 		179A96E017F23DD7003FDC64 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 179A96BC17F23DD6003FDC64 /* Foundation.framework */; };
@@ -49,6 +47,7 @@
 		17CFB3171834038E003341BB /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17CFB3151834038E003341BB /* SettingsViewController.m */; };
 		17CFB3181834038E003341BB /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17CFB3161834038E003341BB /* SettingsViewController.xib */; };
 		17CFB31D18340C0F003341BB /* sitkol.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 17CFB31C18340C0F003341BB /* sitkol.jpg */; };
+		17D0054C186C9437000223A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17D0054E186C9437000223A7 /* Localizable.strings */; };
 		17DF4B7217F881EE000F0B8A /* StationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF4B7117F881EE000F0B8A /* StationAnnotation.m */; };
 		17DF4B7617F89141000F0B8A /* StationAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF4B7517F89141000F0B8A /* StationAnnotationView.m */; };
 		17DF4B7B17F89D74000F0B8A /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF4B7917F89D74000F0B8A /* ScheduleViewController.m */; };
@@ -98,8 +97,6 @@
 		179A96CA17F23DD6003FDC64 /* Lokomapa-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lokomapa-Prefix.pch"; sourceTree = "<group>"; };
 		179A96CB17F23DD6003FDC64 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		179A96CC17F23DD6003FDC64 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		179A96CF17F23DD6003FDC64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		179A96D217F23DD6003FDC64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		179A96D717F23DD6003FDC64 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		179A96DD17F23DD7003FDC64 /* LokomapaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LokomapaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		179A96DE17F23DD7003FDC64 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -129,6 +126,8 @@
 		17CFB3151834038E003341BB /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		17CFB3161834038E003341BB /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		17CFB31C18340C0F003341BB /* sitkol.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sitkol.jpg; sourceTree = "<group>"; };
+		17D00550186C95D2000223A7 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		17D00551186C9632000223A7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17DF4B7017F881EE000F0B8A /* StationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationAnnotation.h; sourceTree = "<group>"; };
 		17DF4B7117F881EE000F0B8A /* StationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationAnnotation.m; sourceTree = "<group>"; };
 		17DF4B7417F89141000F0B8A /* StationAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationAnnotationView.h; sourceTree = "<group>"; };
@@ -198,6 +197,7 @@
 		175747151814E80E004E540E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				17D00549186C940C000223A7 /* Localizations */,
 				17CFB31B18340C00003341BB /* Images */,
 				175747161814E81E004E540E /* JSON */,
 			);
@@ -268,8 +268,6 @@
 				17AC5F0117F6CFC7000A2DB1 /* Network */,
 				1720367018003C3100463419 /* Categories */,
 				179A96C317F23DD6003FDC64 /* Supporting Files */,
-				179A96CE17F23DD6003FDC64 /* Main_iPhone.storyboard */,
-				179A96D117F23DD6003FDC64 /* Main_iPad.storyboard */,
 				179A96D717F23DD6003FDC64 /* Images.xcassets */,
 			);
 			path = Lokomapa;
@@ -402,6 +400,14 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		17D00549186C940C000223A7 /* Localizations */ = {
+			isa = PBXGroup;
+			children = (
+				17D0054E186C9437000223A7 /* Localizable.strings */,
+			);
+			path = Localizations;
+			sourceTree = "<group>";
+		};
 		17DF4B6F17F881C6000F0B8A /* Annotations */ = {
 			isa = PBXGroup;
 			children = (
@@ -503,6 +509,7 @@
 			knownRegions = (
 				en,
 				Base,
+				pl,
 			);
 			mainGroup = 179A96B017F23DD6003FDC64;
 			productRefGroup = 179A96BA17F23DD6003FDC64 /* Products */;
@@ -521,7 +528,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				17E7F7F8181D2C3A00C3455D /* TrainScheduleViewController.xib in Resources */,
-				179A96D317F23DD6003FDC64 /* Main_iPad.storyboard in Resources */,
 				179A96FD17F23F3F003FDC64 /* MapViewController.xib in Resources */,
 				17C0FCE017FC5BF500B0A233 /* TrainDetailsViewController.xib in Resources */,
 				17CFB3181834038E003341BB /* SettingsViewController.xib in Resources */,
@@ -529,9 +535,9 @@
 				179A96D817F23DD6003FDC64 /* Images.xcassets in Resources */,
 				17DF4B7C17F89D74000F0B8A /* ScheduleViewController.xib in Resources */,
 				17CFB31D18340C0F003341BB /* sitkol.jpg in Resources */,
-				179A96D017F23DD6003FDC64 /* Main_iPhone.storyboard in Resources */,
 				179A96FB17F23E8A003FDC64 /* MapViewController~ipad.xib in Resources */,
 				1757471E1814EE5B004E540E /* TestTrainDetailResponse.json in Resources */,
+				17D0054C186C9437000223A7 /* Localizable.strings in Resources */,
 				175747181814E865004E540E /* TestStationResponse.json in Resources */,
 				179A96C717F23DD6003FDC64 /* InfoPlist.strings in Resources */,
 				1720366A17FF3AB800463419 /* TrainStopDetailsCell.xib in Resources */,
@@ -637,28 +643,21 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		179A96CE17F23DD6003FDC64 /* Main_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				179A96CF17F23DD6003FDC64 /* Base */,
-			);
-			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		179A96D117F23DD6003FDC64 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				179A96D217F23DD6003FDC64 /* Base */,
-			);
-			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-		};
 		179A96E717F23DD7003FDC64 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				179A96E817F23DD7003FDC64 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		17D0054E186C9437000223A7 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17D00550186C95D2000223A7 /* pl */,
+				17D00551186C9632000223A7 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
