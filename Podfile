@@ -1,5 +1,5 @@
 platform :ios, '7.0'
-pod 'AFNetworking', '~> 2.0.1'
+pod 'AFNetworking', '~> 2.0.3'
 pod 'MKMapViewZoom', '~> 1.0.0'
-pod 'FontAwesomeKit/FontAwesome', '~> 2.1.0'
+pod 'FontAwesomeKit/FontAwesome', '~> 2.1.3'
 pod 'MCPanelViewController', '~> 0.2'
