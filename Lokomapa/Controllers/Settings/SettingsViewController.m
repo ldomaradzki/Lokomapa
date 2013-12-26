@@ -20,7 +20,7 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"Settings";
 
-    fontAwesomes = @[@[[FAKFontAwesome mapMarkerIconWithSize:ICON_SIZE], [FAKFontAwesome clockOIconWithSize:ICON_SIZE], [FAKFontAwesome bellOIconWithSize:ICON_SIZE]], @[[FAKFontAwesome linkIconWithSize:ICON_SIZE], [FAKFontAwesome questionIconWithSize:ICON_SIZE], [FAKFontAwesome githubIconWithSize:ICON_SIZE]]];
+    fontAwesomes = @[@[[FAKFontAwesome mapMarkerIconWithSize:ICON_SIZE], [FAKFontAwesome bellOIconWithSize:ICON_SIZE]], @[[FAKFontAwesome linkIconWithSize:ICON_SIZE], [FAKFontAwesome questionIconWithSize:ICON_SIZE], [FAKFontAwesome githubIconWithSize:ICON_SIZE]]];
 }
 
 -(UIImage *)fontAwesomeImageWithIcon:(FAKFontAwesome*)fontAwesome {
@@ -29,7 +29,7 @@
 }
 
 -(void)cellSwitchAction:(UISwitch*)cellSwitch {
-    [[NSUserDefaults standardUserDefaults] setBool:cellSwitch.on forKey:@[@"showingPinTitle", @"autoUpdate"][cellSwitch.tag]];
+    [[NSUserDefaults standardUserDefaults] setBool:cellSwitch.on forKey:@"showingPinTitle"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -41,7 +41,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0)
-        return 3;
+        return 2;
     if (section == 1)
         return 3;
     
@@ -53,15 +53,12 @@
  
     if (indexPath.section == 0) {
         cell.textLabel.text =
-        @[@"Showing pin title",
-          @"Auto update", [NSString stringWithFormat:@"Clear all notifications (%d)", [[UIApplication sharedApplication] scheduledLocalNotifications].count]][indexPath.row];
-        cell.detailTextLabel.text = @[@"", @"10 sec timer", @""][indexPath.row];
+        @[@"Showing pin title", [NSString stringWithFormat:@"Clear all notifications (%d)", [[UIApplication sharedApplication] scheduledLocalNotifications].count]][indexPath.row];
         
-        if (indexPath.row < 2) {
+        if (indexPath.row == 0) {
             UISwitch *cellSwitch = [[UISwitch alloc] init];
-            [cellSwitch setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@[@"showingPinTitle", @"autoUpdate"][indexPath.row]] animated:NO];
+            [cellSwitch setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"showingPinTitle"] animated:NO];
             cellSwitch.onTintColor = RGBA(91, 140, 169, 1);
-            cellSwitch.tag = indexPath.row;
             [cellSwitch addTarget:self action:@selector(cellSwitchAction:) forControlEvents:UIControlEventValueChanged];
             cell.accessoryView = cellSwitch;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -90,7 +87,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 0 && indexPath.row == 2) {
+    if (indexPath.section == 0 && indexPath.row == 1) {
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
         [self.tableView reloadData];
     }

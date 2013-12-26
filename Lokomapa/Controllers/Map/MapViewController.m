@@ -111,8 +111,6 @@
     [self.navigationController.navigationBar setBarTintColor:RGBA(91, 140, 169, 1)]; //#5B8CA9
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
-    
-    
     [self addSettingsBarButton];
     [self addUserLocationButton];
     
@@ -134,17 +132,21 @@
 }
 
 -(void)addUserLocationButton {
-    FAKFontAwesome *locationIcon = [FAKFontAwesome locationArrowIconWithSize:20];
-    [locationIcon addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor]];
-    UIImage *leftImage = [locationIcon imageWithSize:CGSizeMake(20, 20)];
-    locationIcon.iconFontSize = 15;
-    UIImage *leftLandscapeImage = [locationIcon imageWithSize:CGSizeMake(15, 15)];
-    self.navigationItem.rightBarButtonItem =
-    [[UIBarButtonItem alloc] initWithImage:leftImage
-                       landscapeImagePhone:leftLandscapeImage
-                                     style:UIBarButtonItemStylePlain
-                                    target:self
-                                    action:@selector(zoomToUserLocation:)];
+    if([CLLocationManager locationServicesEnabled] &&
+       [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied)
+    {
+        FAKFontAwesome *locationIcon = [FAKFontAwesome locationArrowIconWithSize:20];
+        [locationIcon addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor]];
+        UIImage *leftImage = [locationIcon imageWithSize:CGSizeMake(20, 20)];
+        locationIcon.iconFontSize = 15;
+        UIImage *leftLandscapeImage = [locationIcon imageWithSize:CGSizeMake(15, 15)];
+        self.navigationItem.rightBarButtonItem =
+        [[UIBarButtonItem alloc] initWithImage:leftImage
+                           landscapeImagePhone:leftLandscapeImage
+                                         style:UIBarButtonItemStylePlain
+                                        target:self
+                                        action:@selector(zoomToUserLocation:)];
+    }
 }
 
 -(void)zoomToUserLocation:(BOOL)animated {
@@ -159,6 +161,43 @@
         });
     }
 }
+
+#pragma mark - ZoomLevel watcher
+
+-(void)startWatchingZoomLevel {
+    zoomLevelTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateZoomLevel) userInfo:nil repeats:YES];
+    currentZoomLevel = [self.mapView betterZoomLevel];
+    double percentageLevel = 1 - ((currentZoomLevel - ZOOM_LEVEL_CEILING) / 12);
+    [self.zoomIndicator updateZoomLevel:percentageLevel];
+    
+    [self.zoomIndicator show];
+}
+
+-(void)updateZoomLevel {
+    if (currentZoomLevel != [self.mapView betterZoomLevel]) {
+        currentZoomLevel = [self.mapView betterZoomLevel];
+        double percentageLevel = 1 - ((currentZoomLevel - ZOOM_LEVEL_CEILING) / 12);
+        [self.zoomIndicator updateZoomLevel:percentageLevel];
+        
+        if (percentageLevel > 1.0f) {
+            [self.mapView removeAnnotations:self.mapView.annotations];
+        }
+    }
+}
+
+-(void)stopWatchingZoomLevel {
+    if (zoomLevelTimer) {
+        [zoomLevelTimer invalidate];
+        zoomLevelTimer = nil;
+    }
+    currentZoomLevel = [self.mapView betterZoomLevel];
+    double percentageLevel = 1 - ((currentZoomLevel - ZOOM_LEVEL_CEILING) / 12);
+    [self.zoomIndicator updateZoomLevel:percentageLevel];
+    
+    [self.zoomIndicator hide];
+}
+
+#pragma mark - Map data
 
 - (void)getStations:(MKMapView *)mapView {
     NSURLSessionDataTask *task = [Station stationsInRegion:mapView.region forZoomLevel:[mapView betterZoomLevel] withBlock:^(NSArray *stations, NSError *error) {
@@ -219,50 +258,7 @@
     self.lastTask = task;
 }
 
-#pragma mark - ZoomLevel watcher
-
--(void)startWatchingZoomLevel {
-    zoomLevelTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateZoomLevel) userInfo:nil repeats:YES];
-    currentZoomLevel = [self.mapView betterZoomLevel];
-    double percentageLevel = 1 - ((currentZoomLevel - ZOOM_LEVEL_CEILING) / 12);
-    [self.zoomIndicator updateZoomLevel:percentageLevel];
-    
-    [self.zoomIndicator show];
-}
-
--(void)updateZoomLevel {
-    if (currentZoomLevel != [self.mapView betterZoomLevel]) {
-        currentZoomLevel = [self.mapView betterZoomLevel];
-        double percentageLevel = 1 - ((currentZoomLevel - ZOOM_LEVEL_CEILING) / 12);
-        [self.zoomIndicator updateZoomLevel:percentageLevel];
-        
-        if (percentageLevel > 1.0f) {
-            [self.mapView removeAnnotations:self.mapView.annotations];
-        }
-    }
-}
-
--(void)stopWatchingZoomLevel {
-    if (zoomLevelTimer) {
-        [zoomLevelTimer invalidate];
-        zoomLevelTimer = nil;
-    }
-    currentZoomLevel = [self.mapView betterZoomLevel];
-    double percentageLevel = 1 - ((currentZoomLevel - ZOOM_LEVEL_CEILING) / 12);
-    [self.zoomIndicator updateZoomLevel:percentageLevel];
-    
-    [self.zoomIndicator hide];
-}
-
-#pragma mark - MapView
-
--(void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
-    [self startWatchingZoomLevel];
-}
-
--(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    [self stopWatchingZoomLevel];
-    
+- (void)reloadMapData:(MKMapView *)mapView {
     if ([mapView betterZoomLevel] > ZOOM_LEVEL_CEILING) {
         switch (self.stationsTrainsSegmentedControl.selectedSegmentIndex) {
             case 0: {
@@ -285,10 +281,10 @@
         [mapView removeAnnotations:annotationsToRemove] ;
     }
     
-    if ([mapView betterZoomLevel] > ZOOM_LEVEL_DETAILS) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"showingPinTitle"]) {
         for (id<MKAnnotation> annotation in mapView.annotations) {
             if ([[mapView viewForAnnotation:annotation] respondsToSelector:@selector(animateWithDelay:)]) {
-            [(StationAnnotationView*)[mapView viewForAnnotation:annotation] animateWithDelay:0.02*[mapView.annotations indexOfObject:annotation]];
+                [(StationAnnotationView*)[mapView viewForAnnotation:annotation] animateWithDelay:0.02*[mapView.annotations indexOfObject:annotation]];
             }
         }
     }
@@ -299,6 +295,18 @@
             }
         }
     }
+}
+
+#pragma mark - MapView
+
+-(void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
+    [self startWatchingZoomLevel];
+}
+
+-(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    [self stopWatchingZoomLevel];
+    
+    [self reloadMapData:mapView];
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
@@ -339,7 +347,7 @@
          }
          completion:^(BOOL finished) {
              if (finished) {
-                 if ([mapView betterZoomLevel] > ZOOM_LEVEL_DETAILS) {
+                 if ([[NSUserDefaults standardUserDefaults] boolForKey:@"showingPinTitle"]) {
                      if ([annotationView respondsToSelector:@selector(animateWithDelay:)]) {
                          [annotationView animateWithDelay:0.02*[views indexOfObject:annotationView]];
                      }

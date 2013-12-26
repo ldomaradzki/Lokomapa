@@ -15,7 +15,6 @@
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasBeenLaunched"]) {
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"showingPinTitle"];
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"autoUpdate"];
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasBeenLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];
