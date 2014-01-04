@@ -11,6 +11,7 @@
 #import "Station.h"
 #import "TrainScheduleViewController.h"
 #import <Social/Social.h>
+#import "FAKFontAwesome.h"
 
 @implementation ScheduleViewController
 
@@ -30,6 +31,22 @@
     [self updateScheduleDataWithRefreshControl:indicatorView];
     
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+    
+    [self addRefreshBarButton];
+}
+
+-(void)addRefreshBarButton {
+    FAKFontAwesome *refreshIcon = [FAKFontAwesome refreshIconWithSize:20];
+    [refreshIcon addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor]];
+    UIImage *rightImage = [refreshIcon imageWithSize:CGSizeMake(20, 20)];
+    refreshIcon.iconFontSize = 15;
+    UIImage *rightLandscapeImage = [refreshIcon imageWithSize:CGSizeMake(15, 15)];
+    self.navigationItem.rightBarButtonItem =
+    [[UIBarButtonItem alloc] initWithImage:rightImage
+                       landscapeImagePhone:rightLandscapeImage
+                                     style:UIBarButtonItemStylePlain
+                                    target:self
+                                    action:@selector(updateScheduleDataWithRefreshControl:)];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -37,6 +54,8 @@
 }
 
 -(void)updateScheduleDataWithRefreshControl:(id)sender {
+    
+    
     [Schedule stationBetterSchedule:self.station.externalId withBlock:^(Schedule *schedule, NSError *error) {
         self.schedule = schedule;
         
@@ -56,6 +75,7 @@
             
             [self.tableView reloadData];
             [self.pickerView reloadAllComponents];
+            [self.pickerView selectRow:0 inComponent:0 animated:YES];
         });
     }];
 }
@@ -269,7 +289,7 @@
 
     localNotification.repeatInterval = 0;
     localNotification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Scheduled train notification: %@", nil), [self getInfoStringForJourney:journey]];
-    localNotification.fireDate = [[NSDate date] dateByAddingTimeInterval:60 * time.intValue];
+    localNotification.fireDate = [journey.arrivalTime dateByAddingTimeInterval:-60.0f * time.floatValue];
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
