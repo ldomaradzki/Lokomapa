@@ -136,7 +136,14 @@
     
     currentJourney = self.filteredJourneys[indexPath.row];
     
-    firstActionSheet = [[UIActionSheet alloc] initWithTitle:[self getInfoStringForJourney:currentJourney] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Check full schedule", @"Send or share", @"Set notification", nil];
+    NSDate *currentDate = [NSDate date];
+    
+    if ([currentJourney.arrivalTime compare:currentDate] == NSOrderedAscending) {
+        firstActionSheet = [[UIActionSheet alloc] initWithTitle:[self getInfoStringForJourney:currentJourney] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Check full schedule", nil), NSLocalizedString(@"Send or share", nil), nil];
+    } else {
+        firstActionSheet = [[UIActionSheet alloc] initWithTitle:[self getInfoStringForJourney:currentJourney] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Check full schedule", nil), NSLocalizedString(@"Send or share", nil), NSLocalizedString(@"Set notification", nil), nil];
+    }
+    
     [firstActionSheet showInView:self.view];
 }
 
@@ -153,12 +160,12 @@
 -(void)clipboardActionsForJourney:(Journey*)journey {
     [[UIPasteboard generalPasteboard] setString:[self getInfoStringForJourney:journey]];
     
-    shareActionSheet = [[UIActionSheet alloc] initWithTitle:[self getInfoStringForJourney:journey] delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Send SMS/iMessage", @"Share of Facebook", @"Share on Twitter", nil];
+    shareActionSheet = [[UIActionSheet alloc] initWithTitle:[self getInfoStringForJourney:journey] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Send SMS/iMessage", nil), NSLocalizedString(@"Share of Facebook", nil), NSLocalizedString(@"Share on Twitter", nil), nil];
     [shareActionSheet showInView:self.view];
 }
 
 -(void)notificationActionForJourney:(Journey*)journey {
-    notificationActionSheet = [[UIActionSheet alloc] initWithTitle:@"Set notification for this train before:" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"5 minutes", @"10 minutes", @"20 minutes", @"30 minutes", @"1 hour", nil];
+    notificationActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Set notification for this train before:", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"5 minutes", nil), NSLocalizedString(@"10 minutes", nil), NSLocalizedString(@"20 minutes", nil), NSLocalizedString(@"30 minutes", nil), NSLocalizedString(@"1 hour", nil), nil];
     [notificationActionSheet showInView:self.view];
 }
 
@@ -178,7 +185,10 @@
             }
                 
             case 2: {
-                [self notificationActionForJourney:currentJourney];
+                if ([currentJourney.arrivalTime compare:[NSDate date]] != NSOrderedAscending) {
+                    [self notificationActionForJourney:currentJourney];
+                }
+                
                 break;
             }
                 
@@ -256,9 +266,9 @@
 
 -(void)setNotificationTime:(NSNumber*)time forJourney:(Journey*)journey {
     UILocalNotification *localNotification = [UILocalNotification new];
-    
+
     localNotification.repeatInterval = 0;
-    localNotification.alertBody = [NSString stringWithFormat:@"Scheduled train notification: %@", [self getInfoStringForJourney:journey]];
+    localNotification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"Scheduled train notification: %@", nil), [self getInfoStringForJourney:journey]];
     localNotification.fireDate = [[NSDate date] dateByAddingTimeInterval:60 * time.intValue];
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
@@ -306,7 +316,7 @@
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (row == 0) {
-        return @"ALL";
+        return NSLocalizedString(@"ALL", nil);
     } else {
         row--;
         int count = 0;

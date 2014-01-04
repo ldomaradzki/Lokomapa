@@ -21,7 +21,7 @@
         self.arrivalLabel.text = [NSString stringWithFormat:@"%@ %@", [trainStop.arrivalTime getHourMinuteString], delayString];
     }
     else {
-        self.arrivalLabel.text = @"Departure station";
+        self.arrivalLabel.text = NSLocalizedString(@"Departure station", nil);
     }
     
     if (trainStop.departureTime) {
@@ -32,7 +32,7 @@
         self.departureLabel.text = [NSString stringWithFormat:@"%@ %@", [trainStop.departureTime getHourMinuteString], delayString];
     }
     else {
-        self.departureLabel.text = @"Destination station";
+        self.departureLabel.text = NSLocalizedString(@"Destination station", nil);
     }
     
     if (indexPath.row == 0 || indexPath.row == 2) {

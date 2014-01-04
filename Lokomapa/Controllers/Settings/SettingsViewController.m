@@ -18,7 +18,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Settings";
+    self.title = NSLocalizedString(@"Settings", nil);
 
     fontAwesomes = @[@[[FAKFontAwesome mapMarkerIconWithSize:ICON_SIZE], [FAKFontAwesome bellOIconWithSize:ICON_SIZE]], @[[FAKFontAwesome linkIconWithSize:ICON_SIZE], [FAKFontAwesome questionIconWithSize:ICON_SIZE], [FAKFontAwesome githubIconWithSize:ICON_SIZE]]];
 }
@@ -53,7 +53,7 @@
  
     if (indexPath.section == 0) {
         cell.textLabel.text =
-        @[@"Showing pin title", [NSString stringWithFormat:@"Clear all notifications (%d)", [[UIApplication sharedApplication] scheduledLocalNotifications].count]][indexPath.row];
+        @[NSLocalizedString(@"Showing pin title", nil), [NSString stringWithFormat:NSLocalizedString(@"Clear all notifications (%d)", nil), [[UIApplication sharedApplication] scheduledLocalNotifications].count]][indexPath.row];
         
         if (indexPath.row == 0) {
             UISwitch *cellSwitch = [[UISwitch alloc] init];
@@ -66,8 +66,8 @@
     }
     
     if (indexPath.section == 1) {
-        cell.textLabel.text = @[@"SITkol - rozklad.sitkol.pl", @"Have a question?", @"About"][indexPath.row];
-        cell.detailTextLabel.text = @[@"Data provider", @"Send me an e-mail!", @"Know more about this app"][indexPath.row];
+        cell.textLabel.text = @[@"SITkol - rozklad.sitkol.pl", NSLocalizedString(@"Have a question?", nil), NSLocalizedString(@"About", nil)][indexPath.row];
+        cell.detailTextLabel.text = @[NSLocalizedString(@"Data provider", nil), NSLocalizedString(@"Send me an e-mail!", nil), NSLocalizedString(@"Know more about this app", nil)][indexPath.row];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
@@ -108,7 +108,7 @@
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @[@"General settings", @"Application info"][section];
+    return @[NSLocalizedString(@"General settings", nil), NSLocalizedString(@"Application info", nil)][section];
 }
 
 

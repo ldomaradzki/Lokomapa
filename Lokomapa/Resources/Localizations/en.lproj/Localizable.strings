@@ -10,3 +10,42 @@
 "Stations" = "Stations";
 "Trains" = "Trains";
 "You are too far! Zoom in to see the stations / trains." = "You are too far! Zoom in to see the stations / trains.";
+
+// ScheduleViewController
+"Cancel" = "Cancel";
+"Check full schedule" = "Check full schedule";
+"Send or share" = "Send or share";
+"Set notification" = "Set notification";
+"Send SMS/iMessage" = "Send SMS/iMessage";
+"Share of Facebook" = "Share of Facebook";
+"Share on Twitter" = "Share on Twitter";
+"Set notification for this train before:" = "Set notification for this train before:";
+"5 minutes" = "5 minutes";
+"10 minutes" = "10 minutes";
+"20 minutes" = "20 minutes";
+"30 minutes" = "30 minutes";
+"1 hour" = "1 hour";
+"Scheduled train notification: %@" = "Scheduled train notification: %@";
+"ALL" = "ALL";
+
+// TrainStopDetailsCell
+"Departure station" = "Departure station";
+"Destination station" = "Destination station";
+
+// TrainDetailsViewController
+"Check full schedule" = "Check full schedule";
+
+// TrainScheduleViewController
+"Schedule" = "Schedule";
+
+// SettingsViewController
+"Settings" = "Settings";
+"Showing pin title" = "Showing pin title";
+"Clear all notifications (%d)" = "Clear all notifications (%d)";
+"Have a question?" = "Have a question?";
+"About" = "About";
+"Data provider" = "Data provider";
+"Send me an e-mail!" = "Send me an e-mail!";
+"Know more about this app" = "Know more about this app";
+"General settings" = "General settings";
+"Application info" = "Application info";

@@ -12,6 +12,7 @@
 
 -(NSDate*)getHourMinuteDate {
     NSDateFormatter *hourFormatter = [[NSDateFormatter alloc] init];
+    [hourFormatter setDefaultDate:[NSDate date]];
     [hourFormatter setDateFormat:@"HH:mm"];
 
     return [hourFormatter dateFromString:self];

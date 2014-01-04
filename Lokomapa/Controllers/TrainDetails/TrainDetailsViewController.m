@@ -82,7 +82,7 @@
         cell.contentView.backgroundColor = [UIColor clearColor];
         cell.backgroundColor = [UIColor clearColor];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.text = @"Check full schedule";
+        cell.textLabel.text = NSLocalizedString(@"Check full schedule", nil);
         cell.textLabel.textColor = RGBA(91, 140, 169, 1);
         
         return cell;

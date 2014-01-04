@@ -10,3 +10,39 @@
 "Stations" = "Stacje";
 "Trains" = "Pociągi";
 "You are too far! Zoom in to see the stations / trains." = "Jesteś za daleko! Przybliż, aby zobaczyć stacje / pociągi.";
+
+// ScheduleViewController
+"Cancel" = "Anuluj";
+"Check full schedule" = "Sprawdź pełen rozkład";
+"Send or share" = "Wyślij albo udostępnij";
+"Set notification" = "Ustaw przypomnienie";
+"Send SMS/iMessage" = "Wyślij SMS/iMessage";
+"Share of Facebook" = "Udostępnij przez Facebook";
+"Share on Twitter" = "Udostępnij przez Twitter";
+"Set notification for this train before:" = "Ustaw przypomnienie przed odjazdem pociągu:";
+"5 minutes" = "5 minut";
+"10 minutes" = "10 minut";
+"20 minutes" = "20 minut";
+"30 minutes" = "30 minut";
+"1 hour" = "1 godzina";
+"Scheduled train notification: %@" = "Przypomnienie o pociągu: %@";
+"ALL" = "WSZYSTKIE";
+
+// TrainStopDetailsCell
+"Departure station" = "Stacja początkowa";
+"Destination station" = "Stacja końcowa";
+
+// TrainScheduleViewController
+"Schedule" = "Rozkład";
+
+// SettingsViewController
+"Settings" = "Ustawienia";
+"Showing pin title" = "Opisy na mapie";
+"Clear all notifications (%d)" = "Usuń przypomnienia (%d)";
+"Have a question?" = "Masz pytanie?";
+"About" = "O aplikacji";
+"Data provider" = "Dostawca danych";
+"Send me an e-mail!" = "Wyślij mi maila!";
+"Know more about this app" = "Informacje o aplikacji";
+"General settings" = "Ustawienia aplikacji";
+"Application info" = "Informacje o aplikacji";

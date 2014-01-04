@@ -13,7 +13,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Schedule";
+    self.title = NSLocalizedString(@"Schedule", nil);
     
     self.url = [NSURL URLWithString:[NSString stringWithFormat:@"http://rozklad.sitkol.pl/bin/traininfo.exe/en/%@?date=%@&pageViewMode=PRINT", self.trainId, [[NSDate date] getDefaultDateString]]];
     
