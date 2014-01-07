@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MFMessageComposeViewController.h>
+#import <MessageUI/MessageUI.h>
 
 @class Station, Schedule, Journey;
 
 @interface ScheduleViewController : UIViewController
-<UITableViewDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+<UITableViewDelegate, UITableViewDataSource, MFMessageComposeViewControllerDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPickerViewDelegate, MFMailComposeViewControllerDelegate>
 {
     UIActionSheet *firstActionSheet, *shareActionSheet, *notificationActionSheet;
     Journey *currentJourney;

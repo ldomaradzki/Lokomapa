@@ -17,6 +17,7 @@
 "Send or share" = "Wyślij albo udostępnij";
 "Set notification" = "Ustaw przypomnienie";
 "Send SMS/iMessage" = "Wyślij SMS/iMessage";
+"Send mail" = "Wyślij e-mail";
 "Share of Facebook" = "Udostępnij przez Facebook";
 "Share on Twitter" = "Udostępnij przez Twitter";
 "Set notification for this train before:" = "Ustaw przypomnienie przed odjazdem pociągu:";
@@ -32,6 +33,9 @@
 "Departure station" = "Stacja początkowa";
 "Destination station" = "Stacja końcowa";
 
+// TrainDetailsViewController
+"Check full schedule" = "Sprawdź pełny rozkład";
+
 // TrainScheduleViewController
 "Schedule" = "Rozkład";
 
@@ -46,3 +50,4 @@
 "Know more about this app" = "Informacje o aplikacji";
 "General settings" = "Ustawienia aplikacji";
 "Application info" = "Informacje o aplikacji";
+"Close" = "Zamknij";

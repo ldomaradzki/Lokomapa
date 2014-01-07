@@ -12,7 +12,7 @@
                     <connections>
                         <segue destination="7BE-S7-hjG" kind="push" identifier="map2schedule" id="vGi-nI-jv4"/>
                         <segue destination="5wI-Pu-ohL" kind="push" identifier="map2train" id="4pz-ma-RHZ"/>
-                        <segue destination="W16-lD-KKN" kind="push" identifier="map2settings" id="r0J-uS-m68"/>
+                        <segue destination="W16-lD-KKN" kind="modal" identifier="map2settings" modalTransitionStyle="coverVertical" id="r0J-uS-m68"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e7S-eh-mYF" userLabel="First Responder" sceneMemberID="firstResponder"/>

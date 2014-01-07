@@ -118,6 +118,12 @@
     showedInitialUserLocation = NO;
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+}
+
 -(void)localizeGUI {
     [self.stationsTrainsSegmentedControl setTitle:NSLocalizedString(@"Stations", nil) forSegmentAtIndex:0];
     [self.stationsTrainsSegmentedControl setTitle:NSLocalizedString(@"Trains", nil) forSegmentAtIndex:1];

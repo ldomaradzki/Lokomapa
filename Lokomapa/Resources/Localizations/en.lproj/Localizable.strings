@@ -17,6 +17,7 @@
 "Send or share" = "Send or share";
 "Set notification" = "Set notification";
 "Send SMS/iMessage" = "Send SMS/iMessage";
+"Send mail" = "Send mail";
 "Share of Facebook" = "Share of Facebook";
 "Share on Twitter" = "Share on Twitter";
 "Set notification for this train before:" = "Set notification for this train before:";
@@ -49,3 +50,4 @@
 "Know more about this app" = "Know more about this app";
 "General settings" = "General settings";
 "Application info" = "Application info";
+"Close" = "Close";

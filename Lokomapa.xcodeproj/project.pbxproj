@@ -39,6 +39,8 @@
 		17AC5F0417F6D02D000A2DB1 /* SitkolAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AC5F0317F6D02D000A2DB1 /* SitkolAPIClient.m */; };
 		17AC5F0817F6D1B9000A2DB1 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AC5F0717F6D1B9000A2DB1 /* Station.m */; };
 		17AC5F0A17F6D41F000A2DB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AC5F0917F6D41F000A2DB1 /* CoreLocation.framework */; };
+		17AD0FD7187842850098B470 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17AD0FD3187842850098B470 /* Main_iPhone.storyboard */; };
+		17AD0FD8187842850098B470 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17AD0FD5187842850098B470 /* Main_iPad.storyboard */; };
 		17C0FCD317F9E71100B0A233 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0FCD217F9E71100B0A233 /* Train.m */; };
 		17C0FCD717F9E92600B0A233 /* SitkolCoords.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0FCD617F9E92600B0A233 /* SitkolCoords.m */; };
 		17C0FCDA17F9F04A00B0A233 /* TrainAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0FCD917F9F04A00B0A233 /* TrainAnnotation.m */; };
@@ -113,6 +115,8 @@
 		17AC5F0617F6D1B9000A2DB1 /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Station.h; sourceTree = "<group>"; };
 		17AC5F0717F6D1B9000A2DB1 /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Station.m; sourceTree = "<group>"; };
 		17AC5F0917F6D41F000A2DB1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		17AD0FD4187842850098B470 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		17AD0FD6187842850098B470 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		17C0FCD117F9E71100B0A233 /* Train.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Train.h; sourceTree = "<group>"; };
 		17C0FCD217F9E71100B0A233 /* Train.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Train.m; sourceTree = "<group>"; };
 		17C0FCD517F9E92600B0A233 /* SitkolCoords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SitkolCoords.h; sourceTree = "<group>"; };
@@ -269,6 +273,8 @@
 				1720367018003C3100463419 /* Categories */,
 				179A96C317F23DD6003FDC64 /* Supporting Files */,
 				179A96D717F23DD6003FDC64 /* Images.xcassets */,
+				17AD0FD3187842850098B470 /* Main_iPhone.storyboard */,
+				17AD0FD5187842850098B470 /* Main_iPad.storyboard */,
 			);
 			path = Lokomapa;
 			sourceTree = "<group>";
@@ -531,6 +537,8 @@
 				179A96FD17F23F3F003FDC64 /* MapViewController.xib in Resources */,
 				17C0FCE017FC5BF500B0A233 /* TrainDetailsViewController.xib in Resources */,
 				17CFB3181834038E003341BB /* SettingsViewController.xib in Resources */,
+				17AD0FD8187842850098B470 /* Main_iPad.storyboard in Resources */,
+				17AD0FD7187842850098B470 /* Main_iPhone.storyboard in Resources */,
 				1757471A1814ED80004E540E /* TestScheduleResponse.json in Resources */,
 				179A96D817F23DD6003FDC64 /* Images.xcassets in Resources */,
 				17DF4B7C17F89D74000F0B8A /* ScheduleViewController.xib in Resources */,
@@ -649,6 +657,22 @@
 				179A96E817F23DD7003FDC64 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		17AD0FD3187842850098B470 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17AD0FD4187842850098B470 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		17AD0FD5187842850098B470 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17AD0FD6187842850098B470 /* Base */,
+			);
+			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		17D0054E186C9437000223A7 /* Localizable.strings */ = {

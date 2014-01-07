@@ -18,9 +18,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = NSLocalizedString(@"Settings", nil);
+    self.toolbarTitle.text = NSLocalizedString(@"Settings", nil);
+    self.toolbarCloseButton.title = NSLocalizedString(@"Close", nil);
 
     fontAwesomes = @[@[[FAKFontAwesome mapMarkerIconWithSize:ICON_SIZE], [FAKFontAwesome bellOIconWithSize:ICON_SIZE]], @[[FAKFontAwesome linkIconWithSize:ICON_SIZE], [FAKFontAwesome questionIconWithSize:ICON_SIZE], [FAKFontAwesome githubIconWithSize:ICON_SIZE]]];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
 }
 
 -(UIImage *)fontAwesomeImageWithIcon:(FAKFontAwesome*)fontAwesome {
@@ -111,5 +114,24 @@
     return @[NSLocalizedString(@"General settings", nil), NSLocalizedString(@"Application info", nil)][section];
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if (section == 1) {
+        UIImageView *footer =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SettingsFooter"]];
+        [footer setContentMode:UIViewContentModeScaleAspectFit];
+        return footer;
+    }
+    return nil;
+}
 
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == 1) {
+        return 150;
+    }
+    
+    return 0;
+}
+
+- (IBAction)dismissModalWindow:(UIBarButtonItem *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

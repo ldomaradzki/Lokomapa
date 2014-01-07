@@ -180,7 +180,7 @@
 -(void)clipboardActionsForJourney:(Journey*)journey {
     [[UIPasteboard generalPasteboard] setString:[self getInfoStringForJourney:journey]];
     
-    shareActionSheet = [[UIActionSheet alloc] initWithTitle:[self getInfoStringForJourney:journey] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Send SMS/iMessage", nil), NSLocalizedString(@"Share of Facebook", nil), NSLocalizedString(@"Share on Twitter", nil), nil];
+    shareActionSheet = [[UIActionSheet alloc] initWithTitle:[self getInfoStringForJourney:journey] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Send SMS/iMessage", nil), NSLocalizedString(@"Send mail", nil), NSLocalizedString(@"Share of Facebook", nil), NSLocalizedString(@"Share on Twitter", nil), nil];
     [shareActionSheet showInView:self.view];
 }
 
@@ -223,13 +223,18 @@
                  [self sendSMSMessage:[self getInfoStringForJourney:currentJourney]];
                  break;
              }
+                
+            case 1: {
+                [self sendMailMessage:[self getInfoStringForJourney:currentJourney]];
+                break;
+            }
 
-             case 1: {
+             case 2: {
                  [self sendSocialMessage:[self getInfoStringForJourney:currentJourney] forType:SLServiceTypeFacebook];
                  break;
              }
 
-             case 2: {
+             case 3: {
                  [self sendSocialMessage:[self getInfoStringForJourney:currentJourney] forType:SLServiceTypeTwitter];
                  break;
              }
@@ -318,7 +323,21 @@
     }
 }
 
+-(void)sendMailMessage:(NSString*)message {
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *messageComposeViewController = [[MFMailComposeViewController alloc] init];
+        [messageComposeViewController setMessageBody:message isHTML:NO];
+        messageComposeViewController.mailComposeDelegate = self;
+        
+        [self presentViewController:messageComposeViewController animated:YES completion:nil];
+    }
+}
+
 -(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 

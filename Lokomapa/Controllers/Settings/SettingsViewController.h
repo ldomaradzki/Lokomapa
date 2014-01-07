@@ -12,6 +12,9 @@
     NSArray *fontAwesomes;
 }
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *toolbarCloseButton;
+@property (weak, nonatomic) IBOutlet UILabel *toolbarTitle;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+- (IBAction)dismissModalWindow:(UIBarButtonItem *)sender;
 
 @end
