@@ -19,25 +19,16 @@ static NSString * const SitkolAPIStationGETURLString = @"bin/stboard.exe/pn";
         return nil;
     }
     
-    if ([attributes[@"dest"] length] > 0) {
-        self.destinationStation = [attributes[@"dest"] stringByDecodingXMLEntities];
-        self.delay = [[attributes[@"delay"] stringByDecodingXMLEntities] stringByReplacingOccurrencesOfString:@"ok. " withString:@""];
-        self.journeyId = attributes[@"id"];
-        self.train = [attributes[@"product"] cleanWhitespace];
-        self.arrivalTime = [attributes[@"time"] getHourMinuteDate];
-    }
-    else {
-        // better schedule
-        self.destinationStation = [attributes[@"st"] stringByDecodingXMLEntities];
-        self.delay = @""; // ??
-        self.journeyId = attributes[@"id"];
-        self.train = [attributes[@"pr"] cleanWhitespace];
-        self.arrivalTime = [attributes[@"ti"] getHourMinuteDate];
-        self.trainId = [[attributes[@"tinfo"]
-                         stringByReplacingOccurrencesOfString:@"http://rozklad.sitkol.pl/bin/traininfo.exe/pn/" withString:@""] componentsSeparatedByString:@"?"][0];
-    }
+    NSDateFormatter *hourFormatter = [[NSDateFormatter alloc] init];
+    [hourFormatter setDateFormat:@"HH:mm dd.MM.yy"];
     
-    
+    self.destinationStation = [attributes[@"st"] stringByDecodingXMLEntities];
+    self.delay = @""; // ??
+    self.journeyId = attributes[@"id"];
+    self.train = [attributes[@"pr"] cleanWhitespace];
+    self.arrivalTime = [hourFormatter dateFromString:[NSString stringWithFormat:@"%@ %@", attributes[@"ti"], attributes[@"da"]]];
+    self.trainId = [[attributes[@"tinfo"]
+                     stringByReplacingOccurrencesOfString:@"http://rozklad.sitkol.pl/bin/traininfo.exe/pn/" withString:@""] componentsSeparatedByString:@"?"][0];
     
     return self;
 }
