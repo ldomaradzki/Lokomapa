@@ -15,10 +15,30 @@
     
     self.title = NSLocalizedString(@"Schedule", nil);
     
-    self.url = [NSURL URLWithString:[NSString stringWithFormat:@"http://rozklad.sitkol.pl/bin/traininfo.exe/en/%@?date=%@&pageViewMode=PRINT", self.trainId, [[NSDate date] getDefaultDateString]]];
+    self.url = [NSURL URLWithString:[NSString stringWithFormat:@"http://rozklad.sitkol.pl/bin/traininfo.exe/%@/%@?date=%@&pageViewMode=PRINT", [self getSitkolLanguageExtension], self.trainId, [[NSDate date] getDefaultDateString]]];
     
     self.request = [NSURLRequest requestWithURL:self.url];
     [self.webView loadRequest:self.request];
+}
+
+-(NSString*)getSitkolLanguageExtension {
+    NSString *currentLocale = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"][0];
+    
+    NSString *sitkolLanguageExtension = @"en"; //default language
+    
+    if ([currentLocale isEqualToString:@"pl"]) {
+        sitkolLanguageExtension = @"pn";
+    }
+    
+    if ([currentLocale isEqualToString:@"ru"]) {
+        sitkolLanguageExtension = @"rn";
+    }
+    
+    if ([currentLocale isEqualToString:@"de"]) {
+        sitkolLanguageExtension = @"dn";
+    }
+    
+    return sitkolLanguageExtension;
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {

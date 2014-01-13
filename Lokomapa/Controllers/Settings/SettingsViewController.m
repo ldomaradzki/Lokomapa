@@ -23,7 +23,9 @@
 
     fontAwesomes = @[@[[FAKFontAwesome mapMarkerIconWithSize:ICON_SIZE], [FAKFontAwesome bellOIconWithSize:ICON_SIZE]], @[[FAKFontAwesome linkIconWithSize:ICON_SIZE], [FAKFontAwesome questionIconWithSize:ICON_SIZE], [FAKFontAwesome githubIconWithSize:ICON_SIZE]]];
     
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+    if (IS_IPHONE) {
+        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+    }
 }
 
 -(UIImage *)fontAwesomeImageWithIcon:(FAKFontAwesome*)fontAwesome {
@@ -125,7 +127,11 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section == 1) {
-        return 100;
+        if (IS_IPHONE) {
+            return 150;
+        } else {
+            return 250;
+        }
     }
     
     return 0;

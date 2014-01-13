@@ -28,9 +28,9 @@
                 </tableView>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Nir-N8-Yaf">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <items>
-                        <barButtonItem title="Close" id="ztV-Z7-rhl">
+                        <barButtonItem title="Close" width="64" id="ztV-Z7-rhl">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="dismissModalWindow:" destination="-1" id="Cno-5m-cgC"/>

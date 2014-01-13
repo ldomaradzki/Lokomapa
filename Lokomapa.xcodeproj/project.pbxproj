@@ -56,6 +56,7 @@
 		17DF4B7C17F89D74000F0B8A /* ScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17DF4B7A17F89D74000F0B8A /* ScheduleViewController.xib */; };
 		17E7F7F7181D2C3A00C3455D /* TrainScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17E7F7F5181D2C3A00C3455D /* TrainScheduleViewController.m */; };
 		17E7F7F8181D2C3A00C3455D /* TrainScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17E7F7F6181D2C3A00C3455D /* TrainScheduleViewController.xib */; };
+		17FC78E1188495AC00C4F131 /* SettingsViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17FC78E0188495AC00C4F131 /* SettingsViewController~ipad.xib */; };
 		A61A266AAC334DA58E32A2AC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C57C5ADA7720400D8FDDF8AE /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -142,6 +143,7 @@
 		17E7F7F4181D2C3A00C3455D /* TrainScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainScheduleViewController.h; sourceTree = "<group>"; };
 		17E7F7F5181D2C3A00C3455D /* TrainScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainScheduleViewController.m; sourceTree = "<group>"; };
 		17E7F7F6181D2C3A00C3455D /* TrainScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainScheduleViewController.xib; sourceTree = "<group>"; };
+		17FC78E0188495AC00C4F131 /* SettingsViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SettingsViewController~ipad.xib"; sourceTree = "<group>"; };
 		290E48FB1F7047C7B9ABA920 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		C57C5ADA7720400D8FDDF8AE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -394,6 +396,7 @@
 				17CFB3141834038E003341BB /* SettingsViewController.h */,
 				17CFB3151834038E003341BB /* SettingsViewController.m */,
 				17CFB3161834038E003341BB /* SettingsViewController.xib */,
+				17FC78E0188495AC00C4F131 /* SettingsViewController~ipad.xib */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				17CFB3181834038E003341BB /* SettingsViewController.xib in Resources */,
 				17AD0FD8187842850098B470 /* Main_iPad.storyboard in Resources */,
 				17AD0FD7187842850098B470 /* Main_iPhone.storyboard in Resources */,
+				17FC78E1188495AC00C4F131 /* SettingsViewController~ipad.xib in Resources */,
 				1757471A1814ED80004E540E /* TestScheduleResponse.json in Resources */,
 				179A96D817F23DD6003FDC64 /* Images.xcassets in Resources */,
 				17DF4B7C17F89D74000F0B8A /* ScheduleViewController.xib in Resources */,
