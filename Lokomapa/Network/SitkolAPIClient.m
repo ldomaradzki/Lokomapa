@@ -65,6 +65,7 @@ static NSString * const SitkolAPIClientURLString = @"http://rozklad.sitkol.pl";
         [acceptableContentTypes addObject:@"text/html"];
         responseSerializer.acceptableContentTypes = acceptableContentTypes;
         self.responseSerializer = responseSerializer;
+        [self.requestSerializer setValue:@"Lokomapa" forHTTPHeaderField:@"User-Agent"];
         
         [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
         

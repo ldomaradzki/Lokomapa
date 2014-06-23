@@ -16,7 +16,10 @@
     self.title = NSLocalizedString(@"Schedule", nil);
     
     self.url = [NSURL URLWithString:[NSString stringWithFormat:@"http://rozklad.sitkol.pl/bin/traininfo.exe/%@/%@?date=%@&pageViewMode=PRINT", [self getSitkolLanguageExtension], self.trainId, [[NSDate date] getDefaultDateString]]];
-    
+
+    // dirty browser hack
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent": @"Mozilla"}];
+
     self.request = [NSURLRequest requestWithURL:self.url];
     [self.webView loadRequest:self.request];
 }
